@@ -3,10 +3,10 @@
 	<persistence-unit name="ProyectoDAM" transaction-type="RESOURCE_LOCAL">
 		<!-- Aqui pondemos todas las clases que queremos que JPA vaya a leer las anotaciones
 		para poder mapearlas a la BBDD -->
-		<class>entities.Admin</class>
-		<class>entities.User</class>
-		<class>entities.Persona</class>
-		<class>entities.Access</class>
+		<class>com.g2.Entities.Admin</class>
+		<class>com.g2.Entities.User</class>
+		<class>com.g2.Entities.Persona</class>
+		<class>com.g2.Entities.Access</class>
 		<properties>
 			<!-- Tenemos una seríe de parametros minimos que decirle a JPA para que se pueda
 			contectar a la BBDD -->

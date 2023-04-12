@@ -1,4 +1,4 @@
-package entities;
+package com.g2.Entities;
 
 import java.util.List;
 
@@ -11,12 +11,11 @@ import javax.persistence.Table;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@Table(name = "personas")
 public abstract class Persona {
 	@Id
 	@GeneratedValue
 	private int id;
-	private String name, password, token_access;
+	private String name, password, mail, token_access;
 	// token_access es un uuid que se genera cuando una persona se loga
 	// el token_access es null mientras la persona no esta logueada
 	 
@@ -42,6 +41,22 @@ public abstract class Persona {
 		this.password = password;
 	}
 	
+	public String getMail() {
+		return password;
+	}
+	
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public abstract List<Access> getAccesses();
 	 
 }

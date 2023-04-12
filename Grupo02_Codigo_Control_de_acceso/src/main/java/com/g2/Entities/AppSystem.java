@@ -1,4 +1,4 @@
-package entities;
+package com.g2.Entities;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -25,6 +25,7 @@ public class AppSystem {
 	private EntityManagerFactory factory;
 	private String version = "beta";
 	private String product_name = "TusLibrerias.com";
+	private String out_str = "";
 	
 	public AppSystem() {
 		this.factory = Persistence.createEntityManagerFactory("ProyectoDAM");		
@@ -72,7 +73,6 @@ public class AppSystem {
 
 	
 	
-	private String out_str = "";
 	
 	private void out(String str) {
 		out_str +="\n " + str;

@@ -1,6 +1,6 @@
 package tests;
 
-import entities.AppSystem;
+import com.g2.Entities.AppSystem;
 
 public class Main {
 
