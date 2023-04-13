@@ -1,12 +1,16 @@
 package tests;
 
-import com.g2.Entities.AppSystem;
+import com.qraccess.daos.imp.UserDaoImpl;
+import com.qraccess.entities.User;
 
 public class Main {
 
 	public static void main(String[] args) {
-		AppSystem appsys = new AppSystem();
-		//guarda la info en un xml
+		User u = new User();
+		u.setMail("sdfsdf");
+		u.setName("agapito");
+		u.setPassword("tofacil");
+		UserDaoImpl.createUser(u);
 	}
 
 
