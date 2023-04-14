@@ -5,7 +5,7 @@ import java.util.List;
 import com.qraccess.daos.interfaces.UserDao;
 import com.qraccess.entities.User;
 
-public class UserDaoImpl extends DBManager<User> implements UserDao {
+public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
 
 	public UserDaoImpl() {}
 	

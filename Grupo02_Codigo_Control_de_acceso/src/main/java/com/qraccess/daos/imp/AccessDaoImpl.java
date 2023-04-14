@@ -5,7 +5,7 @@ import javax.persistence.Query;
 import com.qraccess.daos.interfaces.AccessDao;
 import com.qraccess.entities.Access;
 
-public class AccessDaoImpl extends DBManager<Access> implements AccessDao {
+public class AccessDaoImpl extends CrudDaoImpl<Access> implements AccessDao {
 
 	@Override
 	public void validate(int id, String hash) {

@@ -6,7 +6,7 @@ import com.qraccess.entities.Access;
 import com.qraccess.entities.Admin;
 import com.qraccess.entities.User;
 
-public class AdminDaoImpl extends DBManager<Admin> implements AdminDao {
+public class AdminDaoImpl extends CrudDaoImpl<Admin> implements AdminDao {
 
 	@Override
 	public String createAccess(Access a) {

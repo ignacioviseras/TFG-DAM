@@ -3,10 +3,10 @@
 	<persistence-unit name="QR_ACCESS" transaction-type="RESOURCE_LOCAL">
 		<!-- Aqui pondemos todas las clases que queremos que JPA vaya a leer las anotaciones
 		para poder mapearlas a la BBDD -->
-		<class>com.g2.Entities.Admin</class>
-		<class>com.g2.Entities.User</class>
-		<class>com.g2.Entities.Persona</class>
-		<class>com.g2.Entities.Access</class>
+		<class>com.qraccess.entities.Admin</class>
+		<class>com.qraccess.entities.User</class>
+		<class>com.qraccess.entities.Persona</class>
+		<class>com.qraccess.entities.Access</class>
 		<properties>
 			<!-- Tenemos una seríe de parametros minimos que decirle a JPA para que se pueda
 			contectar a la BBDD -->

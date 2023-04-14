@@ -5,11 +5,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public abstract class DBManager<T> {
+public abstract class CrudDaoImpl<T> {
 	private EntityManagerFactory factory;
 	final String entity_manager_creator = "QR_ACCESS";
 	
-	public DBManager() {
+	public CrudDaoImpl() {
 		this.factory = Persistence.createEntityManagerFactory(entity_manager_creator);
 	}
 	
