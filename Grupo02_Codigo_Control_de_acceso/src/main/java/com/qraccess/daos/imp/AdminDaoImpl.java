@@ -2,29 +2,22 @@ package com.qraccess.daos.imp;
 
 
 import com.qraccess.daos.interfaces.AdminDao;
+import com.qraccess.entities.Access;
 import com.qraccess.entities.Admin;
+import com.qraccess.entities.User;
 
 public class AdminDaoImpl extends DBManager<Admin> implements AdminDao {
 
 	@Override
-	public Admin update(Admin obj) {
+	public String createAccess(Access a) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean delete(int id) {
+	public String createUser(User u) {
 		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public String generateQr() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Admin getById(int id) {
+		new UserDaoImpl(u);
 		return null;
 	}
 }

@@ -1,32 +1,20 @@
 package com.qraccess.daos.imp;
 
+import java.util.List;
+
 import com.qraccess.daos.interfaces.UserDao;
 import com.qraccess.entities.User;
 
 public class UserDaoImpl extends DBManager<User> implements UserDao {
 
-	public UserDaoImpl() {
-		
-	}
+	public UserDaoImpl() {}
 	
 	public UserDaoImpl(User user) {
-		this.create(user);
+		this.insert(user);
 	}
 	
 	public static void createUser(User user) {
 		new UserDaoImpl(user);
-	}	
-	
-	@Override
-	public User update(User obj) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean delete(int id) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override

@@ -13,7 +13,7 @@ public abstract class DBManager<T> {
 		this.factory = Persistence.createEntityManagerFactory(entity_manager_creator);
 	}
 	
-	public T create(T obj) {
+	public T insert(T obj) {
 		EntityManager em = factory.createEntityManager();
 		try {			
 			EntityTransaction et = em.getTransaction();
@@ -27,8 +27,13 @@ public abstract class DBManager<T> {
 	    }
 		return obj;
 	}
-	
-	public Object getById(int id) {
+	public T getById(int id) {
 		return null;
+	}
+	public T update(T obj) {
+		return obj;
+	}
+	public boolean delete(int id) {
+		return true;
 	}
 }
