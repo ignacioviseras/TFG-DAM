@@ -9,6 +9,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
+import com.qraccess.utils.PasswordEncrypter;
+
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Persona {
@@ -37,8 +39,8 @@ public abstract class Persona {
 	public String getPassword() {
 		return password;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPassword(String password) {		
+		this.password = PasswordEncrypter.encrypt(password);
 	}
 	
 	public String getMail() {
