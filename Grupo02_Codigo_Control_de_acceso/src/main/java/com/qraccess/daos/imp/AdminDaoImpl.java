@@ -20,4 +20,17 @@ public class AdminDaoImpl extends CrudDaoImpl<Admin> implements AdminDao {
 		new UserDaoImpl(u);
 		return null;
 	}
+
+	public AdminDaoImpl() {}
+	
+	public  AdminDaoImpl(Admin admin) {
+		this.insert(admin);
+	}
+	
+	public static void createAdmin (Admin admin) {
+		new AdminDaoImpl(admin);
+	}
+	
+	
+	
 }
