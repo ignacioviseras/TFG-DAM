@@ -20,9 +20,8 @@
 			drop-and-create -> cada vez que arranquemos la app se borraran y crearan las 
 			tablas desde cero.
 			update -> para solamente refrescar las tablas en caso de cambios de anotaciones
-			 -->
-			<property name="javax.persistence.schema-generation.database.action" value="create"/>
-						 
+			-->
+			<property name="javax.persistence.schema-generation.database.action" value="update"/> 
 			<!-- Mostrar trazas de sql y establecer dialecto con hibernate-->
 			<property name = "hibernate.show_sql" value = "true" />
 			<property name = "hibernate.dialect" value = "org.hibernate.dialect.MySQL8Dialect" />
