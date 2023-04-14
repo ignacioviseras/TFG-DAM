@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -13,9 +14,8 @@ import com.qraccess.utils.PasswordEncrypter;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Persona {
+public abstract class Persona  {
 	@Id
-	@GeneratedValue
 	private int id;
 	private String name, password, mail, token_access;
 	// token_access es un uuid que se genera cuando una persona se loga

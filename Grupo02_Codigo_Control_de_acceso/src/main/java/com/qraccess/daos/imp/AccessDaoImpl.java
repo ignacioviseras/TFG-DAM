@@ -1,7 +1,5 @@
 package com.qraccess.daos.imp;
 
-import javax.persistence.Query;
-
 import com.qraccess.daos.interfaces.AccessDao;
 import com.qraccess.entities.Access;
 
@@ -16,6 +14,14 @@ public class AccessDaoImpl extends CrudDaoImpl<Access> implements AccessDao {
 	public Access getById(int id) {
 		return null;
 	}
-
-
+	
+	public AccessDaoImpl(){}
+	
+	public AccessDaoImpl(Access a){
+		this.insert(a);
+	}
+	
+	public static void createAccess(Access a) {
+		new AccessDaoImpl(a);
+	}
 }

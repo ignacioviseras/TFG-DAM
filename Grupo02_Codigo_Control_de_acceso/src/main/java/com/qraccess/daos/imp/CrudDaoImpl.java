@@ -6,24 +6,24 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 public abstract class CrudDaoImpl<T> {
-	private EntityManagerFactory factory;
 	final String entity_manager_creator = "QR_ACCESS";
 	
-	public CrudDaoImpl() {
-		this.factory = Persistence.createEntityManagerFactory(entity_manager_creator);
-	}
+	public CrudDaoImpl() {}
 	
 	public T insert(T obj) {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory(entity_manager_creator);
 		EntityManager em = factory.createEntityManager();
+		EntityTransaction et = em.getTransaction();
 		try {			
-			EntityTransaction et = em.getTransaction();
 			et.begin();			
 			em.persist(obj);
-			et.commit();			
+			et.commit();
 		} catch (Exception e) {
+			et.rollback();
 			e.printStackTrace();
 	    } finally {
 	    	em.close();
+	    	factory.close();
 	    }
 		return obj;
 	}
