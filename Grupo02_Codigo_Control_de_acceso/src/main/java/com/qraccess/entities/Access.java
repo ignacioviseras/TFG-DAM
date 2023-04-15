@@ -16,7 +16,15 @@ public class Access implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int id, availables, expires;
+	private String uuid;
+	@ManyToOne
+	@JoinColumn(name="user_id", referencedColumnName="id")	
+	private Customer user;
+	@ManyToOne
+	@JoinColumn(name="admin_id", referencedColumnName="id")
+	private Admin admin;
+
 	public int getId() {
 		return id;
 	}
@@ -25,18 +33,6 @@ public class Access implements Serializable {
 		this.id = id;
 	}
 
-	private int availables, expires;
-	private String uuid;
-	
-	//@JoinColumn(name = "users", referencedColumnName = "id")
-	@ManyToOne
-	@JoinColumn(name="user_id", referencedColumnName="id")	
-	private Customer user;
-	
-	@ManyToOne
-	@JoinColumn(name="admin_id", referencedColumnName="id")
-	private Admin admin;
-	
 	public Admin getAdmin() {
 		return admin;
 	}

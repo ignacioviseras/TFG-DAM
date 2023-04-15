@@ -15,13 +15,16 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity
 @Table(name = "users")
-public class Customer implements Serializable{
+public class Customer implements Serializable{	
 	private static final long serialVersionUID = 1L;	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Embedded
 	private User user;
+	@OneToMany( mappedBy = "user",orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Access> accesses = new ArrayList<Access>();
+
 	public User getUser() {
 		return user;
 	}
@@ -30,13 +33,10 @@ public class Customer implements Serializable{
 		this.user = user;
 	}
 
-	@OneToMany( mappedBy = "user",orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Access> accesses = new ArrayList<Access>();
-	
 	public List<Access> getAccesses() {
 		return this.getAccesses();
 	}
-	
+
 	public int getId() {
 		return id;
 	}

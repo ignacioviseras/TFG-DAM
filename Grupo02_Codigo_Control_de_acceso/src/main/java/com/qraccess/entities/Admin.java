@@ -24,11 +24,11 @@ public class Admin implements Serializable{
 	private User user;
 	@OneToMany( mappedBy = "admin",orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Access> accesses = new ArrayList<Access>();
-	
+
 	public List<Access> getAccesses() {
 		return this.getAccesses();
 	}
-	
+
 	public int getId() {
 		return id;
 	}
