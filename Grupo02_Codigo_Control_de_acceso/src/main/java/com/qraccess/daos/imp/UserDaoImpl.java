@@ -3,17 +3,18 @@ package com.qraccess.daos.imp;
 import java.util.List;
 
 import com.qraccess.daos.interfaces.UserDao;
-import com.qraccess.entities.User;
+import com.qraccess.entities.Access;
+import com.qraccess.entities.Customer;
 
-public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
+public class UserDaoImpl extends CrudDaoImpl<Customer> implements UserDao {
 
 	public UserDaoImpl() {}
 	
-	public UserDaoImpl(User user) {
+	public UserDaoImpl(Customer user) {
 		this.insert(user);
 	}
 	
-	public static void createUser(User user) {
+	public static void createUser(Customer user) {
 		new UserDaoImpl(user);
 	}
 
@@ -23,7 +24,11 @@ public class UserDaoImpl extends CrudDaoImpl<User> implements UserDao {
 		return null;
 	}
 	
-	public User getById(int id) {
-		return (User)super.getById(id);
+	public Class<Customer> getEntityClass(){
+		return Customer.class;
+	}
+	
+	public Customer getById(int id) {
+		return (Customer)super.getById(id);
 	}
 }

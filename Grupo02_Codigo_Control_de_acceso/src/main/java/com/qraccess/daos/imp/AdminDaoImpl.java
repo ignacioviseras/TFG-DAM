@@ -4,7 +4,7 @@ package com.qraccess.daos.imp;
 import com.qraccess.daos.interfaces.AdminDao;
 import com.qraccess.entities.Access;
 import com.qraccess.entities.Admin;
-import com.qraccess.entities.User;
+import com.qraccess.entities.Customer;
 
 public class AdminDaoImpl extends CrudDaoImpl<Admin> implements AdminDao {
 
@@ -15,10 +15,14 @@ public class AdminDaoImpl extends CrudDaoImpl<Admin> implements AdminDao {
 	}
 
 	@Override
-	public String createUser(User u) {
+	public String createUser(Customer u) {
 		// TODO Auto-generated method stub
 		new UserDaoImpl(u);
 		return null;
+	}
+	
+	public Class<Admin> getEntityClass(){
+		return Admin.class;
 	}
 
 	public AdminDaoImpl() {}

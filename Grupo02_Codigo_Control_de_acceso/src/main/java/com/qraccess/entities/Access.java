@@ -31,7 +31,7 @@ public class Access implements Serializable {
 	//@JoinColumn(name = "users", referencedColumnName = "id")
 	@ManyToOne
 	@JoinColumn(name="user_id", referencedColumnName="id")	
-	private User user;
+	private Customer user;
 	
 	@ManyToOne
 	@JoinColumn(name="admin_id", referencedColumnName="id")

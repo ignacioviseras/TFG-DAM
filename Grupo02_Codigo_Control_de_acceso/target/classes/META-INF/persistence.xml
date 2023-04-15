@@ -5,7 +5,6 @@
 		para poder mapearlas a la BBDD -->
 		<class>com.qraccess.entities.Admin</class>
 		<class>com.qraccess.entities.User</class>
-		<class>com.qraccess.entities.Persona</class>
 		<class>com.qraccess.entities.Access</class>
 		<properties>
 			<!-- Tenemos una seríe de parametros minimos que decirle a JPA para que se pueda

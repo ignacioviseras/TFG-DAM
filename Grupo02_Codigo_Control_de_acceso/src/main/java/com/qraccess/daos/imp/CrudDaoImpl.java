@@ -22,14 +22,41 @@ public abstract class CrudDaoImpl<T> {
 	    	em.close();
 	    }
 		return obj;
-	}
+	}	
+	
+	public abstract Class<T> getEntityClass();
+	
+	@SuppressWarnings("unchecked")
 	public T getById(int id) {
+		T result = (T) em.find(this.getClass(),id);
+		em.close();
+		return result;
+	}
+	
+	public T update(T obj) {
+		try {
+			em.getTransaction().begin();
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+			e.printStackTrace();
+	    } finally {
+	    	em.close();
+	    }
 		return null;
 	}
-	public T update(T obj) {
-		return obj;
-	}
 	public boolean delete(int id) {
+		try {
+			T obj = this.getById(id); 
+			em.getTransaction().begin();
+			em.remove(obj);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+			e.printStackTrace();
+	    } finally {
+	    	em.close();
+	    }
 		return true;
 	}
 }

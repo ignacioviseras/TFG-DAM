@@ -13,16 +13,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 @Entity
-@Table(name = "admins")
-public class Admin implements Serializable{
-	private static final long serialVersionUID = 1L;
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Table(name = "users")
+public class Customer implements Serializable{
+	private static final long serialVersionUID = 1L;	
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Embedded
 	private User user;
-	@OneToMany( mappedBy = "admin",orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@OneToMany( mappedBy = "user",orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Access> accesses = new ArrayList<Access>();
 	
 	public List<Access> getAccesses() {
@@ -35,13 +43,5 @@ public class Admin implements Serializable{
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 }

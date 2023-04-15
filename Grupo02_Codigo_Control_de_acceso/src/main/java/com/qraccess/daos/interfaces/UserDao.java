@@ -1,7 +1,7 @@
 package com.qraccess.daos.interfaces;
-import com.qraccess.entities.User;
+import com.qraccess.entities.Customer;
 
-public interface UserDao extends CrudDao<User>{
+public interface UserDao extends CrudDao<Customer>{
 
 	public String showQr();
 }
