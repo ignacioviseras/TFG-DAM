@@ -1,9 +1,6 @@
 package com.qraccess.daos.imp;
 
-import java.util.List;
-
 import com.qraccess.daos.interfaces.UserDao;
-import com.qraccess.entities.Access;
 import com.qraccess.entities.Customer;
 
 public class UserDaoImpl extends CrudDaoImpl<Customer> implements UserDao {

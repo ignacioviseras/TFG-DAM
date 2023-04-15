@@ -9,7 +9,7 @@ public abstract class CrudDaoImpl<T> {
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory(entity_manager_creator);
 	private EntityManager em = emf.createEntityManager();
 	public CrudDaoImpl() {}
-	
+
 	public T insert(T obj) {		
 		try {			
 			em.getTransaction().begin();			
@@ -18,21 +18,20 @@ public abstract class CrudDaoImpl<T> {
 		} catch (Exception e) {
 			em.getTransaction().rollback();
 			e.printStackTrace();
-	    } finally {
-	    	em.close();
-	    }
+		} finally {
+			em.close();
+		}
 		return obj;
 	}	
-	
+
 	public abstract Class<T> getEntityClass();
-	
-	@SuppressWarnings("unchecked")
+
 	public T getById(int id) {
-		T result = (T) em.find(this.getClass(),id);
+		T result = (T) em.find(this.getEntityClass(),id);
 		em.close();
 		return result;
 	}
-	
+
 	public T update(T obj) {
 		try {
 			em.getTransaction().begin();
@@ -40,9 +39,9 @@ public abstract class CrudDaoImpl<T> {
 		} catch (Exception e) {
 			em.getTransaction().rollback();
 			e.printStackTrace();
-	    } finally {
-	    	em.close();
-	    }
+		} finally {
+			em.close();
+		}
 		return null;
 	}
 	public boolean delete(int id) {
@@ -54,9 +53,9 @@ public abstract class CrudDaoImpl<T> {
 		} catch (Exception e) {
 			em.getTransaction().rollback();
 			e.printStackTrace();
-	    } finally {
-	    	em.close();
-	    }
+		} finally {
+			em.close();
+		}
 		return true;
 	}
 }

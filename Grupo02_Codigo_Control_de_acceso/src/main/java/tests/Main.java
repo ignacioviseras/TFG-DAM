@@ -11,27 +11,29 @@ import com.qraccess.entities.User;
 public class Main {
 
 	public static void main(String[] args) {
+//		
+//		User u = new User();
+//		u.setMail("sdfsdf");
+//		u.setName("agapito");
+//		u.setPassword("tofacil");
+//		
+//		Admin a = new Admin();		
+//		a.setUser(u);
+//		AdminDaoImpl.createAdmin(a);
+//		
+//		
+//		Access ac = new Access();
+//		ac.setAvailables(22);
+//		ac.setExpires(55);
+//		ac.setUuid();
+//		AccessDaoImpl.createAccess(ac);
+//		
+//		Customer c = new Customer();
+//		c.setUser(u);
+//		UserDaoImpl.createUser(c);
 		
-		User u = new User();
-		u.setMail("sdfsdf");
-		u.setName("agapito");
-		u.setPassword("tofacil");
-		
-		Admin a = new Admin();		
-		a.setUser(u);
-		AdminDaoImpl.createAdmin(a);
-		
-		
-		Access ac = new Access();
-		ac.setAvailables(22);
-		ac.setExpires(55);
-		ac.setUuid();
-		AccessDaoImpl.createAccess(ac);
-		
-		Customer c = new Customer();
-		c.setUser(u);
-		UserDaoImpl.createUser(c);
-		//UserDaoImpl uss = new UserDaoImpl();
+		UserDaoImpl uss = new UserDaoImpl();
+		uss.getById(1);
 		
 		
 	}
