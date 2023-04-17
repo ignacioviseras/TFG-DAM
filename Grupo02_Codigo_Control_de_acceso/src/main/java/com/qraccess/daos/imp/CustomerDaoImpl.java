@@ -1,18 +1,18 @@
 package com.qraccess.daos.imp;
 
-import com.qraccess.daos.interfaces.UserDao;
+import com.qraccess.daos.interfaces.CustomerDao;
 import com.qraccess.entities.Customer;
 
-public class UserDaoImpl extends CrudDaoImpl<Customer> implements UserDao {
+public class CustomerDaoImpl extends CrudDaoImpl<Customer> implements CustomerDao {
 
-	public UserDaoImpl() {}
+	public CustomerDaoImpl() {}
 	
-	public UserDaoImpl(Customer user) {
+	public CustomerDaoImpl(Customer user) {
 		this.insert(user);
 	}
 	
 	public static void createUser(Customer user) {
-		new UserDaoImpl(user);
+		new CustomerDaoImpl(user);
 	}
 
 	@Override
@@ -28,4 +28,11 @@ public class UserDaoImpl extends CrudDaoImpl<Customer> implements UserDao {
 	public Customer getById(int id) {
 		return (Customer)super.getById(id);
 	}
+
+	public Customer updateEntity(Customer entity, Customer updates) {
+		entity.setUser(updates.getUser());
+		return entity;
+	}
+	
+	
 }

@@ -17,7 +17,7 @@ public class AdminDaoImpl extends CrudDaoImpl<Admin> implements AdminDao {
 	@Override
 	public String createUser(Customer u) {
 		// TODO Auto-generated method stub
-		new UserDaoImpl(u);
+		new CustomerDaoImpl(u);
 		return null;
 	}
 	
@@ -35,6 +35,9 @@ public class AdminDaoImpl extends CrudDaoImpl<Admin> implements AdminDao {
 		new AdminDaoImpl(admin);
 	}
 	
-	
+	public Admin updateEntity(Admin entity, Admin updates) {
+		entity.setUser(updates.getUser());
+		return entity;
+	}
 	
 }

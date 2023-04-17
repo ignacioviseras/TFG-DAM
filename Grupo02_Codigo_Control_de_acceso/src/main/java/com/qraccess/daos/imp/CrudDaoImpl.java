@@ -19,22 +19,25 @@ public abstract class CrudDaoImpl<T> {
 			em.getTransaction().rollback();
 			e.printStackTrace();
 		} finally {
-			em.close();
+			//em.close();
 		}
 		return obj;
 	}	
 
 	public abstract Class<T> getEntityClass();
+	
+	public abstract T updateEntity(T entity, T updates);
 
 	public T getById(int id) {
 		T result = (T) em.find(this.getEntityClass(),id);
-		em.close();
+		//em.close();
 		return result;
 	}
 
-	public T update(T obj) {
+	public T update(int id, T updates) {
 		try {
 			em.getTransaction().begin();
+			em.merge(this.updateEntity(this.getById(id), updates));
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			em.getTransaction().rollback();
@@ -54,7 +57,7 @@ public abstract class CrudDaoImpl<T> {
 			em.getTransaction().rollback();
 			e.printStackTrace();
 		} finally {
-			em.close();
+			//em.close();
 		}
 		return true;
 	}

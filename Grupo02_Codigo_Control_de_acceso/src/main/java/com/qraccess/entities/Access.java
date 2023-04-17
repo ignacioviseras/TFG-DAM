@@ -60,4 +60,8 @@ public class Access implements Serializable {
 	public void setUuid() {
 		this.uuid = java.util.UUID.randomUUID().toString();
 	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;		
+	}
 }
