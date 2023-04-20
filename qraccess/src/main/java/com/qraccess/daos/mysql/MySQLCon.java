@@ -18,7 +18,7 @@ public class MySQLCon {
 	public boolean start() {
 		// conecta a la base de datos 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			Log.error("No se carga el driver:"+e.getMessage());
 		}

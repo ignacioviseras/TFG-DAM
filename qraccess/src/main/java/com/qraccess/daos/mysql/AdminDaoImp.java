@@ -1,6 +1,7 @@
 package com.qraccess.daos.mysql;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -16,7 +17,7 @@ public class AdminDaoImp extends MySQLCon implements AdminDao {
 	@Override
 	public Admin insert(Admin obj) {
 		if(this.start()){
-			String sql = "INSERT INTO ADMIN(NAME,EMAIL,PASSWORD)"+
+			String sql = "INSERT INTO ADMINS(NAME,EMAIL,PASSWORD)"+
 							" VALUES(?,?,?)";
 			try {
 				PreparedStatement ps = this.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -27,7 +28,7 @@ public class AdminDaoImp extends MySQLCon implements AdminDao {
 				obj.setId(this.getLastId(ps));
 				return obj;
 			}catch(SQLException e) {
-				System.err.print("No se ha podido registrar el coche:"+e.getMessage());
+				System.err.print("No se ha podido registrar el admin:"+e.getMessage());
 			}finally {
 				this.close();
 			}
@@ -36,9 +37,29 @@ public class AdminDaoImp extends MySQLCon implements AdminDao {
 	}
 
 	@Override
-	public Admin getById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Admin getById(int id){
+		if(!this.start()){
+			return null;
+		}
+		Admin admin = null;
+		String sql = "SELECT ID, NAME, EMAIL FROM ADMINS WHERE ID = ?";
+		try {
+			PreparedStatement ps = this.con.prepareStatement(sql);
+			ps.setInt(1,id);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				admin = new Admin();
+				admin.setId(rs.getInt(1));
+				admin.setName(rs.getString(2));
+				admin.setMail(rs.getString(3));
+			}				
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			this.close();
+		}
+		return admin;	
 	}
 
 	@Override
@@ -64,7 +85,7 @@ public class AdminDaoImp extends MySQLCon implements AdminDao {
 	public boolean delete(int id) {
 		boolean deleted = false;
 		if(this.start()) {
-			String sql = "DELETE FROM CUSTOMERS WHERE ID = ?";			
+			String sql = "DELETE FROM ADMINS WHERE ID = ?";			
 			try {
 				PreparedStatement ps = this.con.prepareStatement(sql);
 				ps.setInt(1, id);
