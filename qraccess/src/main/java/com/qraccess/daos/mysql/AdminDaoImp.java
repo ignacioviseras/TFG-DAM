@@ -17,7 +17,7 @@ public class AdminDaoImp extends MySQLCon implements AdminDao {
 	@Override
 	public Admin insert(Admin obj) {
 		if(this.start()){
-			String sql = "INSERT INTO ADMINS(NAME,EMAIL,PASSWORD)"+
+			String sql = "INSERT INTO ADMINS(NAME,MAIL,PASSWORD)"+
 							" VALUES(?,?,?)";
 			try {
 				PreparedStatement ps = this.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -42,7 +42,7 @@ public class AdminDaoImp extends MySQLCon implements AdminDao {
 			return null;
 		}
 		Admin admin = null;
-		String sql = "SELECT ID, NAME, EMAIL FROM ADMINS WHERE ID = ?";
+		String sql = "SELECT ID, NAME, MAIL FROM ADMINS WHERE ID = ?";
 		try {
 			PreparedStatement ps = this.con.prepareStatement(sql);
 			ps.setInt(1,id);
@@ -65,7 +65,7 @@ public class AdminDaoImp extends MySQLCon implements AdminDao {
 	@Override
 	public Admin update(Admin obj) {
 		if(this.start()){
-			String sql = "UPDATE ADMINS (NAME=?,EMAIL=?,PASSWORD=?)";
+			String sql = "UPDATE ADMINS (NAME=?,MAIL=?,PASSWORD=?)";
 			try {
 				PreparedStatement ps = this.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				ps.setString(1,obj.getName());
