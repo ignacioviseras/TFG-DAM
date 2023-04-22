@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Component;
 
 import com.qraccess.daos.interfaces.CustomerDao;
@@ -79,7 +80,7 @@ public class CustomerDaoImp  extends MySQLCon implements CustomerDao{
 	}
 
 	@Override
-	public boolean delete(int id) {
+	public HttpStatusCode delete(int id) {
 		boolean deleted = false;
 		if(this.start()) {
 			String sql = "DELETE FROM CUSTOMERS WHERE ID = ?";			

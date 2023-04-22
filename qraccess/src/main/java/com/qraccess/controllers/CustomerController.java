@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,5 +35,17 @@ public class CustomerController {
 		}
 		return entity_response;
 	}
+	
+	
+	@GetMapping(path="customer",consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Customer> deleteCustomer(@RequestBody Customer customer) {
+		Log.info("Eliminando: " + customer);
+		ResponseEntity<Customer> entity_response = this.checkCustomer(customer); // comprueba si el nombre es válido
+		if(entity_response == null) {
+			entity_response = new ResponseEntity<Customer>(cdao.delete(customer.getId()),HttpStatus.OK);//201 CREATED
+		}
+		return entity_response;
+	}
+	
 	
 }
