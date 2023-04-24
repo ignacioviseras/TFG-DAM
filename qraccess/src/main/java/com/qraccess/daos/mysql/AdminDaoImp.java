@@ -13,7 +13,7 @@ import com.qraccess.entities.Admin;
 import com.qraccess.entities.Customer;
 @Component
 public class AdminDaoImp extends MySQLCon implements AdminDao {
-
+//dfgbdfgb
 	@Override
 	public Admin insert(Admin obj) {
 		if(this.start()){
