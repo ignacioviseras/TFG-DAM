@@ -80,24 +80,6 @@ public class CustomerDaoImp  extends MySQLCon implements CustomerDao{
 	}
 
 	@Override
-	public HttpStatusCode delete(int id) {
-		boolean deleted = false;
-		if(this.start()) {
-			String sql = "DELETE FROM CUSTOMERS WHERE ID = ?";			
-			try {
-				PreparedStatement ps = this.con.prepareStatement(sql);
-				ps.setInt(1, id);
-				deleted = ps.executeUpdate() > 0;
-				this.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}			
-		}
-		return deleted;		
-	}
-
-	@Override
 	public String showQr() {
 		// TODO Auto-generated method stub
 		return null;
