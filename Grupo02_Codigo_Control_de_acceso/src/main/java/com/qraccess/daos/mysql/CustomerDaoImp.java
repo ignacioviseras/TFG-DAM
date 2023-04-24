@@ -61,12 +61,13 @@ public class CustomerDaoImp  extends MySQLCon implements CustomerDao{
 	@Override
 	public Customer update(Customer obj) {
 		if(this.start()){
-			String sql = "UPDATE CUSTOMERS (NAME=?,MAIL=?,PASSWORD=?)";
+			String sql = "UPDATE CUSTOMERS SET NAME=?, MAIL=? WHERE ID=?";
 			try {
 				PreparedStatement ps = this.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				ps.setString(1,obj.getName());
 				ps.setString(2,obj.getMail());
-				ps.setString(3,obj.getPassword());
+				//ps.setString(3,obj.getPassword());
+				ps.setInt(3, obj.getId());
 				ps.executeUpdate();
 			}catch(SQLException e) {
 				System.err.print("No se ha podido actualizar el user:"+e.getMessage());

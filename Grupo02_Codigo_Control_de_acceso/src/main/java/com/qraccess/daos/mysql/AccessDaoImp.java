@@ -44,7 +44,7 @@ public class AccessDaoImp extends MySQLCon implements AccessDao{
 	@Override
 	public Access update(Access obj) {
 		if(this.start()){
-			String sql = "UPDATE ACCESSES (AVAILABLES=?,EXPIRES=?,USER_ID=?,ADMIN_ID=?,UUID=?)";
+			String sql = "UPDATE ACCESSES SET AVAILABLES=?, EXPIRES=?, USER_ID=?, ADMIN_ID=?, UUID=? WHERE ID=?";
 			try {
 				PreparedStatement ps = this.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				ps.setInt(1,obj.getAvailables());
@@ -52,6 +52,7 @@ public class AccessDaoImp extends MySQLCon implements AccessDao{
 				ps.setInt(3,obj.getUser_id());
 				ps.setInt(4,obj.getAdmin_id());
 				ps.setString(5,obj.getUuid());
+				ps.setInt(6,obj.getId());
 				ps.executeUpdate();
 			}catch(SQLException e) {
 				System.err.print("No se ha podido actualizar el acceso:"+e.getMessage());
