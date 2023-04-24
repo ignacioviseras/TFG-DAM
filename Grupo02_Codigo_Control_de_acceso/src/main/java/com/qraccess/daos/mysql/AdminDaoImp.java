@@ -15,7 +15,6 @@ import com.qraccess.utils.Log;
 
 @Component
 public class AdminDaoImp extends MySQLCon implements AdminDao {
-//dfgbdfgb
 	@Override
 	public Admin insert(Admin obj) {
 		if (this.start()) {

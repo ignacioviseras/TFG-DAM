@@ -11,7 +11,7 @@ import com.qraccess.daos.interfaces.CustomerDao;
 import com.qraccess.entities.Customer;
 @Component
 public class CustomerDaoImp  extends MySQLCon implements CustomerDao{
-	
+	@Override
 	public Customer insert(Customer obj) {
 		if(this.start()){
 			String sql = "INSERT INTO CUSTOMERS(NAME,MAIL,PASSWORD)"+
@@ -24,7 +24,7 @@ public class CustomerDaoImp  extends MySQLCon implements CustomerDao{
 				ps.executeUpdate();
 				obj.setId(this.getLastId(ps));
 			}catch(SQLException e) {
-				System.err.print("No se ha podido registrar el coche:"+e.getMessage());
+				System.err.print("No se ha podido registrar el customer:"+e.getMessage());
 			}finally {
 				this.close();
 			}
@@ -70,7 +70,7 @@ public class CustomerDaoImp  extends MySQLCon implements CustomerDao{
 				ps.setInt(3, obj.getId());
 				ps.executeUpdate();
 			}catch(SQLException e) {
-				System.err.print("No se ha podido actualizar el user:"+e.getMessage());
+				System.err.print("No se ha podido actualizar el Customer:"+e.getMessage());
 			}finally {
 				this.close();
 			}
@@ -79,15 +79,29 @@ public class CustomerDaoImp  extends MySQLCon implements CustomerDao{
 	}
 
 	@Override
+	public boolean delete(int id) {
+		boolean deleted = false;
+		if (this.start()) {
+			String sql = "DELETE FROM CUSTOMERS WHERE ID = ?";
+			try {
+				PreparedStatement ps = this.con.prepareStatement(sql);
+				ps.setInt(1, id);
+				deleted = ps.executeUpdate() > 0;
+				this.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return deleted;
+	}
+	
+	@Override
 	public String showQr() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public boolean delete(int id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 }
