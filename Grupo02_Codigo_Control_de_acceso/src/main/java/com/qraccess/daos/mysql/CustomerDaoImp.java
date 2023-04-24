@@ -5,11 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Component;
 
 import com.qraccess.daos.interfaces.CustomerDao;
-import com.qraccess.entities.Admin;
 import com.qraccess.entities.Customer;
 @Component
 public class CustomerDaoImp  extends MySQLCon implements CustomerDao{
@@ -83,6 +81,12 @@ public class CustomerDaoImp  extends MySQLCon implements CustomerDao{
 	public String showQr() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean delete(int id) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

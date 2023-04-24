@@ -37,15 +37,15 @@ public class CustomerController {
 	}
 	
 	
-	@GetMapping(path="customer",consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Customer> deleteCustomer(@RequestBody Customer customer) {
-		Log.info("Eliminando: " + customer);
-		ResponseEntity<Customer> entity_response = this.checkCustomer(customer); // comprueba si el nombre es válido
-		if(entity_response == null) {
-			entity_response = new ResponseEntity<Customer>(cdao.delete(customer.getId()),HttpStatus.OK);//201 CREATED
-		}
-		return entity_response;
-	}
+//	@GetMapping(path="customer",consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
+//	public ResponseEntity<Customer> deleteCustomer(@RequestBody Customer customer) {
+//		Log.info("Eliminando: " + customer);
+//		ResponseEntity<Customer> entity_response = this.checkCustomer(customer); // comprueba si el nombre es válido
+//		if(entity_response == null) {
+//			entity_response = new ResponseEntity<Customer>(cdao.delete(customer.getId()),HttpStatus.OK);//201 CREATED
+//		}
+//		return entity_response;
+//	}
 	
 	
 }
