@@ -106,10 +106,4 @@ public class AdminDaoImp extends MySQLCon implements AdminDao {
 		return null;
 	}
 
-	@Override
-	public String createUser(Customer u) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

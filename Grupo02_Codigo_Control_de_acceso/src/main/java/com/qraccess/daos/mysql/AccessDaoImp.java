@@ -14,15 +14,14 @@ public class AccessDaoImp extends MySQLCon implements AccessDao{
 	@Override
 	public Access insert(Access obj) {
 		if(this.start()){
-			String sql = "INSERT INTO ACCESSES(AVAILABLES,EXPIRES,USER_ID,ADMIN_ID,UUID)"+
-							" VALUES(?,?,?,?,?)";
+			String sql = "INSERT INTO ACCESSES(AVAILABLES,EXPIRES,USER_ID,ADMIN_ID)"+
+							" VALUES(?,?,?,?)";
 			try {
 				PreparedStatement ps = this.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				ps.setInt(1,obj.getAvailables());
-				ps.setInt(2,obj.getExpires());
+				ps.setLong(2,obj.getExpires());
 				ps.setInt(3,obj.getUser_id());
 				ps.setInt(4,obj.getAdmin_id());
-				ps.setString(5,obj.getUuid());
 				ps.executeUpdate();
 				obj.setId(this.getLastId(ps));
 				return obj;
@@ -44,15 +43,14 @@ public class AccessDaoImp extends MySQLCon implements AccessDao{
 	@Override
 	public Access update(Access obj) {
 		if(this.start()){
-			String sql = "UPDATE ACCESSES SET AVAILABLES=?, EXPIRES=?, USER_ID=?, ADMIN_ID=?, UUID=? WHERE ID=?";
+			String sql = "UPDATE ACCESSES SET AVAILABLES=?, EXPIRES=?, USER_ID=?, ADMIN_ID=? WHERE ID=?";
 			try {
 				PreparedStatement ps = this.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				ps.setInt(1,obj.getAvailables());
-				ps.setInt(2,obj.getExpires());
+				ps.setLong(2,obj.getExpires());
 				ps.setInt(3,obj.getUser_id());
 				ps.setInt(4,obj.getAdmin_id());
-				ps.setString(5,obj.getUuid());
-				ps.setInt(6,obj.getId());
+				ps.setInt(5,obj.getId());
 				ps.executeUpdate();
 			}catch(SQLException e) {
 				System.err.print("No se ha podido actualizar el acceso:"+e.getMessage());
@@ -82,9 +80,22 @@ public class AccessDaoImp extends MySQLCon implements AccessDao{
 	}
 
 	@Override
-	public void validate(int id, String hash) {
-		// TODO Auto-generated method stub
-		
+	public void validate(int id) {
+		Access access = this.getById(id);
+		access.validate();
+		this.update(access);
+	}
+	
+	public void addValidations(int id, int n) {
+		Access access = this.getById(id);
+		access.setAvailables((access.getAvailables() + n));
+		this.update(access);
+	}
+	
+	public void renew(int id, long timestart) {
+		Access access = this.getById(id);
+		access.setExpires(timestart);
+		this.update(access);
 	}
 
 }

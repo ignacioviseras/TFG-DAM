@@ -4,7 +4,7 @@ import com.qraccess.entities.Access;
 import com.qraccess.entities.Admin;
 
 public interface AccessDao extends CrudDao<Access>{
-
-	public void validate(int id, String hash);	
-	
+	void validate(int id);
+	void renew(int id, long timestamp);
+	void addValidations(int id, int n);
 }

@@ -2,8 +2,8 @@ package com.qraccess.entities;
 
 public class Access{
 
-	private int id, availables, expires, user_id, admin_id;
-	private String uuid;
+	private int id, availables, user_id, admin_id;
+	private long expires;
 
 	public int getId() {
 		return id;
@@ -21,24 +21,12 @@ public class Access{
 		this.availables = availables;
 	}
 
-	public int getExpires() {
+	public long getExpires() {
 		return expires;
 	}
 
-	public void setExpires(int expires) {
+	public void setExpires(long expires) {
 		this.expires = expires;
-	}
-
-	public String getUuid() {
-		return uuid;
-	}
-
-	public void setUuid() {
-		this.uuid = java.util.UUID.randomUUID().toString();
-	}
-
-	public void setUuid(String uuid) {
-		this.uuid = uuid;		
 	}
 
 	public int getUser_id() {
@@ -55,5 +43,9 @@ public class Access{
 
 	public void setAdmin_id(int admin_id) {
 		this.admin_id = admin_id;
-	}	
+	}
+	
+	public void validate() {
+		this.availables--;
+	}
 }
