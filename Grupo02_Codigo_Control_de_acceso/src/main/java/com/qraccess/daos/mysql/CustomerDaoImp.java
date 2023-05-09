@@ -31,6 +31,32 @@ public class CustomerDaoImp  extends MySQLCon implements CustomerDao{
 		}
 		return null;
 	}
+	
+	public Customer getByMail( String mail) {
+		if (!this.start()) {
+			return null;
+		}
+		Customer customer = null;
+		String sql = "SELECT ID, NAME, MAIL, PASSWORD FROM CUSTOMERS WHERE MAIL LIKE ?";
+		try {
+			PreparedStatement ps = this.con.prepareStatement(sql);
+			ps.setString(1, mail);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				customer = new Customer();
+				customer.setId(rs.getInt(1));
+				customer.setName(rs.getString(2));
+				customer.setMail(rs.getString(3));
+				customer.setPassword(rs.getString(4));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			this.close();
+		}
+		return customer;
+	}
 
 	@Override
 	public Customer getById(int id) {

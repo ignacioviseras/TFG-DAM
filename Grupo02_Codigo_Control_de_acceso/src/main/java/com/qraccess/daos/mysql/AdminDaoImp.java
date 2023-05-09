@@ -35,6 +35,32 @@ public class AdminDaoImp extends MySQLCon implements AdminDao {
 		}
 		return null;
 	}
+	
+    public Admin getByMail( String mail) {
+		if (!this.start()) {
+			return null;
+		}
+		Admin admin = null;
+		String sql = "SELECT ID, NAME, MAIL, PASSWORD FROM ADMINS WHERE MAIL LIKE ?";
+		try {
+			PreparedStatement ps = this.con.prepareStatement(sql);
+			ps.setString(1, mail);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				admin = new Admin();
+				admin.setId(rs.getInt(1));
+				admin.setName(rs.getString(2));                
+				admin.setMail(rs.getString(3));
+                admin.setPassword(rs.getString(4));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			this.close();
+		}
+		return admin;
+	}
 
 	@Override
 	public Admin getById(int id) {

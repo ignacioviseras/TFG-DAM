@@ -4,7 +4,7 @@ public class Customer extends User{
 	
 	@Override
 	public String toString() {
-		return "Customer [getToken_access()=" + getToken_access() + ", getName()=" + getName() + ", getPassword()="
+		return "Customer [getName()=" + getName() + ", getPassword()="
 				+ getPassword() + ", getMail()=" + getMail() + ", getId()=" + getId() + "]";
 	}
 

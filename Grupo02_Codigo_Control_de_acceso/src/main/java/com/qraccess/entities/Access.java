@@ -2,7 +2,7 @@ package com.qraccess.entities;
 
 public class Access{
 
-	private int id, availables, user_id, admin_id;
+	private int id, availables, user_id;
 	private long expires;
 
 	public int getId() {
@@ -35,14 +35,6 @@ public class Access{
 
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
-	}
-
-	public int getAdmin_id() {
-		return admin_id;
-	}
-
-	public void setAdmin_id(int admin_id) {
-		this.admin_id = admin_id;
 	}
 	
 	public void validate() {
