@@ -19,7 +19,7 @@ public class AdminDaoImpTest {
 		 try {
 			 // tras 5 segundos recupera el admin
 			 Thread.sleep(5*1000);
-			 System.out.println( admin_dao.getById(admin.getId()));
+			 System.out.println( admin_dao.findById(admin.getId()));
             //tras 15 segundos borra el admin
             Thread.sleep(15*1000);
             admin_dao.delete(admin.getId());

@@ -23,6 +23,7 @@ public class CustomerDaoImp  extends MySQLCon implements CustomerDao{
 				ps.setString(3,obj.getPassword());
 				ps.executeUpdate();
 				obj.setId(this.getLastId(ps));
+				return obj;
 			}catch(SQLException e) {
 				System.err.print("No se ha podido registrar el customer:"+e.getMessage());
 			}finally {
@@ -30,6 +31,15 @@ public class CustomerDaoImp  extends MySQLCon implements CustomerDao{
 			}
 		}
 		return null;
+	}
+
+	public Customer insert(String name, String email, String pwd) {
+		Customer c = new Customer();
+		c.setMail(email);
+		c.setName(name);
+		c.setPassword(pwd);
+		c.encryptPassword();
+		return this.insert(c);
 	}
 	
 	public Customer getByMail( String mail) {
@@ -59,7 +69,7 @@ public class CustomerDaoImp  extends MySQLCon implements CustomerDao{
 	}
 
 	@Override
-	public Customer getById(int id) {
+	public Customer findById(int id) {
 		if(!this.start()){
 			return null;
 		}

@@ -29,7 +29,7 @@ public class AccessController {
     }
 
     private ResponseEntity<Access> ifNotExist(int id) {
-        Access admin = acdao.getById(id);
+        Access admin = acdao.findById(id);
         ResponseEntity<Access> entity_response = null;
         if(admin == null) {
             entity_response = new ResponseEntity<Access>(HttpStatus.INTERNAL_SERVER_ERROR);//404 NOT FOUND
@@ -51,7 +51,7 @@ public class AccessController {
         System.out.println("GET access/"+id);
         ResponseEntity<Access> entity_response = this.ifNotExist(id);
         if(entity_response == null) {
-            Access accs = acdao.getById(id);
+            Access accs = acdao.findById(id);
             entity_response = new ResponseEntity<Access>(accs, HttpStatus.OK);
         }
         return entity_response;

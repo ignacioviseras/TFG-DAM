@@ -35,6 +35,15 @@ public class AdminDaoImp extends MySQLCon implements AdminDao {
 		}
 		return null;
 	}
+
+	public Admin insert(String name, String email, String pwd) {
+		Admin a = new Admin();
+		a.setMail(email);
+		a.setName(name);
+		a.setPassword(pwd);
+		a.encryptPassword();
+		return this.insert(a);
+	}
 	
     public Admin getByMail( String mail) {
 		if (!this.start()) {
@@ -63,7 +72,7 @@ public class AdminDaoImp extends MySQLCon implements AdminDao {
 	}
 
 	@Override
-	public Admin getById(int id) {
+	public Admin findById(int id) {
 		if (!this.start()) {
 			return null;
 		}

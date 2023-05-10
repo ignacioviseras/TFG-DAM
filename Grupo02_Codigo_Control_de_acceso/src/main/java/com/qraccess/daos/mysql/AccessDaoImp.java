@@ -14,14 +14,13 @@ public class AccessDaoImp extends MySQLCon implements AccessDao{
 	@Override
 	public Access insert(Access obj) {
 		if(this.start()){
-			String sql = "INSERT INTO ACCESSES(AVAILABLES,EXPIRES,USER_ID,ADMIN_ID)"+
+			String sql = "INSERT INTO ACCESSES(AVAILABLES,USER_ID,EVENT_ID)"+
 							" VALUES(?,?,?,?)";
 			try {
 				PreparedStatement ps = this.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				ps.setInt(1,obj.getAvailables());
-				ps.setLong(2,obj.getExpires());
-				ps.setInt(3,obj.getUser_id());
-				ps.setInt(4,obj.getAdmin_id());
+				ps.setInt(2,obj.getUser_id());
+				ps.setInt(3,obj.getEvent_id());
 				ps.executeUpdate();
 				obj.setId(this.getLastId(ps));
 				return obj;
@@ -35,7 +34,7 @@ public class AccessDaoImp extends MySQLCon implements AccessDao{
 	}
 
 	@Override
-	public Access getById(int id) {
+	public Access findById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -43,14 +42,13 @@ public class AccessDaoImp extends MySQLCon implements AccessDao{
 	@Override
 	public Access update(Access obj) {
 		if(this.start()){
-			String sql = "UPDATE ACCESSES SET AVAILABLES=?, EXPIRES=?, USER_ID=?, ADMIN_ID=? WHERE ID=?";
+			String sql = "UPDATE ACCESSES SET AVAILABLES=?, USER_ID=?, EVENT_ID=? WHERE ID=?";
 			try {
 				PreparedStatement ps = this.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-				ps.setInt(1,obj.getAvailables());
-				ps.setLong(2,obj.getExpires());
-				ps.setInt(3,obj.getUser_id());
-				ps.setInt(4,obj.getAdmin_id());
-				ps.setInt(5,obj.getId());
+				ps.setInt(1,obj.getAvailables());				
+				ps.setInt(2,obj.getUser_id());
+				ps.setInt(3,obj.getEvent_id());
+				ps.setInt(4,obj.getId());
 				ps.executeUpdate();
 			}catch(SQLException e) {
 				System.err.print("No se ha podido actualizar el acceso:"+e.getMessage());
@@ -81,20 +79,19 @@ public class AccessDaoImp extends MySQLCon implements AccessDao{
 
 	@Override
 	public void validate(int id) {
-		Access access = this.getById(id);
+		Access access = this.findById(id);
 		access.validate();
 		this.update(access);
 	}
 	
 	public void addValidations(int id, int n) {
-		Access access = this.getById(id);
+		Access access = this.findById(id);
 		access.setAvailables((access.getAvailables() + n));
 		this.update(access);
 	}
 	
 	public void renew(int id, long timestart) {
-		Access access = this.getById(id);
-		access.setExpires(timestart);
+		Access access = this.findById(id);
 		this.update(access);
 	}
 

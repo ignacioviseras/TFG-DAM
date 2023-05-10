@@ -2,8 +2,7 @@ package com.qraccess.entities;
 
 public class Access{
 
-	private int id, availables, user_id;
-	private long expires;
+	private int id, availables, user_id, event_id;
 
 	public int getId() {
 		return id;
@@ -21,12 +20,12 @@ public class Access{
 		this.availables = availables;
 	}
 
-	public long getExpires() {
-		return expires;
+	public int getEvent_id() {
+		return event_id;
 	}
 
-	public void setExpires(long expires) {
-		this.expires = expires;
+	public void getEvent_id(int event_id) {
+		this.event_id = event_id;
 	}
 
 	public int getUser_id() {

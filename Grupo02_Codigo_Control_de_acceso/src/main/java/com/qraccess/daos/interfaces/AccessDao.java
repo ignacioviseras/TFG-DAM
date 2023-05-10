@@ -1,7 +1,6 @@
 package com.qraccess.daos.interfaces;
 
 import com.qraccess.entities.Access;
-import com.qraccess.entities.Admin;
 
 public interface AccessDao extends CrudDao<Access>{
 	void validate(int id);

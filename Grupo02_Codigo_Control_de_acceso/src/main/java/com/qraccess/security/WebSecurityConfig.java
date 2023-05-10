@@ -31,9 +31,11 @@ public class WebSecurityConfig {
           //.requestMatchers("/public/**").permitAll()	
         .requestMatchers("/login").permitAll()
         .requestMatchers("/signin").permitAll()
-        	.requestMatchers("/admin/**").hasRole("ADMIN")
+        .requestMatchers("/events/**").permitAll()
+        	.requestMatchers("/admin/*").hasRole("ADMIN")
+          
             .anyRequest().authenticated()
-        ) 
+        )
         .cors(withDefaults())
         .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
         .sessionManagement((session) -> session

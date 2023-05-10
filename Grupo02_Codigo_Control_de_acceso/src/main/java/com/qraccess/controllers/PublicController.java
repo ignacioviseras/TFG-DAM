@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
+import com.qraccess.daos.mysql.AdminDaoImp;
 import com.qraccess.daos.mysql.CustomerDaoImp;
 import com.qraccess.entities.Customer;
 import com.qraccess.security.service.JwtUtilService;
@@ -33,6 +34,9 @@ public class PublicController {
 	  
 	  @Autowired
 	  private CustomerDaoImp customerDao;
+
+	  @Autowired
+	  private AdminDaoImp adminDao;
 	 
 	  @PostMapping("/login")
 	  public ResponseEntity<TokenInfo> authenticate(@RequestBody Map<String,String> auth) {
@@ -52,9 +56,19 @@ public class PublicController {
 	  }
 	  
 	  @PostMapping("/signin")
-	  public ResponseEntity<Customer> singin(@RequestBody Customer customer) {
-		  customer.encryptPassword();
-		  customerDao.insert(customer);
-		  return ResponseEntity.ok(customer);
+	  public ResponseEntity<Boolean> singin(@RequestBody Map<String,String> newUser) {
+		Boolean success = false;
+		if(true){
+			/* check email */
+		}
+		// if admin or customer is created returns true, else false
+		if(newUser.get("role").equals("admin")){
+			success = adminDao.insert(newUser.get("name"), newUser.get("mail"), newUser.get("password")) != null;
+		}else if(newUser.get("role").equals("customer")){
+			success = customerDao.insert(newUser.get("name"), newUser.get("mail"), newUser.get("password")) != null;
+		}else{
+			/* exception role not available */			
+		}
+		return ResponseEntity.ok(success);
 	  }
 }
