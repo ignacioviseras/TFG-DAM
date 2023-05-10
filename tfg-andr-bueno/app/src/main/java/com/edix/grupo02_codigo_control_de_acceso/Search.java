@@ -13,6 +13,7 @@ public class Search extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        getSupportActionBar().hide();
 
 
         ImageButton botonHome = findViewById(R.id.botonHome);
@@ -29,6 +30,7 @@ public class Search extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Search.this, Search.class);
+                startActivity(intent);
             }
         });
 
@@ -37,6 +39,7 @@ public class Search extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Search.this, Profile.class);
+                startActivity(intent);
             }
         });
     }
