@@ -8,9 +8,10 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="234dp"
-        android:layout_height="196dp"
-        android:layout_marginTop="64dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintDimensionRatio="H,2:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -18,63 +19,53 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layautCorreo"
-        android:layout_width="314dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        app:cornerRadius="60sp"
+        android:layout_width="355dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/cajaCorreo"
-            android:layout_width="314dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
             android:hint="@string/cajaCorreo"
             android:textColorHint="@color/morado_claro"
-            android:textSize="16sp"
-            app:cornerRadius="60sp"/>
-        <!--Para el color de las letras-->
-        <!--Para el tamaño de la letra-->
-        <!--Para el color de fondo de la caja-->
-        <requestFocus />
-
+            android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layautContraseña"
-        android:layout_width="314dp"
+        android:layout_width="355dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        app:cornerRadius="60sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layautCorreo">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/cajaContraseña"
-            android:layout_width="314dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
             android:hint="@string/cajaContraseña"
             android:inputType="textPassword"
             android:textColorHint="@color/morado_claro"
-            android:textSize="16sp"
-            app:cornerRadius="60sp"/>
+            android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/botonLogin"
-        android:layout_width="301dp"
+        android:layout_width="340dp"
         android:layout_height="52dp"
-        android:layout_marginTop="54dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="@color/morado"
         android:text="@string/login"
         android:textSize="16sp"
         app:cornerRadius="32sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layautContraseña" />
 

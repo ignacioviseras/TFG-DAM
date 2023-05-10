@@ -55,7 +55,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/CorreoTexto"
+        android:id="@+id/fechaNacText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -67,7 +67,7 @@
         app:layout_constraintTop_toBottomOf="@+id/NombreUsuario" />
 
     <TextView
-        android:id="@+id/Correo"
+        android:id="@+id/fechaNac"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="76dp"
@@ -75,11 +75,11 @@
         android:text="20/10/10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.728"
-        app:layout_constraintStart_toEndOf="@+id/CorreoTexto"
+        app:layout_constraintStart_toEndOf="@+id/fechaNacText"
         app:layout_constraintTop_toBottomOf="@+id/NombreUsuario" />
 
     <TextView
-        android:id="@+id/fechaNacimientoTexto"
+        android:id="@+id/CorreoTexto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -87,10 +87,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.135"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CorreoTexto" />
+        app:layout_constraintTop_toBottomOf="@+id/fechaNacText" />
 
     <TextView
-        android:id="@+id/fechaNacimiento"
+        android:id="@+id/CorreoProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -98,17 +98,17 @@
         android:text="ignacio.viseras@gmail.com"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.692"
-        app:layout_constraintStart_toEndOf="@+id/fechaNacimientoTexto"
-        app:layout_constraintTop_toBottomOf="@+id/Correo" />
+        app:layout_constraintStart_toEndOf="@+id/CorreoTexto"
+        app:layout_constraintTop_toBottomOf="@+id/fechaNac" />
 
     <TextView
-        android:id="@+id/CambiarContraseña"
+        android:id="@+id/cambiarContraseña"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="55dp"
         android:text="Cambiar Contraseña"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fechaNacimiento" />
+        app:layout_constraintTop_toBottomOf="@+id/CorreoProfile" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
