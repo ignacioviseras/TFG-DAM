@@ -131,13 +131,4 @@ public class CustomerDaoImp  extends MySQLCon implements CustomerDao{
 		}
 		return deleted;
 	}
-	
-	@Override
-	public String showQr() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
-
 }

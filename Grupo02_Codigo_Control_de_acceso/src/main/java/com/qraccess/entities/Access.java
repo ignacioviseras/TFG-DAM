@@ -2,7 +2,7 @@ package com.qraccess.entities;
 
 public class Access{
 
-	private int id, availables, user_id, event_id;
+	private int id, availables, customer_id, event_id;
 
 	public int getId() {
 		return id;
@@ -24,16 +24,16 @@ public class Access{
 		return event_id;
 	}
 
-	public void getEvent_id(int event_id) {
+	public void setEvent_id(int event_id) {
 		this.event_id = event_id;
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public int getCustomer_id() {
+		return customer_id;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setCustomer_id(int user_id) {
+		this.customer_id = user_id;
 	}
 	
 	public void validate() {

@@ -7,9 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
-
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.Statement;
 import com.qraccess.daos.interfaces.EventDao;
 import com.qraccess.entities.Event;

@@ -8,10 +8,7 @@ import java.sql.Statement;
 import org.springframework.stereotype.Component;
 
 import com.qraccess.daos.interfaces.AdminDao;
-import com.qraccess.entities.Access;
 import com.qraccess.entities.Admin;
-import com.qraccess.entities.Customer;
-import com.qraccess.utils.Log;
 
 @Component
 public class AdminDaoImp extends MySQLCon implements AdminDao {
@@ -134,11 +131,4 @@ public class AdminDaoImp extends MySQLCon implements AdminDao {
 		}
 		return deleted;
 	}
-
-	@Override
-	public String createAccess(Access a) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

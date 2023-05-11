@@ -1,8 +1,11 @@
 package com.qraccess.daos.mysql;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
@@ -19,7 +22,7 @@ public class AccessDaoImp extends MySQLCon implements AccessDao{
 			try {
 				PreparedStatement ps = this.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				ps.setInt(1,obj.getAvailables());
-				ps.setInt(2,obj.getUser_id());
+				ps.setInt(2,obj.getCustomer_id());
 				ps.setInt(3,obj.getEvent_id());
 				ps.executeUpdate();
 				obj.setId(this.getLastId(ps));
@@ -35,8 +38,81 @@ public class AccessDaoImp extends MySQLCon implements AccessDao{
 
 	@Override
 	public Access findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		if (!this.start()) {
+			return null;
+		}
+		Access access = null;
+		String sql = "SELECT ID, AVAILABLES, USER_ID, EVENT_ID FROM ACCESSES WHERE ID = ?";
+		try {
+			PreparedStatement ps = this.con.prepareStatement(sql);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				access = new Access();
+				access.setId(rs.getInt(1));
+				access.setAvailables(rs.getInt(2));
+				access.setCustomer_id(rs.getInt(3));
+				access.setEvent_id(rs.getInt(4));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			this.close();
+		}
+		return access;
+	}
+
+	public Access findByCustomerIdAndEventId(int customer_id, int event_id){
+		if (!this.start()) {
+			return null;
+		}
+		Access access = null;
+		String sql = "SELECT ID, AVAILABLES, USER_ID, EVENT_ID FROM ACCESSES WHERE EVENT_ID = ? AND CUSTOMER_ID = ?";
+		try {
+			PreparedStatement ps = this.con.prepareStatement(sql);
+			ps.setInt(1, event_id);
+			ps.setInt(2, customer_id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				access = new Access();
+				access.setId(rs.getInt(1));
+				access.setAvailables(rs.getInt(2));
+				access.setCustomer_id(rs.getInt(3));
+				access.setEvent_id(rs.getInt(4));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			this.close();
+		}
+		return access;
+	}
+
+	public List<Access> findByCustomerId(int customer_id){
+		if (!this.start()) {
+			return null;
+		}
+		List<Access> accesses = new ArrayList<Access>();
+		
+		String sql = "SELECT ID, AVAILABLES, USER_ID, EVENT_ID FROM ACCESSES WHERE CUSTOMER_ID = ?";
+		try {
+			PreparedStatement ps = this.con.prepareStatement(sql);
+			ps.setInt(1, customer_id);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Access access = new Access();
+				access.setId(rs.getInt(1));
+				access.setAvailables(rs.getInt(2));
+				access.setCustomer_id(rs.getInt(3));
+				access.setEvent_id(rs.getInt(4));
+				accesses.add(access);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			this.close();
+		}
+		return accesses;
 	}
 
 	@Override
@@ -46,7 +122,7 @@ public class AccessDaoImp extends MySQLCon implements AccessDao{
 			try {
 				PreparedStatement ps = this.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				ps.setInt(1,obj.getAvailables());				
-				ps.setInt(2,obj.getUser_id());
+				ps.setInt(2,obj.getCustomer_id());
 				ps.setInt(3,obj.getEvent_id());
 				ps.setInt(4,obj.getId());
 				ps.executeUpdate();
@@ -76,23 +152,4 @@ public class AccessDaoImp extends MySQLCon implements AccessDao{
 		}
 		return deleted;
 	}
-
-	@Override
-	public void validate(int id) {
-		Access access = this.findById(id);
-		access.validate();
-		this.update(access);
-	}
-	
-	public void addValidations(int id, int n) {
-		Access access = this.findById(id);
-		access.setAvailables((access.getAvailables() + n));
-		this.update(access);
-	}
-	
-	public void renew(int id, long timestart) {
-		Access access = this.findById(id);
-		this.update(access);
-	}
-
 }

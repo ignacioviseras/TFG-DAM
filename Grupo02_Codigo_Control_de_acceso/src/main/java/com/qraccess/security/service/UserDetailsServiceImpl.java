@@ -13,7 +13,6 @@ import com.qraccess.daos.mysql.AdminDaoImp;
 import com.qraccess.daos.mysql.CustomerDaoImp;
 import com.qraccess.entities.Admin;
 import com.qraccess.entities.Customer;
-import com.qraccess.utils.Log;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
