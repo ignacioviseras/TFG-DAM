@@ -35,7 +35,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 				return User
 			        .withUsername(username)
 			        .password(customer.getPassword())
-			        .roles(Set.of("USER").toArray(new String[0]))
+			        .roles(Set.of("CUSTOMER").toArray(new String[0]))
 			        .build();
 			}
 		}else{

@@ -33,6 +33,7 @@ public class WebSecurityConfig {
         .requestMatchers("/signin").permitAll()
         .requestMatchers("/events/**").permitAll()
         	.requestMatchers("/admin/*").hasRole("ADMIN")
+          .requestMatchers("/customer/*").hasRole("CUSTOMER")
           
             .anyRequest().authenticated()
         )
