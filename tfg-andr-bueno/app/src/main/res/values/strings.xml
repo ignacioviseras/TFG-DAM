@@ -5,4 +5,7 @@
     <string name="login">Login</string>
     <string name="crea_una_cuenta">Create account</string>
     <string name="cajaNombre">Nombre</string>
+    <string name="registro">registro</string>
+    <string name="hecho">hecho</string>
+    <string name="actualizar">actualizar</string>
 </resources>
