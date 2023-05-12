@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Grupo02_codigo_control_de_acceso"
         tools:targetApi="31">
         <activity
+            android:name=".RegisterList"
+            android:exported="false" />
+        <activity
             android:name=".Search"
             android:exported="false">
             <meta-data
