@@ -17,8 +17,8 @@ public class AccessDaoImp extends MySQLCon implements AccessDao{
 	@Override
 	public Access insert(Access obj) {
 		if(this.start()){
-			String sql = "INSERT INTO ACCESSES(AVAILABLES,USER_ID,EVENT_ID)"+
-							" VALUES(?,?,?,?)";
+			String sql = "INSERT INTO ACCESSES(AVAILABLES,CUSTOMER_ID,EVENT_ID)"+
+							" VALUES(?,?,?)";
 			try {
 				PreparedStatement ps = this.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				ps.setInt(1,obj.getAvailables());
@@ -28,7 +28,7 @@ public class AccessDaoImp extends MySQLCon implements AccessDao{
 				obj.setId(this.getLastId(ps));
 				return obj;
 			}catch(SQLException e) {
-				System.err.print("No se ha podido registrar el coche:"+e.getMessage());
+				System.err.print("No se ha podido registrar el acceso:"+e.getMessage());
 			}finally {
 				this.close();
 			}
@@ -42,7 +42,7 @@ public class AccessDaoImp extends MySQLCon implements AccessDao{
 			return null;
 		}
 		Access access = null;
-		String sql = "SELECT ID, AVAILABLES, USER_ID, EVENT_ID FROM ACCESSES WHERE ID = ?";
+		String sql = "SELECT ID, AVAILABLES, CUSTOMER_ID, EVENT_ID FROM ACCESSES WHERE ID = ?";
 		try {
 			PreparedStatement ps = this.con.prepareStatement(sql);
 			ps.setInt(1, id);
@@ -67,7 +67,7 @@ public class AccessDaoImp extends MySQLCon implements AccessDao{
 			return null;
 		}
 		Access access = null;
-		String sql = "SELECT ID, AVAILABLES, USER_ID, EVENT_ID FROM ACCESSES WHERE EVENT_ID = ? AND CUSTOMER_ID = ?";
+		String sql = "SELECT ID, AVAILABLES, CUSTOMER_ID, EVENT_ID FROM ACCESSES WHERE EVENT_ID = ? AND CUSTOMER_ID = ?";
 		try {
 			PreparedStatement ps = this.con.prepareStatement(sql);
 			ps.setInt(1, event_id);
@@ -94,7 +94,7 @@ public class AccessDaoImp extends MySQLCon implements AccessDao{
 		}
 		List<Access> accesses = new ArrayList<Access>();
 		
-		String sql = "SELECT ID, AVAILABLES, USER_ID, EVENT_ID FROM ACCESSES WHERE CUSTOMER_ID = ?";
+		String sql = "SELECT ID, AVAILABLES, CUSTOMER_ID, EVENT_ID FROM ACCESSES WHERE CUSTOMER_ID = ?";
 		try {
 			PreparedStatement ps = this.con.prepareStatement(sql);
 			ps.setInt(1, customer_id);
@@ -118,7 +118,7 @@ public class AccessDaoImp extends MySQLCon implements AccessDao{
 	@Override
 	public Access update(Access obj) {
 		if(this.start()){
-			String sql = "UPDATE ACCESSES SET AVAILABLES=?, USER_ID=?, EVENT_ID=? WHERE ID=?";
+			String sql = "UPDATE ACCESSES SET AVAILABLES=?, CUSTOMER_ID=?, EVENT_ID=? WHERE ID=?";
 			try {
 				PreparedStatement ps = this.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				ps.setInt(1,obj.getAvailables());				

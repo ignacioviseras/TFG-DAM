@@ -37,7 +37,7 @@ public class CustomerController {
      * @return           A ResponseEntity containing the access for that event updated and HTTPStatus.
      */
 	@PostMapping(path="/buyevent/{event_id}",consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Access> buyAccess(@PathVariable("event_id") int event_id,  Map<String,String> data) {
+	public ResponseEntity<Access> buyAccess(@PathVariable("event_id") int event_id,@RequestBody  Map<String,String> data) {
 
 		var auth =  SecurityContextHolder.getContext().getAuthentication();
 		int availables = 0;

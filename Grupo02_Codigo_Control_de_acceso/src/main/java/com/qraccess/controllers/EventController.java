@@ -26,7 +26,7 @@ public class EventController {
      *
      * @return A ResponseEntity containing a list of all events.
      */
-    @GetMapping(path="/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path="", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Event>> getEvents(){
 		return new ResponseEntity<List<Event>>(eventDao.findAll(), HttpStatus.OK);
 	}
