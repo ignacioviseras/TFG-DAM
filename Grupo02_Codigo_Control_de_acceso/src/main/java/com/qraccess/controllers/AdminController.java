@@ -40,13 +40,20 @@ public class AdminController {
  */
 
 	@PostMapping(path="/addevent",consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Event> addVideoGame(@RequestBody Event event) {
+	public ResponseEntity<Event> addEvent(@RequestBody Event event) {
 		System.out.println("creating event: " + event.toString());
 		var auth =  SecurityContextHolder.getContext().getAuthentication();
 		System.out.println("creating event: " + auth.toString());
 		return new ResponseEntity<Event>(eventDao.insert(event),HttpStatus.CREATED);//201 CREATED
 	}
 
+    /**
+     * Retrieves an Access object by its ID and validates it.
+     *
+     * @param  access_id    the ID of the Access object to be retrieved
+     * @return          a ResponseEntity containing the validated Access object
+     *                  or a 404 NOT FOUND status if the Access object is not found
+     */
 	@GetMapping(path="/validateAccess/{access_id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Access> getEvent(@PathVariable("access_id") int access_id){
 		Access access= accessDao.findById(access_id);
