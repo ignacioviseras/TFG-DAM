@@ -12,11 +12,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUp extends AppCompatActivity {
 
 
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
     Button botonRegistro;
     EditText emailText, passText, nameText, birthText;
 
@@ -27,7 +32,7 @@ public class SignUp extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         getSupportActionBar().hide();
         mAuth = FirebaseAuth.getInstance();
-
+        db = FirebaseFirestore.getInstance();
 
         emailText = findViewById(R.id.cajaCorreoS);
         passText = findViewById(R.id.cajaContraseñaS);
@@ -54,6 +59,14 @@ public class SignUp extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         String cumple = birthText.getText().toString();
                                         String nombre = nameText.getText().toString();
+
+                                        Map<String, Object> user = new HashMap<>();
+                                        user.put("nombre", nombre);//nombre del user
+                                        user.put("cumple", cumple);//cumple del user
+                                        user.put("email", email);//correo del usuario
+
+                                        //añadimos la tarea a la base de datos
+                                        db.collection("Users").add(user);
                                         //damos acceso al menu
                                         Toast.makeText(SignUp.this, "Usuario Registrado", Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(SignUp.this, MainActivity.class);
