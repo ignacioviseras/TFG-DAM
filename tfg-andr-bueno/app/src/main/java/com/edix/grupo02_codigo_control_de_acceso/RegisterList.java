@@ -114,7 +114,7 @@ public class RegisterList extends AppCompatActivity {
 
 
                                 Map<String, Object> registro = new HashMap<>();
-                                registro.put("nombreTarea", miRegistro);
+                                registro.put("nombreRegistro", miRegistro);
                                 registro.put("emailUsuario", email);
 
                                 db.collection("Registros").add(registro);
@@ -150,12 +150,13 @@ public class RegisterList extends AppCompatActivity {
     }
 
 
+/*
     public void vistaSelect(){
         select = findViewById(R.id.select);
         ArrayAdapter<String> myadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.itemselect));
         myadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         select.setAdapter(myadapter);
-    }
+    }*/
 
 
     public void actualizarTarea (View view){
@@ -175,14 +176,14 @@ public class RegisterList extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        String miTarea = RegistroEditText.getText().toString();
+                        String miRegistro = RegistroEditText.getText().toString();
                         int posicion = listaRegistros.indexOf(tarea2);
 
-                        Map<String, Object> tarea = new HashMap<>();
-                        tarea.put("registro", miTarea);
-                        tarea.put("emailUsuario", email);
+                        Map<String, Object> registro = new HashMap<>();
+                        registro.put("registro", miRegistro);
+                        registro.put("emailUsuario", email);
 
-                        db.collection("Registros").document(listaIdRegistros.get(posicion)).set(tarea);
+                        db.collection("Registros").document(listaIdRegistros.get(posicion)).set(registro);
 
                     }
                 })

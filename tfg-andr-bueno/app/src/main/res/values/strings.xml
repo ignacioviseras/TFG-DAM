@@ -8,4 +8,6 @@
     <string name="registro">registro</string>
     <string name="hecho">hecho</string>
     <string name="actualizar">actualizar</string>
+    <string name="logout">logout</string>
+    <string name="mas">mas</string>
 </resources>

@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         botonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Search.class);
+                Intent intent = new Intent(MainActivity.this, RegisterList.class);
                 startActivity(intent);
             }
         });

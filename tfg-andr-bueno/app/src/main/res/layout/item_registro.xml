@@ -10,8 +10,8 @@
         android:id="@+id/registro"
         android:layout_width="190dp"
         android:layout_height="32dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="164dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="104dp"
         android:text="@string/registro"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,8 +21,8 @@
         android:id="@+id/button"
         android:layout_width="49dp"
         android:layout_height="32dp"
-        android:layout_marginTop="164dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="36dp"
         android:onClick="borrarTarea"
         android:text="@string/hecho"
         android:textSize="8sp"
@@ -33,37 +33,13 @@
         android:id="@+id/actualizar"
         android:layout_width="49dp"
         android:layout_height="32dp"
-        android:layout_marginTop="164dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="28dp"
         android:onClick="actualizarTarea"
         android:text="@string/actualizar"
         android:textSize="8sp"
         app:layout_constraintEnd_toStartOf="@+id/button"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
-        android:id="@+id/select"
-        android:layout_width="59dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="164dp"
-        android:layout_marginEnd="9dp"
-        android:textColor="#07423C"
-        app:layout_constraintEnd_toStartOf="@+id/actualizar"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/registro"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <SearchView
-        android:layout_width="302dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/select"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.155" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
