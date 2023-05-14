@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.annotations.Nullable;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -31,7 +32,7 @@ import java.util.Map;
 public class Profile extends AppCompatActivity {
     private EditText TextEmail;
     String correo, mEmail, sNom, sCump, sEma;
-    TextView cambiarContraseña, textCorreo, textCNombre, textCumple;
+    TextView cambiarContraseña, textCorreo, textNombre, textCumple;
     List<String> listaDatosUser = new ArrayList<>();
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -46,11 +47,12 @@ public class Profile extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
 
-        textCNombre = findViewById(R.id.NombreUsuario);
+        textNombre = findViewById(R.id.NombreUsuario);
         textCumple = findViewById(R.id.fechaNac);
         textCorreo = findViewById(R.id.CorreoProfile);
         mEmail = mAuth.getCurrentUser().getEmail();
 
+        datosUser();
         ImageButton botonHome = findViewById(R.id.botonHome);
         botonHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +79,7 @@ public class Profile extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
         cambiarContraseña = findViewById(R.id.cambiarContraseña);
         cambiarContraseña.setOnClickListener(new View.OnClickListener() {
@@ -110,36 +113,30 @@ public class Profile extends AppCompatActivity {
     }
 
     public void datosUser() {
-        db.collection("Users").whereEqualTo("email", mEmail)
-            .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                @Override
-                public void onEvent(@Nullable QuerySnapshot value,
-                                    @Nullable FirebaseFirestoreException e) {
-                    if (e != null) {
-                        return;
-                    }
-                    listaDatosUser.clear();
-                    for (QueryDocumentSnapshot doc : value) {
-                        listaDatosUser.add(doc.getString("nombre"));
-                        listaDatosUser.add(doc.getString("cumple"));
-                        listaDatosUser.add(doc.getString("email"));
-                    }
-                    //Map<String, Object> user = new HashMap<>();
-                    //listaDatosUser.get(0, (String) user.get("nombre"));//nombre del user
-                    sNom = listaDatosUser.get(0).toString();
-                    sCump = listaDatosUser.get(1).toString();
-                    sEma = listaDatosUser.get(2).toString();
-                    //sCump = (String) user.get("cumple");//cumple del user
-                    //sEma = (String) user.get("email");//correo del usuario
+        db.collection("Users")
+                .whereEqualTo("email", mEmail)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            QuerySnapshot querySnapshot = task.getResult();
+                            if (querySnapshot != null) {
+                                for (DocumentSnapshot document : querySnapshot.getDocuments()) {
+                                    String nombre = document.getString("nombre");
+                                    String correo = document.getString("email");
+                                    String cumple = document.getString("cumple");
 
-                    Log.d("Nombre", sNom);
-                    Log.d("cumple", sCump);
-                    Log.d("email", sEma);
-                    textCNombre.setText(sNom);
-                    textCumple.setText(sCump);
-                    textCorreo.setText(sEma);
-                }
+                                    textNombre.setText(nombre);
+                                    textCumple.setText(cumple);
+                                    textCorreo.setText(correo);
+                                }
+                            }
+                        } else {
+                            // Manejo de errores
+                        }
+                    }
+                });
 
-            });
     }
 }

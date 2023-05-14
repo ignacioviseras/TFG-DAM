@@ -6,12 +6,14 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -56,6 +58,32 @@ public class RegisterList extends AppCompatActivity {
         //actualizar la interfaz de usuario con sus propias tareas.
         actualizarUI();
 
+        ImageButton botonHome = findViewById(R.id.botonHome);
+        botonHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterList.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageButton botonSearch = findViewById(R.id.botonSearch);
+        botonSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterList.this, Search.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageButton botonProfile = findViewById(R.id.botonProfile);
+        botonProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterList.this, Profile.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
