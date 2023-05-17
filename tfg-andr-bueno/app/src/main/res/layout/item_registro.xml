@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".RegisterList">
 
     <TextView
         android:id="@+id/registro"
@@ -13,6 +13,7 @@
         android:layout_marginStart="36dp"
         android:layout_marginTop="104dp"
         android:text="@string/registro"
+        android:textAlignment="textStart"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,17 +30,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/actualizar"
-        android:layout_width="49dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="28dp"
-        android:onClick="actualizarTarea"
-        android:text="@string/actualizar"
-        android:textSize="8sp"
+    <ImageButton
+        android:id="@+id/btnqr"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="100dp"
+        android:backgroundTint="@color/white"
+        android:src="@mipmap/iconqr"
+        android:onClick="pantallaqr"
+        app:iconSize="20dp"
         app:layout_constraintEnd_toStartOf="@+id/button"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/registro"
+        app:layout_constraintTop_toTopOf="parent"></ImageButton>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

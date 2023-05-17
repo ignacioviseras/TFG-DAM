@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -58,6 +60,16 @@ public class RegisterList extends AppCompatActivity {
         //actualizar la interfaz de usuario con sus propias tareas.
         actualizarUI();
 
+        /*//@SuppressLint({"MissingInflatedId", "LocalSuppress"})
+        ImageButton btnqr = findViewById(R.id.btnqr);
+        btnqr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterList.this, showqr.class);
+                startActivity(intent);
+            }
+        });*/
+
         ImageButton botonHome = findViewById(R.id.botonHome);
         botonHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +83,7 @@ public class RegisterList extends AppCompatActivity {
         botonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegisterList.this, Search.class);
+                Intent intent = new Intent(RegisterList.this, RegisterList.class);
                 startActivity(intent);
             }
         });
@@ -187,40 +199,9 @@ public class RegisterList extends AppCompatActivity {
     }*/
 
 
-    public void actualizarTarea (View view){
-
-
-        EditText RegistroEditText= new EditText(this);
-        View parent = (View) view.getParent();
-        TextView registroTextView = parent.findViewById(R.id.registro);
-        String tarea2 = registroTextView.getText().toString();
-        RegistroEditText.setText(tarea2);
-
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Modificar Registro")
-                .setMessage("Escribe de nuevo el registro")
-                .setView(RegistroEditText)
-                .setPositiveButton("actualizar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                        String miRegistro = RegistroEditText.getText().toString();
-                        int posicion = listaRegistros.indexOf(tarea2);
-
-                        Map<String, Object> registro = new HashMap<>();
-                        registro.put("registro", miRegistro);
-                        registro.put("emailUsuario", email);
-
-                        db.collection("Registros").document(listaIdRegistros.get(posicion)).set(registro);
-
-                    }
-                })
-
-                .setNegativeButton("Cancelar", null)
-                .create();
-        dialog.show();
-
-
+    public void pantallaqr (View view){
+        Intent intent = new Intent(RegisterList.this, showqr.class);
+        startActivity(intent);
 
     }
 

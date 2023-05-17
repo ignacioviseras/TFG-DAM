@@ -66,7 +66,7 @@ public class Profile extends AppCompatActivity {
         botonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Profile.this, Search.class);
+                Intent intent = new Intent(Profile.this, RegisterList.class);
                 startActivity(intent);
             }
         });
