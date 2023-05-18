@@ -18,17 +18,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="49dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="36dp"
+    <ImageButton
+        android:id="@+id/btnborrar"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="100dp"
+        android:backgroundTint="@color/white"
         android:onClick="borrarTarea"
-        android:text="@string/hecho"
-        android:textSize="8sp"
+        android:src="@mipmap/papelera"
+        app:iconSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/btnqr"
+        app:layout_constraintTop_toTopOf="parent"></ImageButton>
 
     <ImageButton
         android:id="@+id/btnqr"
@@ -39,7 +40,7 @@
         android:src="@mipmap/iconqr"
         android:onClick="pantallaqr"
         app:iconSize="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/btnborrar"
         app:layout_constraintStart_toEndOf="@+id/registro"
         app:layout_constraintTop_toTopOf="parent"></ImageButton>
 

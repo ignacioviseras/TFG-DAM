@@ -2,6 +2,7 @@ package com.edix.grupo02_codigo_control_de_acceso;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -20,18 +21,23 @@ public class showqr extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_showqr);
+
+        //recuperamos el texto de la lista
+        Intent intent = getIntent();
+        String txtQr = intent.getStringExtra("txtQr");
+        visualizarQr(txtQr);
     }
 
-    public void visualizarQr (View view){
+    public void visualizarQr (String text){
 
 
         qrImageView = findViewById(R.id.qrImageView);
 
-        String qrData = "Texto o datos que deseas codificar en el QR";
+        String qrData = text;
 
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         try {
-            BitMatrix bitMatrix = qrCodeWriter.encode(qrData, BarcodeFormat.QR_CODE, 512, 512);
+            BitMatrix bitMatrix = qrCodeWriter.encode(qrData, BarcodeFormat.QR_CODE, 900, 900);
             int width = bitMatrix.getWidth();
             int height = bitMatrix.getHeight();
             Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);

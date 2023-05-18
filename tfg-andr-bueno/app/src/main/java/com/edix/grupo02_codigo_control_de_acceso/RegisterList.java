@@ -201,6 +201,9 @@ public class RegisterList extends AppCompatActivity {
 
     public void pantallaqr (View view){
         Intent intent = new Intent(RegisterList.this, showqr.class);
+
+        TextView registro = findViewById(R.id.registro);
+        intent.putExtra("txtQr", registro.getText().toString());//pasamos el texto de la lista
         startActivity(intent);
 
     }
