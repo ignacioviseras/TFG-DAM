@@ -30,8 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Profile extends AppCompatActivity {
-    private EditText TextEmail;
-    String correo, mEmail, sNom, sCump, sEma;
+    String correo, mEmail;
     TextView cambiarContraseña, textCorreo, textNombre, textCumple;
     List<String> listaDatosUser = new ArrayList<>();
     private FirebaseAuth mAuth;
@@ -66,7 +65,7 @@ public class Profile extends AppCompatActivity {
         botonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Profile.this, RegisterList.class);
+                Intent intent = new Intent(Profile.this, ScannerQR.class);
                 startActivity(intent);
             }
         });

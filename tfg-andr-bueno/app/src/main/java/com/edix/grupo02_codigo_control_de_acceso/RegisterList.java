@@ -83,7 +83,7 @@ public class RegisterList extends AppCompatActivity {
         botonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegisterList.this, RegisterList.class);
+                Intent intent = new Intent(RegisterList.this, ScannerQR.class);
                 startActivity(intent);
             }
         });

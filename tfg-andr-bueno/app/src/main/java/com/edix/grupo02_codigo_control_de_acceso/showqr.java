@@ -41,7 +41,7 @@ public class showqr extends AppCompatActivity {
         botonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(showqr.this, RegisterList.class);
+                Intent intent = new Intent(showqr.this, ScannerQR.class);
                 startActivity(intent);
             }
         });
