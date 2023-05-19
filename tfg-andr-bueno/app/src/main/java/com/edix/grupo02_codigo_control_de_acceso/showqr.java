@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.google.zxing.BarcodeFormat;
@@ -26,6 +27,33 @@ public class showqr extends AppCompatActivity {
         Intent intent = getIntent();
         String txtQr = intent.getStringExtra("txtQr");
         visualizarQr(txtQr);
+
+        ImageButton botonHome = findViewById(R.id.botonHome);
+        botonHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(showqr.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageButton botonSearch = findViewById(R.id.botonSearch);
+        botonSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(showqr.this, RegisterList.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageButton botonProfile = findViewById(R.id.botonProfile);
+        botonProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(showqr.this, Profile.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void visualizarQr (String text){
