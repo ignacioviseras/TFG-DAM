@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     List<String> listaIdRegistros= new ArrayList<>();
     ArrayAdapter<String> mAdapterRegistros;
     Spinner select;
+    SearchView searchView;
+    ListView listView;
 
 
 
@@ -55,15 +58,18 @@ public class MainActivity extends AppCompatActivity {
         mAuth= FirebaseAuth.getInstance();
         email = mAuth.getCurrentUser().getEmail();
         listViewRegistro=findViewById(R.id.listView);
+        searchView = findViewById(R.id.searchView);
+        listView = findViewById(R.id.listView);
 
         //actualizar la interfaz de usuario con sus propias tareas.
         actualizarUI();
+        buscarUno();
 
         ImageButton botonHome = findViewById(R.id.botonHome);
         botonHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                Intent intent = new Intent(MainActivity.this, Search.class);
                 startActivity(intent);
             }
         });
@@ -85,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 
     private void actualizarUI(){
@@ -113,6 +121,29 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    private void buscarUno(){
+
+
+        // Configurar el adaptador del ListView
+        mAdapterRegistros = new ArrayAdapter<>(MainActivity.this, R.layout.item_registro, listaRegistros);
+        listView.setAdapter(mAdapterRegistros);
+
+        // Configurar el listener del SearchView
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // Filtrar la lista de registros según el texto ingresado en el SearchView
+                mAdapterRegistros.getFilter().filter(newText);
+                return false;
+            }
+        });
     }
 
     @Override
