@@ -22,6 +22,7 @@ public class showqr extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_showqr);
+        getSupportActionBar().hide();
 
         //recuperamos el texto de la lista
         Intent intent = getIntent();
