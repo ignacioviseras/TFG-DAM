@@ -10,12 +10,12 @@ import com.qraccess.utils.Log;
 
 public class MySQLCon {
 	
-	// private final String user = "admin";
-	// private final String pass = "uk48K2*~Vv";
-	// private final String path = "jdbc:mysql://qr-access.cdbvobgbdkc0.eu-north-1.rds.amazonaws.com:3306/qr_access?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC";
-	private final String path = "jdbc:mysql://localhost:3306/qr_access";
-	private final String user = "root";
-	private final String pass = "";
+	private final String user = "admin";
+	private final String pass = "uk48K2*~Vv";
+	private final String path = "jdbc:mysql://qr-access.cdbvobgbdkc0.eu-north-1.rds.amazonaws.com:3306/qr_access?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	// private final String path = "jdbc:mysql://localhost:3306/qr_access";
+	// private final String user = "root";
+	// private final String pass = "";
 	protected Connection con;
 	
 	public boolean start() {

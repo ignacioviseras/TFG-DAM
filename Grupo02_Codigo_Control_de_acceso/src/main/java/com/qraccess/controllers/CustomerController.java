@@ -16,14 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.zxing.WriterException;
 import com.qraccess.daos.mysql.AccessDaoImp;
 import com.qraccess.daos.mysql.CustomerDaoImp;
 import com.qraccess.entities.Access;
 import com.qraccess.entities.Customer;
-import com.qraccess.utils.Log;
-import com.qraccess.utils.QRCodeGenerator;
-
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
