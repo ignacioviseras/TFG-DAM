@@ -4,17 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:windowSoftInputMode="adjustNothing"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="560dp"
+        android:layout_marginTop="115dp"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/botonSearch"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="302dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/botonHome"
@@ -26,8 +39,7 @@
         android:src="@mipmap/home"
         app:iconSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"></ImageButton>
-
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/botonSearch"
@@ -35,11 +47,11 @@
         android:layout_height="33dp"
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/white"
-        android:src="@mipmap/search"
-        app:iconSize="40dp"
+        android:src="@mipmap/qrscanner"
+        app:iconSize="33dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/botonProfile"
-        app:layout_constraintStart_toEndOf="@+id/botonHome"></ImageButton>
+        app:layout_constraintStart_toEndOf="@+id/botonHome" />
 
     <ImageButton
         android:id="@+id/botonProfile"
@@ -51,6 +63,6 @@
         android:src="@mipmap/profile"
         app:iconSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"></ImageButton>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

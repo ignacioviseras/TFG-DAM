@@ -5,13 +5,17 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -56,6 +60,42 @@ public class RegisterList extends AppCompatActivity {
         //actualizar la interfaz de usuario con sus propias tareas.
         actualizarUI();
 
+        /*//@SuppressLint({"MissingInflatedId", "LocalSuppress"})
+        ImageButton btnqr = findViewById(R.id.btnqr);
+        btnqr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterList.this, showqr.class);
+                startActivity(intent);
+            }
+        });*/
+
+        ImageButton botonHome = findViewById(R.id.botonHome);
+        botonHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterList.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageButton botonSearch = findViewById(R.id.botonSearch);
+        botonSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterList.this, ScannerQR.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageButton botonProfile = findViewById(R.id.botonProfile);
+        botonProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterList.this, Profile.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -114,7 +154,7 @@ public class RegisterList extends AppCompatActivity {
 
 
                                 Map<String, Object> registro = new HashMap<>();
-                                registro.put("nombreTarea", miRegistro);
+                                registro.put("nombreRegistro", miRegistro);
                                 registro.put("emailUsuario", email);
 
                                 db.collection("Registros").add(registro);
@@ -150,48 +190,21 @@ public class RegisterList extends AppCompatActivity {
     }
 
 
+/*
     public void vistaSelect(){
         select = findViewById(R.id.select);
         ArrayAdapter<String> myadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.itemselect));
         myadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         select.setAdapter(myadapter);
-    }
+    }*/
 
 
-    public void actualizarTarea (View view){
+    public void pantallaqr (View view){
+        Intent intent = new Intent(RegisterList.this, showqr.class);
 
-
-        EditText RegistroEditText= new EditText(this);
-        View parent = (View) view.getParent();
-        TextView registroTextView = parent.findViewById(R.id.registro);
-        String tarea2 = registroTextView.getText().toString();
-        RegistroEditText.setText(tarea2);
-
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Modificar Registro")
-                .setMessage("Escribe de nuevo el registro")
-                .setView(RegistroEditText)
-                .setPositiveButton("actualizar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                        String miTarea = RegistroEditText.getText().toString();
-                        int posicion = listaRegistros.indexOf(tarea2);
-
-                        Map<String, Object> tarea = new HashMap<>();
-                        tarea.put("registro", miTarea);
-                        tarea.put("emailUsuario", email);
-
-                        db.collection("Registros").document(listaIdRegistros.get(posicion)).set(tarea);
-
-                    }
-                })
-
-                .setNegativeButton("Cancelar", null)
-                .create();
-        dialog.show();
-
-
+        TextView registro = findViewById(R.id.registro);
+        intent.putExtra("txtQr", registro.getText().toString());//pasamos el texto de la lista
+        startActivity(intent);
 
     }
 

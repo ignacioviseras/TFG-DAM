@@ -2,8 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" /><!--Permisos de la camara-->
+
 
     <application
         android:allowBackup="true"
@@ -15,11 +18,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Grupo02_codigo_control_de_acceso"
         tools:targetApi="31">
+        <activity android:name="CaptureQR"
+            android:screenOrientation="portrait"
+            android:stateNotNeeded="true"
+            android:theme="@style/zxing_CaptureTheme"/>
+
+        <activity
+            android:name=".ScannerQR"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".RegisterList"
             android:exported="false" />
         <activity
-            android:name=".Search"
+            android:name=".showqr"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

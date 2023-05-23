@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
             android:hint="@string/cajaCorreo"
-            android:textColorHint="@color/morado_claro"
+            android:textColorHint="@color/blue_sea"
             android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -52,7 +52,7 @@
             android:backgroundTint="@color/white"
             android:hint="@string/cajaContraseña"
             android:inputType="textPassword"
-            android:textColorHint="@color/morado_claro"
+            android:textColorHint="@color/blue_sea"
             android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -61,7 +61,7 @@
         android:layout_width="340dp"
         android:layout_height="52dp"
         android:layout_marginTop="24dp"
-        android:backgroundTint="@color/morado"
+        android:backgroundTint="@color/light_blue"
         android:text="@string/login"
         android:textSize="16sp"
         app:cornerRadius="32sp"
@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/crea_una_cuenta"
-        android:textColor="@color/morado"
+        android:textColor="@color/light_blue"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
