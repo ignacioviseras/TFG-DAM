@@ -1,5 +1,10 @@
 package com.qraccess.entities;
 
+import java.io.IOException;
+
+import com.google.zxing.WriterException;
+import com.qraccess.utils.QRCodeGenerator;
+
 public class Access{
 
 	private int id, availables, customer_id, event_id;
@@ -38,5 +43,18 @@ public class Access{
 	
 	public void validate() {
 		this.availables--;
+	}
+	
+	public byte[] gerQr() {
+		try {
+			return QRCodeGenerator.getQRCodeImage(""+this.id,250,250);
+		} catch (WriterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

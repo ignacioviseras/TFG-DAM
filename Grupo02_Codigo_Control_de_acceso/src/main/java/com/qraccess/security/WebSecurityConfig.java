@@ -29,13 +29,11 @@ public class WebSecurityConfig {
     	.csrf().disable()
         .authorizeHttpRequests((authorize) -> authorize
           //.requestMatchers("/public/**").permitAll()	
-        .requestMatchers("/login").permitAll()
-        .requestMatchers("/signin").permitAll()
+        .requestMatchers("/login", "/signin").permitAll()
         .requestMatchers("/events/**").permitAll()
-        	.requestMatchers("/admin/*").hasRole("ADMIN")
-          .requestMatchers("/customer/*").hasRole("CUSTOMER")
-          
-            .anyRequest().authenticated()
+        .requestMatchers("/admin/**").hasRole("ADMIN")
+        .requestMatchers("/customer/**").hasRole("CUSTOMER")
+        .anyRequest().authenticated()
         )
         .cors(withDefaults())
         .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)

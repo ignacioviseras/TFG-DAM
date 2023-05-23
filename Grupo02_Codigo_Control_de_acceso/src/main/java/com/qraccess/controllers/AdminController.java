@@ -73,7 +73,7 @@ public class AdminController {
 	 * @return          ResponseEntity containing the updated Admin object with the password encrypted and hidden
 	 */
 	@PostMapping(path="/update",consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Admin> addVideoGame(@RequestBody Admin newinfo) {		
+	public ResponseEntity<Admin> updateAdmin(@RequestBody Admin newinfo) {		
 		newinfo.encryptPassword();
 		Admin newAdmin = adminDao.update(newinfo);
 		newAdmin.setPassword("******");
