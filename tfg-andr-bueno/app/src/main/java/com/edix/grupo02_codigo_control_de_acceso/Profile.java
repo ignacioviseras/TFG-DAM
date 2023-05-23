@@ -1,5 +1,7 @@
 package com.edix.grupo02_codigo_control_de_acceso;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -16,6 +19,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.annotations.Nullable;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -32,6 +36,8 @@ import java.util.Map;
 public class Profile extends AppCompatActivity {
     String correo, mEmail;
     TextView cambiarContraseña, textCorreo, textNombre, textCumple;
+    Button bajaUser;
+
     List<String> listaDatosUser = new ArrayList<>();
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -94,6 +100,18 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+        bajaUser = findViewById(R.id.botonBaja);
+        bajaUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                bajaUser();
+                finishAffinity(); // Cierra la aplicación y todas las actividades relacionadas
+
+            }
+
+        });
+
     }
 
     private void cambiarContraseña(String correo){
@@ -137,5 +155,23 @@ public class Profile extends AppCompatActivity {
                     }
                 });
 
+    }
+
+
+    public void bajaUser(){
+
+     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        user.delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User account deleted.");
+                            mAuth.signOut();
+
+                        }
+                    }
+                });
     }
 }
