@@ -169,6 +169,8 @@ public class Profile extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "User account deleted.");
                             mAuth.signOut();
+                            Toast.makeText(Profile.this, "Usuario borrado", Toast.LENGTH_LONG).show();
+                            finishAffinity(); // Close the application and all related activities
 
                         }
                     }
