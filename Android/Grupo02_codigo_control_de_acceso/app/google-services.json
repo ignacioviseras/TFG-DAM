@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "785289402352",
+    "project_id": "codigo-control-de-acceso-583b5",
+    "storage_bucket": "codigo-control-de-acceso-583b5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:785289402352:android:2de9fd36dc942ffdf12f35",
+        "android_client_info": {
+          "package_name": "com.edix.grupo02_codigo_control_de_acceso"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "785289402352-hhro3obiepee75fkcvjvt0pb1rursbe0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6G5jMEwwQkQ2XrR_Mafht4_zWq4_YKkI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "785289402352-hhro3obiepee75fkcvjvt0pb1rursbe0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
