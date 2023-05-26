@@ -41,7 +41,7 @@
         android:layout_marginEnd="64dp"
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/white"
-        android:src="@mipmap/qrscanner"
+        android:src="@mipmap/qrscanner_blue2"
         app:iconSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/botonProfile"

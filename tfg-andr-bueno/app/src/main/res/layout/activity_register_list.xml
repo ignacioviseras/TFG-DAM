@@ -34,7 +34,7 @@
         android:layout_marginStart="60dp"
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/white"
-        android:src="@mipmap/home"
+        android:src="@mipmap/home_blue"
         app:iconSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"></ImageButton>
