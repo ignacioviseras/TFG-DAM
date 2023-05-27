@@ -18,7 +18,7 @@
         app:srcCompat="@drawable/icono_app" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layautCorreo"
+        android:id="@+id/mailLayout"
         android:layout_width="355dp"
         android:layout_height="54dp"
         android:layout_marginTop="32dp"
@@ -27,7 +27,7 @@
         app:layout_constraintTop_toBottomOf="@+id/logo">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/cajaCorreo"
+            android:id="@+id/mailBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
@@ -37,16 +37,16 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layautContraseña"
+        android:id="@+id/passLayout"
         android:layout_width="355dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layautCorreo">
+        app:layout_constraintTop_toBottomOf="@+id/mailLayout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/cajaContraseña"
+            android:id="@+id/passBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
@@ -57,7 +57,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/botonLogin"
+        android:id="@+id/loginBtn"
         android:layout_width="340dp"
         android:layout_height="52dp"
         android:layout_marginTop="24dp"
@@ -67,10 +67,10 @@
         app:cornerRadius="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layautContraseña" />
+        app:layout_constraintTop_toBottomOf="@+id/passLayout" />
 
     <TextView
-        android:id="@+id/botonRegistro"
+        android:id="@+id/signinBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -80,6 +80,6 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botonLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

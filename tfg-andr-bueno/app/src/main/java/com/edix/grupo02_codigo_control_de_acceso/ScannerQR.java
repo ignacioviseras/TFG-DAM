@@ -15,13 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.journeyapps.barcodescanner.ScanContract;
@@ -30,15 +23,12 @@ import com.journeyapps.barcodescanner.ScanOptions;
 public class ScannerQR extends AppCompatActivity{
     private Button scanButton;
     private String qrResult, validacion;
-    FirebaseFirestore db;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner_qr);
         getSupportActionBar().hide();
-        db = FirebaseFirestore.getInstance();
 
         scanButton = findViewById(R.id.scanButton);
         scanButton.setOnClickListener(new View.OnClickListener() {
@@ -109,26 +99,7 @@ public class ScannerQR extends AppCompatActivity{
             }
 
             //validamos que el qr exista en la bd
-            CollectionReference registrosRef = db.collection("Registros");
 
-            registrosRef.whereEqualTo("nombreRegistro", qrResult)
-                    .get()
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            QuerySnapshot snapshot = task.getResult();
-                            for (DocumentSnapshot document : snapshot.getDocuments()) {
-                                validacion = document.getString("nombreRegistro");
-                                if (validacion.equals(qrResult))
-                                    ventana(validacion);
-                            }
-
-                        } else {//error al obtener los datos
-                            ventana("QR no valido");
-                            Exception exception = task.getException();
-                            Log.w("error firestore", exception);
-                            // Manejar el error...
-                        }
-                    });
 
 
         }
@@ -151,25 +122,6 @@ public class ScannerQR extends AppCompatActivity{
 
     public String verificarNombreRegistro(String valor) {
         //usamos CollectionReference para
-        CollectionReference registrosRef = db.collection("Registros");
-
-        registrosRef.whereEqualTo("nombreRegistro", valor)
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        QuerySnapshot snapshot = task.getResult();
-                        for (DocumentSnapshot document : snapshot.getDocuments()) {
-                            String nombreRegistro = document.getString("nombreRegistro");
-                            // Hacer algo con el nombreRegistro...
-
-                        }
-                    } else {
-                        // Ocurrió un error al obtener los datos de Firestore
-                        Exception exception = task.getException();
-                        Log.w("error firestore", exception);
-                        // Manejar el error...
-                    }
-                });
 
         // Si llegamos hasta aquí, retornamos un valor predeterminado en caso de que haya algún problema
         return "Ocurrio un problema";

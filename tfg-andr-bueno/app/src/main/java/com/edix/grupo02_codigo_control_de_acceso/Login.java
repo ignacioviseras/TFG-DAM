@@ -1,6 +1,5 @@
 package com.edix.grupo02_codigo_control_de_acceso;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,83 +8,69 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
+import com.edix.grupo02_codigo_control_de_acceso.global.AppUtils;
+import com.edix.grupo02_codigo_control_de_acceso.io.ApiAdapter;
+import com.edix.grupo02_codigo_control_de_acceso.io.AccessToken;
+import com.edix.grupo02_codigo_control_de_acceso.io.response.User;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class Login extends AppCompatActivity {
+public class Login extends AppCompatActivity{
 
-    private FirebaseAuth mAuth;
-    Button botonLogin;
-    TextView botonRegistro;
-    EditText emailText, passText;
+    private Button loginBtn;
+    private TextView signinBtn;
+    private EditText emailText, passText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // carga el layout y esconde la barra de navegacion
+
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
-        mAuth = FirebaseAuth.getInstance();
 
-        emailText = findViewById(R.id.cajaCorreo);
-        passText = findViewById(R.id.cajaContraseña);
+        // parametriza los elementos  de la gui
 
+        emailText = findViewById(R.id.mailBox);
+        passText = findViewById(R.id.passBox);
+        loginBtn = findViewById(R.id.loginBtn);
+        signinBtn = findViewById(R.id.signinBtn);
 
-        botonLogin = findViewById(R.id.botonLogin);
-        botonLogin.setOnClickListener(view -> {
-            String email = emailText.getText().toString();
-            String password = passText.getText().toString();
+        // anade las acciones a los botones
 
-            String regex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$";
-            Pattern p = Pattern.compile(regex);
-            Matcher m = p.matcher(email);
-            if (email.isEmpty()) {
-                emailText.setError("Campo sin rellenar");
-            } else if (!m.find()) {//si no se cumple el filtro regex del correo avisa
-                emailText.setError("Hay que colocar un correo");
-            } else if (password.isEmpty()) {
-                passText.setError("Campo sin rellenar");
-            }else if(!(password.length() >= 6)){
-                passText.setError("Necesitas 6 o mas caracteres para la contraseña");
-            }else {// si las validaciones estan bien
-                mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    //En caso de que sea correcto el user/passwd accedemos al main
-                                    Intent intent = new Intent(Login.this, MainActivity.class);
-                                    startActivity(intent);
-                                    Toast.makeText(Login.this, "Accediendo",
-                                            Toast.LENGTH_SHORT).show();
-                                    finish();
-                                } else {
-                                    //En caso de no dar un user/passwd correcto.
-                                    Toast.makeText(Login.this, "Usuario incorrecto.",
-                                            Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-            }
-
-        });
-
-        botonRegistro = findViewById(R.id.botonRegistro);
-        botonRegistro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Login.this, SignUp.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
+        loginBtn.setOnClickListener(this::login);
+        signinBtn.setOnClickListener(this::goToSignIn);
     }
 
+    private void goToSignIn(View view) {
+        Intent intent = new Intent(Login.this, SignUp.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void login(View view) {
+        try {
+            User user = User.get(emailText.getText().toString(), passText.getText().toString());
+            Call<AccessToken> call = ApiAdapter.getApiService().getLogin(user);
+            call.enqueue(new Callback<AccessToken>() {
+                @Override
+                public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
+                    if (response.isSuccessful()) {
+                        AccessToken accessToken = response.body();
+                        AppUtils.setMyVariable(getApplicationContext(), "_token", accessToken.getJwtToken());
+                    }
+                }
+                @Override
+                public void onFailure(Call<AccessToken> call, Throwable t) {
+
+                }
+            });
+        } catch (IllegalArgumentException e) {
+
+        }
+    }
 }

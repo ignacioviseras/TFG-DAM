@@ -20,13 +20,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,8 +27,6 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    FirebaseAuth mAuth;
-    FirebaseFirestore db;
     String email;
     String nombreRegistro;
     ListView listViewRegistro, listView;
@@ -51,9 +42,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        db = FirebaseFirestore.getInstance();
-        mAuth= FirebaseAuth.getInstance();
-        email = mAuth.getCurrentUser().getEmail();
         listViewRegistro=findViewById(R.id.listView);
         searchView = findViewById(R.id.searchView);
         listView = findViewById(R.id.listView);
@@ -91,30 +79,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void actualizarUI(){
-        db.collection("Registros")
-                .whereEqualTo("emailUsuario", email)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
-                        if (e != null) {
-
-                            return;
-                        }
-                        listaRegistros.clear();
-                        listaRegistros.clear();
-                        for (QueryDocumentSnapshot doc : value) {
-                            listaIdRegistros.add(doc.getId());
-                            listaRegistros.add(doc.getString("nombreRegistro"));
-                            if (listaRegistros.size() == 0) {
-                                listViewRegistro.setAdapter(null);
-                            }else {
-                                mAdapterRegistros= new ArrayAdapter<String>(MainActivity.this, R.layout.item_registro, R.id.registro, listaRegistros);
-                                listViewRegistro.setAdapter(mAdapterRegistros);
-                            }
-                        }
-
-                    }
-                });
 
     }
 
@@ -145,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
                                 registro.put("nombreRegistro", miRegistro);
                                 registro.put("emailUsuario", email);
 
-                                db.collection("Registros").add(registro);
 
                             }
                         })
@@ -156,8 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
                 return true;
             case R.id.logout:
-                // cierre de sesion por firebase
-                mAuth.signOut();
+                // cierre de sesion
                 onBackPressed();
                 finish();
                 return true;
@@ -173,7 +135,6 @@ public class MainActivity extends AppCompatActivity {
         String registro = registroTextView.getText().toString();
         int posicion = listaRegistros.indexOf(registro);
 
-        db.collection("Registros").document(listaIdRegistros.get(posicion)).delete();
 
     }
 
