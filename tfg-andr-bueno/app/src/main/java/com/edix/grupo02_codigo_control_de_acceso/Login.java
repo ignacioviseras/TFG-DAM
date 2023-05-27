@@ -52,6 +52,12 @@ public class Login extends AppCompatActivity{
         finish();
     }
 
+    private void goToMainActivity(View view) {
+        Intent intent = new Intent(Login.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     private void login(View view) {
         try {
             User user = User.get(emailText.getText().toString(), passText.getText().toString());
@@ -60,8 +66,13 @@ public class Login extends AppCompatActivity{
                 @Override
                 public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
                     if (response.isSuccessful()) {
+                        // se obtiene el token
                         AccessToken accessToken = response.body();
                         AppUtils.setMyVariable(getApplicationContext(), "_token", accessToken.getJwtToken());
+                        // y vamos a la vista principal
+                        Intent intent = new Intent(Login.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
                 }
                 @Override

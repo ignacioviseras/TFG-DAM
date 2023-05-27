@@ -1,13 +1,13 @@
 package com.edix.grupo02_codigo_control_de_acceso;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,12 +18,19 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.edix.grupo02_codigo_control_de_acceso.global.AppUtils;
+import com.edix.grupo02_codigo_control_de_acceso.io.ApiAdapter;
+import com.edix.grupo02_codigo_control_de_acceso.io.response.Access;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     ListView listViewRegistro, listView;
     SearchView searchView;
 
+    List<Access> accessesList = new ArrayList<>();
     List<String> listaRegistros = new ArrayList<>();
     List<String> listaIdRegistros= new ArrayList<>();
     ArrayAdapter<String> mAdapterRegistros;
@@ -45,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
         listViewRegistro=findViewById(R.id.listView);
         searchView = findViewById(R.id.searchView);
         listView = findViewById(R.id.listView);
-
+        Log.d(">>>>>>>>>>>>>>>>>>>>", AppUtils.getMyVariable(getApplicationContext(), "_token"));
+        loadAccesses();
         //actualizar la interfaz de usuario con sus propias tareas.
         actualizarUI();
         buscarUno();
@@ -76,6 +85,30 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void loadAccesses() {
+        try {
+            Call<List<Access>> call = ApiAdapter.getApiService().getAccesses(AppUtils.getAuthToken(getApplicationContext()));
+            call.enqueue(new Callback<List<Access>>() {
+                @Override
+                public void onResponse(Call<List<Access>> call, Response<List<Access>> response) {
+                    if (response.isSuccessful()) {
+                        // se obtienen los accesos
+                        accessesList = response.body();
+                        accessesList.forEach(access->{
+                            Log.d(">>>>>>>>>>>>>>>>>>>>", access.toString());
+                        });
+                    }
+                }
+                @Override
+                public void onFailure(Call<List<Access>> call, Throwable t) {
+
+                }
+            });
+        } catch (IllegalArgumentException e) {
+
+        }
     }
 
     private void actualizarUI(){

@@ -36,4 +36,8 @@ public class AppUtils {
         SharedPreferences preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         return preferences.getString(key, null);
     }
+
+    public static String getAuthToken(Context context){
+        return "Bearer "+ AppUtils.getMyVariable(context, "_token");
+    }
 }
