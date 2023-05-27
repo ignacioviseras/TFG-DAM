@@ -2,11 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" /><!--Permisos de la camara-->
-
 
     <application
         android:allowBackup="true"
@@ -18,11 +16,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Grupo02_codigo_control_de_acceso"
         tools:targetApi="31">
-        <activity android:name="CaptureQR"
+        <activity
+            android:name=".Splash"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".CaptureQR"
             android:screenOrientation="portrait"
             android:stateNotNeeded="true"
-            android:theme="@style/zxing_CaptureTheme"/>
-
+            android:theme="@style/zxing_CaptureTheme" />
         <activity
             android:name=".ScannerQR"
             android:exported="false">
@@ -51,12 +62,12 @@
             android:name=".Login"
             android:exported="true">
 
-            <!-- Borrar esto para cuando tengamos la pantalla de inicio -->
+            <!-- Borrar esto para cuando tengamos la pantalla de inicio
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
 
             <meta-data
                 android:name="android.app.lib_name"
@@ -70,9 +81,9 @@
                 android:value="" />
         </activity>
         <activity
-            android:windowSoftInputMode="adjustPan"
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
