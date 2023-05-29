@@ -8,7 +8,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiAdapter {
 
     private static ApiService API_SERVICE;
-    private static final String BASE_URL = "http://beta-env.eba-zisupifz.eu-north-1.elasticbeanstalk.com";
+    //private static final String BASE_URL = "http://beta-env.eba-zisupifz.eu-north-1.elasticbeanstalk.com";
+    private static final String BASE_URL = "http://qr-access-env.eba-d2zzajhm.eu-north-1.elasticbeanstalk.com/";
 
     public static ApiService getApiService() {
         // Creamos un interceptor y le indicamos el log level a usar

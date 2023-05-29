@@ -16,6 +16,30 @@ public class User {
         this.mail = username; // api entiende mail como username, por eso esto
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
     public User(String username, String password, String name, String role){
         this(username, password);
         this.name = name;

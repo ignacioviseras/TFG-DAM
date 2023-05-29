@@ -18,8 +18,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SignUp extends AppCompatActivity {
-
-
     private Button signinBtn;
     private EditText emailText, passText, nameText;
     private RadioGroup roleGroup;
@@ -56,7 +54,6 @@ public class SignUp extends AppCompatActivity {
                 public void onResponse(Call<User> call, Response<User> response) {
                     if (response.isSuccessful()) {
                         User newUser = response.body();
-                        Log.d(">>>>>>>>>>>>>>>>>>>>", newUser.toString());
                     }
                 }
                 @Override

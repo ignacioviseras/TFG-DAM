@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
-            android:hint="@string/cajaContraseña"
+            android:hint="@string/passwordBox"
             android:inputType="textPassword"
             android:textColorHint="@color/blue_sea"
             android:textSize="16sp" />

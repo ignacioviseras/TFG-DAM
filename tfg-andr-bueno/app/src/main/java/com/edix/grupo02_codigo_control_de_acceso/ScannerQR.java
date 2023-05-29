@@ -60,8 +60,6 @@ public class ScannerQR extends AppCompatActivity{
         botonProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ScannerQR.this, Profile.class);
-                startActivity(intent);
             }
         });
     }

@@ -3,6 +3,7 @@ package com.qraccess.controllers;
 
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -74,6 +75,9 @@ public class PublicController {
 		Boolean success = false;
 		if(true){
 			/* check email */
+			if(adminDao.getByMail( newUser.get("mail")) == null || customerDao.getByMail( newUser.get("mail")) == null){
+				return new ResponseEntity<Boolean>(HttpStatus.CONFLICT); //409 NOT FOUND	
+			}
 		}
 		// if admin or customer is created returns true, else false
 		if(newUser.get("role").equals("admin")){
@@ -81,7 +85,8 @@ public class PublicController {
 		}else if(newUser.get("role").equals("customer")){
 			success = customerDao.insert(newUser.get("name"), newUser.get("mail"), newUser.get("password")) != null;
 		}else{
-			/* exception role not available */			
+			/* exception role not available */	
+				
 		}
 		return ResponseEntity.ok(success);
 	  }

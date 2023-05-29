@@ -32,9 +32,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".RegisterList"
-            android:exported="false" />
-        <activity
             android:name=".showqr"
             android:exported="false">
             <meta-data
@@ -42,7 +39,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Profile"
+            android:name=".EditProfileActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

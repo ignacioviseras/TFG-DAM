@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".SignUp">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -50,50 +49,49 @@
             android:textSize="16sp"
             app:cornerRadius="60sp"
             android:layout_margin="10dp"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/signInPassBoxBis"
+            android:layout_width="314dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:hint="@string/passwordBoxBis"
+            android:inputType="textPassword"
+            android:textColorHint="@color/blue_sea"
+            android:textSize="16sp"
+            app:cornerRadius="60sp"
+            android:layout_margin="10dp"/>
 
         <LinearLayout
-            android:layout_width="312dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:baselineAligned="false"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#EEEEEE"
-                android:padding="8dp"
-                android:text="Selecciona una opción:"
-                android:textSize="18sp" />
+            <Button
+                android:id="@+id/updateProfileBtn"
+                android:layout_width="150dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="@color/light_blue"
+                android:text="@string/updateInfo"
+                android:textSize="16sp"
+                app:cornerRadius="32sp" />
 
-            <RadioGroup
-                android:id="@+id/whatRoleIs"
-                android:layout_width="288dp"
-                android:layout_height="107dp"
-                android:layout_margin="10dp">
+            <Button
+                android:id="@+id/cancelUpdateBtn"
+                android:layout_width="150dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/light_blue"
+                android:text="@string/cancelUpdate"
+                android:textSize="16sp"
+                app:cornerRadius="32sp" />
 
-                <RadioButton
-                    android:id="@+id/roleIsCustomer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="Cliente" />
-
-                <RadioButton
-                    android:id="@+id/roleIsAdmin"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Administrador" />
-            </RadioGroup>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/botonRegistroS"
-            android:layout_width="301dp"
-            android:layout_height="52dp"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/light_blue"
-            android:text="@string/crea_una_cuenta"
-            android:textSize="16sp"
-            app:cornerRadius="32sp" />
+
 
     </LinearLayout>
 

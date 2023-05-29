@@ -146,4 +146,24 @@ public class CustomerController {
 			}
 		}
 	}
+	/**
+	 * Returns a ResponseEntity object containing a Customer's information
+	 * after authenticating the user. If the user is not found, a 403 FORBIDDEN
+	 * status is returned.
+	 *
+	 * @return          a ResponseEntity object containing a Customer's information
+	 *                  with password masked or a 403 FORBIDDEN status
+	 */
+	@GetMapping(path="/whoami", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Customer> whoAmI(){
+		var auth =  SecurityContextHolder.getContext().getAuthentication();
+		Customer c = customerDao.getByMail(auth.getName());	
+				
+		if(c == null){
+			return new ResponseEntity<Customer>(HttpStatus.FORBIDDEN);//403 USER NOT FOUND
+		}else{
+			c.setPassword("*********");
+			return new ResponseEntity<Customer>(c, HttpStatus.OK);
+		}		
+	}
 }

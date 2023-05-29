@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Grupo02_codigo_control_de_acceso</string>
     <string name="cajaCorreo">Correo</string>
-    <string name="cajaContraseña">Contraseña</string>
+    <string name="passwordBox">Contraseña</string>
     <string name="login">Login</string>
     <string name="crea_una_cuenta">Create account</string>
     <string name="cajaNombre">Nombre</string>
@@ -10,4 +10,7 @@
     <string name="actualizar">actualizar</string>
     <string name="logout">logout</string>
     <string name="mas">mas</string>
+    <string name="updateInfo">actualizar</string>
+    <string name="cancelUpdate">Cancelar</string>
+    <string name="passwordBoxBis">repite la contraseña</string>
 </resources>

@@ -13,6 +13,8 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiService {
 
@@ -24,6 +26,12 @@ public interface ApiService {
 
     @GET("/events")
     Call<List<Event>> getEvents();
+
+    @GET("/customer/whoami")
+    Call<User> whoAmI(@Header("Authorization") String token);
+
+    @GET("/events/{id}")
+    Call<Event> getEvents(@Path("id") int id);
 
     @GET("/customer/accesses")
     Call<List<Access>> getAccesses(@Header("Authorization") String token);

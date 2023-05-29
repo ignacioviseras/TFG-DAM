@@ -79,4 +79,25 @@ public class AdminController {
 		newAdmin.setPassword("******");
 		return new ResponseEntity<Admin>(newAdmin,HttpStatus.CREATED);//201 CREATED
 	}
+
+	/**
+	 * Retrieves the customer information based on the authenticated user's email. 
+	 * Returns HTTP status code 403 if the user is not found. 
+	 * Otherwise, returns the customer information with the password removed. 
+	 *
+	 * @return          ResponseEntity<Customer> containing the customer information
+	 */
+	@GetMapping(path="/whoami", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Admin> whoAmI(){
+		var auth =  SecurityContextHolder.getContext().getAuthentication();
+
+		Admin admin = adminDao.getByMail(auth.getName());	
+				
+		if(admin == null){
+			return new ResponseEntity<Admin>(HttpStatus.FORBIDDEN);//403 USER NOT FOUND
+		}else{
+			admin.setPassword("*********");
+			return new ResponseEntity<Admin>(admin, HttpStatus.OK);
+		}		
+	}
 }

@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/registro"
+        android:id="@+id/accessTitle"
         android:layout_width="190dp"
         android:layout_height="32dp"
         android:layout_marginStart="36dp"
@@ -19,29 +19,31 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/btnborrar"
+        android:id="@+id/accessDelete"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="@color/white"
         android:onClick="borrarTarea"
         android:src="@mipmap/papelera"
         app:iconSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnqr"
+        app:layout_constraintHorizontal_bias="0.446"
+        app:layout_constraintStart_toEndOf="@+id/accessTitle"
         app:layout_constraintTop_toTopOf="parent"></ImageButton>
 
     <ImageButton
-        android:id="@+id/btnqr"
+        android:id="@+id/accessQR"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="@color/white"
         android:onClick="pantallaqr"
         android:src="@mipmap/iconqr"
+
         app:iconSize="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/btnborrar"
-        app:layout_constraintStart_toEndOf="@+id/registro"
+        app:layout_constraintStart_toEndOf="@+id/accessDelete"
         app:layout_constraintTop_toTopOf="parent"></ImageButton>
 
 
