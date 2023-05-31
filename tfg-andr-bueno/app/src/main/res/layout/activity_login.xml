@@ -19,7 +19,7 @@
             android:layout_width="245dp"
             android:layout_height="217dp"
             app:layout_constraintDimensionRatio="H,2:1"
-            app:srcCompat="@drawable/icono_app" />
+            app:srcCompat="@drawable/app_icon" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/mailLayout"
