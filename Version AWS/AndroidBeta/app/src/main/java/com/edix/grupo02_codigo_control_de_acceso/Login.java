@@ -2,22 +2,19 @@ package com.edix.grupo02_codigo_control_de_acceso;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
+import android.widget.ImageButton;
 import com.edix.grupo02_codigo_control_de_acceso.global.AppToast;
 import com.edix.grupo02_codigo_control_de_acceso.global.AppUtils;
 import com.edix.grupo02_codigo_control_de_acceso.apiService.ApiAdapter;
 import com.edix.grupo02_codigo_control_de_acceso.apiService.response.AccessToken;
 import com.edix.grupo02_codigo_control_de_acceso.entities.User;
-
 import java.util.Objects;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -42,7 +39,7 @@ public class Login extends AppCompatActivity{
         emailText = findViewById(R.id.mailBox);
         passText = findViewById(R.id.passBox);
         Button loginBtn = findViewById(R.id.loginBtn);
-        Button signinBtn = findViewById(R.id.signinBtn);
+        ImageButton signinBtn = findViewById(R.id.signinBtn);
 
         // anade las acciones a los botones
 
@@ -104,7 +101,6 @@ public class Login extends AppCompatActivity{
                     if (response.isSuccessful()) {
                         User user = response.body();
                         if(user != null){
-
                             AppUtils.setVariable(context, "_role", user.getRole());
                             AppToast.show(context,"Bienvenida "+user.getName(),AppToast.INFO);
                             Intent intent = new Intent(Login.this, MainActivity.class);
