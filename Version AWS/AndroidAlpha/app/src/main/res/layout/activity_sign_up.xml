@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUp">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutCorreoS"
+        android:layout_width="314dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:cornerRadius="60sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutNombre">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/cajaCorreoS"
+            android:layout_width="314dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:hint="@string/cajaCorreo"
+            android:textColorHint="@color/blue_sea"
+            android:textSize="16sp"
+            app:cornerRadius="60sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutContraseñaS"
+        android:layout_width="314dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:cornerRadius="60sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutCorreoS">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/cajaContraseñaS"
+            android:layout_width="314dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:hint="@string/cajaContraseña"
+            android:inputType="textPassword"
+            android:textColorHint="@color/blue_sea"
+            android:textSize="16sp"
+            app:cornerRadius="60sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/botonRegistroS"
+        android:layout_width="301dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/light_blue"
+        android:text="@string/crea_una_cuenta"
+        android:textSize="16sp"
+        app:cornerRadius="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutContraseñaS" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutNombre"
+        android:layout_width="314dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:cornerRadius="60sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cajaCumple">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/cajaNombre"
+            android:layout_width="314dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:hint="@string/cajaNombre"
+            android:textColorHint="@color/blue_sea"
+            android:textSize="16sp"
+            app:cornerRadius="60sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <EditText
+        android:id="@+id/cajaCumple"
+        android:layout_width="314dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:layout_marginBottom="43dp"
+        android:ems="10"
+        android:hint="DD/MM/YYYY"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
