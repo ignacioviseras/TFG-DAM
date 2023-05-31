@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:title=""
+    tools:context=".MainActvity">
+
+    <item
+        android:id="@+id/boughtAccesses"
+        android:visible="false"
+        android:title="@string/accesos_comprados"
+        android:icon="@drawable/bought_tickets_icon"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/checkAccess"
+        android:visible="false"
+        android:title="@string/validar_acceso"
+        android:icon="@drawable/check_qr_icon"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/events"
+        android:title="@string/eventos_disponibles"
+        android:icon="@drawable/event_icon"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/editProfile"
+        android:title="@string/ver_editar_perfil"
+        android:icon="@drawable/user_info"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/logout"
+        android:title="@string/cerrar_aplicacion"
+        android:icon="@drawable/shutdown_icon"
+        app:showAsAction="always"/>
+</menu>

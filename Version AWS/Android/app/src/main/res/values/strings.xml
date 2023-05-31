@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">QR Access</string>
+    <string name="cajaCorreo">Correo</string>
+    <string name="passwordBox">Contraseña</string>
+    <string name="login">Login</string>
+    <string name="crea_una_cuenta">Create account</string>
+    <string name="cajaNombre">Nombre</string>
+    <string name="registro">registro</string>
+    <string name="hecho">hecho</string>
+    <string name="actualizar">actualizar</string>
+    <string name="logout">logout</string>
+    <string name="mas">mas</string>
+    <string name="updateInfo">actualizar</string>
+    <string name="cancelUpdate">Cancelar</string>
+    <string name="passwordBoxBis">repite la contraseña</string>
+    <string name="accesos_comprados">Accesos comprados</string>
+    <string name="validar_acceso">validar acceso</string>
+    <string name="cerrar_aplicacion">cerrar aplicación</string>
+    <string name="ver_editar_perfil">Ver/editar perfil</string>
+    <string name="eventos_disponibles">Eventos disponibles</string>
+</resources>

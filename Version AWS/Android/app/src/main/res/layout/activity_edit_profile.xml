@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.442"
+        tools:layout_editor_absoluteX="19dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editBoxName"
+            android:layout_width="314dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:hint="@string/cajaNombre"
+            android:textColorHint="@color/blue_sea"
+            android:textSize="16sp"
+            app:cornerRadius="60sp"
+            android:layout_margin="10dp"/>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editBoxMail"
+            android:layout_width="314dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:hint="@string/cajaCorreo"
+            android:textColorHint="@color/blue_sea"
+            android:textSize="16sp"
+            app:cornerRadius="60sp"
+            android:layout_margin="10dp"/>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editPassBox"
+            android:layout_width="314dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:hint="@string/passwordBox"
+            android:inputType="textPassword"
+            android:textColorHint="@color/blue_sea"
+            android:textSize="16sp"
+            app:cornerRadius="60sp"
+            android:layout_margin="10dp"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editPassBoxBis"
+            android:layout_width="314dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:hint="@string/passwordBoxBis"
+            android:inputType="textPassword"
+            android:textColorHint="@color/blue_sea"
+            android:textSize="16sp"
+            app:cornerRadius="60sp"
+            android:layout_margin="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:baselineAligned="false"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/updateProfileBtn"
+                android:layout_width="150dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="@color/light_blue"
+                android:text="@string/updateInfo"
+                android:textSize="16sp"
+                app:cornerRadius="32sp" />
+
+            <Button
+                android:id="@+id/cancelUpdateBtn"
+                android:layout_width="150dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/light_blue"
+                android:text="@string/cancelUpdate"
+                android:textSize="16sp"
+                app:cornerRadius="32sp" />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
