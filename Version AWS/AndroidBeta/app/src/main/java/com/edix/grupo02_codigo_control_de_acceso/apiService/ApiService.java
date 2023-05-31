@@ -33,7 +33,7 @@ public interface ApiService {
     @POST("/customer/update")
     Call<User> updateCustomer(@Header("Authorization") String token, @Body User user);
 
-    @DELETE("/customer/access/{accessId}}")
+    @DELETE("/customer/deleteAccess/{accessId}")
     Call<Boolean> deleteAccess(@Header("Authorization") String token, @Path("accessId") int access_id);
 
     @POST("/admin/update")
@@ -41,6 +41,9 @@ public interface ApiService {
 
     @GET("/admin/validateAccess/{accessId}")
     Call<Access> validateAccess(@Header("Authorization") String token, @Path("accessId") int access_id);
+
+    @DELETE("/admin/eventDelete/{eventId}")
+    Call<Boolean> deleteEvent(@Header("Authorization") String token, @Path("eventId") int event_id);
 
     @GET("/events/{id}")
     Call<Event> getEvents(@Path("id") int id);

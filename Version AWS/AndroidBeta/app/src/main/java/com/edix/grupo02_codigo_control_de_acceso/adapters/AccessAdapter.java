@@ -58,9 +58,10 @@ public class AccessAdapter extends ArrayAdapter<Access> {
         ImageButton accessQr = convertView.findViewById(R.id.accessQR);
         accessQr.setOnClickListener(v -> showQRCode(parent.getContext(),
                 AppUtils.encodeAccessId(access.getEvent_id())));
-        View finalConvertView = convertView;
+        View the_view = convertView;
         removeAccess.setOnClickListener(v->{
             deleteAccess(parent.getContext(), access);
+            the_view.setVisibility(View.INVISIBLE);
         });
         Event event = DataBaseUtils.getDBManager(parent.getContext()).eventDao().findById(access.getEvent_id());
         itemTextView.setText(event.getName() + " (x" + access.getAvailables() + ")");

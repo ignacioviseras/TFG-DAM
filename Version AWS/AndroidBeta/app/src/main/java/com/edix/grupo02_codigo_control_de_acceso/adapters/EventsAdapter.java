@@ -55,8 +55,10 @@ public class EventsAdapter  extends ArrayAdapter<Event> {
             buyAccess.setVisibility(View.VISIBLE);
         }
 
+        View the_view = convertView;
         deleteEvent.setOnClickListener(v->{
             deleteEvent(parent.getContext(), event);
+            the_view.setVisibility(View.INVISIBLE);
         });
 
 
@@ -88,7 +90,7 @@ public class EventsAdapter  extends ArrayAdapter<Event> {
     }
 
     public void deleteEvent(Context context, Event event) {
-        Call<Boolean> call = ApiAdapter.getApiService().deleteAccess(AppUtils.getAuthToken(context), event.getId());
+        Call<Boolean> call = ApiAdapter.getApiService().deleteEvent(AppUtils.getAuthToken(context), event.getId());
         call.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(@NonNull Call<Boolean> call, @NonNull Response<Boolean> response) {
