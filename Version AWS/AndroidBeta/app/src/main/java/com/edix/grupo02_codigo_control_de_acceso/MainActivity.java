@@ -35,29 +35,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         listView = findViewById(R.id.boughtAccessesList);
         isAdmin = AppUtils.isAdmin(getApplicationContext());
-        refreshEvents();
-        loadAccesses();
+        refreshEvents(false);
+        refreshAccesses(true);
     }
 
     private void loadAccesses() {
-        try {
-            Call<List<Access>> call = ApiAdapter.getApiService().getAccesses(AppUtils.getAuthToken(getApplicationContext()));
-            call.enqueue(new Callback<List<Access>>() {
-                @Override
-                public void onResponse(@NonNull Call<List<Access>> call, @NonNull Response<List<Access>> response) {
-                    if (response.isSuccessful()) {
-                        AccessAdapter adapter = new AccessAdapter(getApplicationContext(), response.body());
-                        listView.setAdapter(adapter);
-                    }
-                }
-                @Override
-                public void onFailure(@NonNull Call<List<Access>> call, @NonNull Throwable t) {
-
-                }
-            });
-        } catch (IllegalArgumentException ignored) {
-
-        }
+        AccessAdapter adapter = new AccessAdapter(
+                getApplicationContext(),
+                DataBaseUtils.getDBManager(getApplicationContext()).accessDao().getAll()
+        );
+        listView.setAdapter(adapter);
     }
 
     private void loadEvents() {
@@ -67,7 +54,33 @@ public class MainActivity extends AppCompatActivity {
         );
         listView.setAdapter(adapter);
     }
-    private void refreshEvents() {
+
+    private void refreshAccesses(boolean print){
+        try {
+            Call<List<Access>> call = ApiAdapter.getApiService().getAccesses(AppUtils.getAuthToken(getApplicationContext()));
+            call.enqueue(new Callback<List<Access>>() {
+                @Override
+                public void onResponse(@NonNull Call<List<Access>> call, @NonNull Response<List<Access>> response) {
+                    if (response.isSuccessful()) {
+                        DataBaseUtils.getDBManager(getApplicationContext()).accessDao().reset();
+                        DataBaseUtils.getDBManager(getApplicationContext()).accessDao().insertAll(response.body());
+                        if(print){
+                            loadAccesses();
+                        }
+                    }
+                }
+                @Override
+                public void onFailure(@NonNull Call<List<Access>> call, @NonNull Throwable t) {
+                    if(print){
+                        loadAccesses();
+                    }
+                }
+            });
+        } catch (IllegalArgumentException ignored) {
+
+        }
+    }
+    private void refreshEvents(boolean print) {
         try {
             Call<List<Event>> call = ApiAdapter.getApiService().getEvents();
             call.enqueue(new Callback<List<Event>>() {
@@ -76,11 +89,16 @@ public class MainActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         DataBaseUtils.getDBManager(getApplicationContext()).eventDao().reset();
                         DataBaseUtils.getDBManager(getApplicationContext()).eventDao().insertAll(response.body());
+                        if (print) {
+                            loadEvents();
+                        }
                     }
                 }
                 @Override
                 public void onFailure(@NonNull Call<List<Event>> call, @NonNull Throwable t) {
-
+                    if (print) {
+                        loadEvents();
+                    }
                 }
             });
         } catch (IllegalArgumentException ignored) {
@@ -108,10 +126,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.events:
-                loadEvents();
+                refreshEvents(true);
                 return true;
             case R.id.boughtAccesses:
-                loadAccesses();
+                refreshAccesses(true);
                 return true;
             case R.id.editProfile:
                 editProfile();

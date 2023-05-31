@@ -1,4 +1,4 @@
-package com.edix.grupo02_codigo_control_de_acceso;
+package com.edix.grupo02_codigo_control_de_acceso.global;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.edix.grupo02_codigo_control_de_acceso.R;
 
 public class AppToast {
     final public static String INFO = "info";

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.edix.grupo02_codigo_control_de_acceso.AppToast;
+import com.edix.grupo02_codigo_control_de_acceso.global.AppToast;
 import com.edix.grupo02_codigo_control_de_acceso.R;
 import com.edix.grupo02_codigo_control_de_acceso.global.AppUtils;
 import com.edix.grupo02_codigo_control_de_acceso.apiService.ApiAdapter;

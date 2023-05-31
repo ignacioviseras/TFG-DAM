@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.edix.grupo02_codigo_control_de_acceso.database.DataBaseUtils;
+import com.edix.grupo02_codigo_control_de_acceso.global.AppToast;
 import com.edix.grupo02_codigo_control_de_acceso.global.AppUtils;
 import com.edix.grupo02_codigo_control_de_acceso.apiService.ApiAdapter;
 import com.edix.grupo02_codigo_control_de_acceso.entities.User;

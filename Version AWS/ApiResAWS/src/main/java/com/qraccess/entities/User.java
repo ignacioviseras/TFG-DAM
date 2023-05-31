@@ -34,9 +34,22 @@ public abstract class User  {
 		this.password = password;
 	}
 	public void encryptPassword() {
-		String salt = BCrypt.gensalt();
-        this.password = BCrypt.hashpw(this.password, salt);
+		if(this.getPassword() != null){
+			String salt = BCrypt.gensalt();
+        	this.password = BCrypt.hashpw(this.password, salt);
+		}		
 	}
+
+	public void update(User user){
+		if (user.getName() != null) {
+            this.setName(user.getName());
+        }
+        if (user.getPassword() != null) {
+            this.setPassword(user.getPassword());
+        }
+        if (user.getMail() != null) {
+            this.setMail(user.getMail());
+        }
 
 	public abstract String getRole();
 

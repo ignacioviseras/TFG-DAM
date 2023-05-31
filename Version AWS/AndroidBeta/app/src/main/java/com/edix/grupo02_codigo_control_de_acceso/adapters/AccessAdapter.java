@@ -1,5 +1,6 @@
 package com.edix.grupo02_codigo_control_de_acceso.adapters;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -16,9 +17,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.edix.grupo02_codigo_control_de_acceso.R;
-import com.edix.grupo02_codigo_control_de_acceso.apiService.ApiAdapter;
+import com.edix.grupo02_codigo_control_de_acceso.database.DataBaseUtils;
 import com.edix.grupo02_codigo_control_de_acceso.entities.Access;
 import com.edix.grupo02_codigo_control_de_acceso.entities.Event;
+import com.edix.grupo02_codigo_control_de_acceso.global.AppUtils;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
@@ -26,12 +28,8 @@ import com.google.zxing.qrcode.QRCodeWriter;
 
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class AccessAdapter extends ArrayAdapter<Access> {
-    private List<Access> itemList;
+    private final List<Access> itemList;
 
 
     public AccessAdapter(Context context, List<Access> itemList) {
@@ -39,6 +37,7 @@ public class AccessAdapter extends ArrayAdapter<Access> {
         this.itemList = itemList;
     }
 
+    @SuppressLint("SetTextI18n")
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -48,37 +47,17 @@ public class AccessAdapter extends ArrayAdapter<Access> {
         Access access = itemList.get(position);
         TextView itemTextView = convertView.findViewById(R.id.accessTitle);
         ImageButton accessQr = convertView.findViewById(R.id.accessQR);
-        accessQr.setOnClickListener(v -> {
-            showQRCode(parent.getContext(), access.getEvent_id() + "");
-        });
-
-
-        Call<Event> call = ApiAdapter.getApiService().getEvents(access.getEvent_id());
-        call.enqueue(new Callback<Event>() {
-            @Override
-            public void onResponse(Call<Event> call, Response<Event> response) {
-                if (response.isSuccessful()) {
-                    Event eventResponse = response.body();
-                    itemTextView.setText(eventResponse.getName() + " (x" + access.getAvailables() + ")");
-                } else {
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Event> call, Throwable t) {
-
-            }
-        });
-
+        accessQr.setOnClickListener(v -> showQRCode(parent.getContext(),
+                AppUtils.encodeAccessId(access.getEvent_id())));
+        Event event = DataBaseUtils.getDBManager(parent.getContext()).eventDao().findById(access.getEvent_id());
+        itemTextView.setText(event.getName() + " (x" + access.getAvailables() + ")");
         return convertView;
     }
-
-    private final int QR_CODE_SIZE = 500;
 
     public void showQRCode(Context context, String texto) {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         try {
+            int QR_CODE_SIZE = 500;
             BitMatrix bitMatrix = qrCodeWriter.encode(texto, BarcodeFormat.QR_CODE, QR_CODE_SIZE, QR_CODE_SIZE);
             int width = bitMatrix.getWidth();
             int height = bitMatrix.getHeight();

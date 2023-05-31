@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.edix.grupo02_codigo_control_de_acceso.apiService.ApiAdapter;
 import com.edix.grupo02_codigo_control_de_acceso.databinding.ActivityMainBinding;
 import com.edix.grupo02_codigo_control_de_acceso.entities.Access;
+import com.edix.grupo02_codigo_control_de_acceso.global.AppToast;
 import com.edix.grupo02_codigo_control_de_acceso.global.AppUtils;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;

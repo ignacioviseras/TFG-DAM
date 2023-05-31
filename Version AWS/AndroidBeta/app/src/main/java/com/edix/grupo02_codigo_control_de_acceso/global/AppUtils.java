@@ -5,6 +5,7 @@ import android.content.Context;
 import com.edix.grupo02_codigo_control_de_acceso.database.DataBaseUtils;
 import com.edix.grupo02_codigo_control_de_acceso.entities.Variable;
 
+import java.util.Base64;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,6 +53,18 @@ public class AppUtils {
         }else{
             return role.equals("ADMIN");
         }
+    }
+
+    public static String encodeAccessId(int accessId){
+        String encodedInteger = Base64.getEncoder().encodeToString(String.valueOf(accessId).getBytes());
+        return encodedInteger;
+    }
+
+    public static int decodeAccessId(String encoded){
+        byte[] decodedBytes = Base64.getDecoder().decode(encoded);
+        String decodedIntegerString = new String(decodedBytes);
+        int decodedInteger = Integer.parseInt(decodedIntegerString);
+        return decodedInteger;
     }
 
 }

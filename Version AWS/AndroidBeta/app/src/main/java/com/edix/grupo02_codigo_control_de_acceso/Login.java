@@ -10,9 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.edix.grupo02_codigo_control_de_acceso.global.AppToast;
 import com.edix.grupo02_codigo_control_de_acceso.global.AppUtils;
 import com.edix.grupo02_codigo_control_de_acceso.apiService.ApiAdapter;
-import com.edix.grupo02_codigo_control_de_acceso.apiService.AccessToken;
+import com.edix.grupo02_codigo_control_de_acceso.apiService.response.AccessToken;
 import com.edix.grupo02_codigo_control_de_acceso.entities.User;
 
 import java.util.Objects;
@@ -93,27 +94,33 @@ public class Login extends AppCompatActivity{
     }
 
     private void welcome(String token){
-        Call<User> call = ApiAdapter.getApiService().whoAmI(token);
-        call.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
-                if (response.isSuccessful()) {
-                    User user = response.body();
-                    if(user != null){
-                        Context context = getApplicationContext();
-                        AppUtils.setVariable(context, "_role", user.getRole());
-                        AppToast.show(context,"Bienvenida "+user.getName(),AppToast.INFO);
-                        Intent intent = new Intent(Login.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
+        Context context = getApplicationContext();
+        String role = AppUtils.getVariable(context, "_role");
+        if(role == null){
+            Call<User> call = ApiAdapter.getApiService().whoAmI(token);
+            call.enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
+                    if (response.isSuccessful()) {
+                        User user = response.body();
+                        if(user != null){
+
+                            AppUtils.setVariable(context, "_role", user.getRole());
+                            AppToast.show(context,"Bienvenida "+user.getName(),AppToast.INFO);
+                            Intent intent = new Intent(Login.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-
-            }
-        });
+                @Override
+                public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
+                    AppToast.show(context,"Error al consultar el API Service",AppToast.FAIL);
+                }
+            });
+        }else{
+            AppToast.show(context,"Bienvenid@ !",AppToast.INFO);
+        }
     }
 }

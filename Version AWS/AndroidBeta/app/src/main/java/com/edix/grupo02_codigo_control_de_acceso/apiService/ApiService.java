@@ -1,5 +1,6 @@
 package com.edix.grupo02_codigo_control_de_acceso.apiService;
 
+import com.edix.grupo02_codigo_control_de_acceso.apiService.response.AccessToken;
 import com.edix.grupo02_codigo_control_de_acceso.entities.Access;
 import com.edix.grupo02_codigo_control_de_acceso.entities.Event;
 import com.edix.grupo02_codigo_control_de_acceso.apiService.response.EventQuantity;

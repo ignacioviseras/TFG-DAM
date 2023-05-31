@@ -120,6 +120,9 @@ public class CustomerController {
 	@PostMapping(path="/update",consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Customer> updateCustomer(@RequestBody Customer newinfo) {		
 		newinfo.encryptPassword();
+		var auth =  SecurityContextHolder.getContext().getAuthentication();
+		Customer c = customerDao.getByMail(auth.getName());
+		c.update(newinfo);
 		Customer newAdmin = customerDao.update(newinfo);
 		newAdmin.setPassword("******");
 		return new ResponseEntity<Customer>(newAdmin,HttpStatus.CREATED);//201 CREATED
