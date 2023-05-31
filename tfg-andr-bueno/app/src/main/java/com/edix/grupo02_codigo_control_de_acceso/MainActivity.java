@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.boughtAccessesList);
         isAdmin = AppUtils.isAdmin(getApplicationContext());
         refreshEvents();
+        loadAccesses();
     }
 
     private void loadAccesses() {
@@ -120,9 +121,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.logout:
+                onBackPressed();
                 // cierre de sesion
                 DataBaseUtils.removeDB(getApplicationContext());
-                onBackPressed();
                 finish();
                 return true;
             default:return super.onOptionsItemSelected(item);

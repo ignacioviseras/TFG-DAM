@@ -51,8 +51,8 @@ public class Login extends AppCompatActivity{
 
     private void isLogged(){
         String token = AppUtils.getAuthToken(getApplicationContext());
-        welcome(token);
         if(token != null){
+            welcome(token);
             Intent intent = new Intent(Login.this, MainActivity.class);
             startActivity(intent);
             finish();
@@ -75,9 +75,10 @@ public class Login extends AppCompatActivity{
                     if (response.isSuccessful()) {
                         // se obtiene el token
                         AccessToken accessToken = response.body();
+                        Context context = getApplicationContext();
                         if(accessToken != null){
-                            AppUtils.setVariable(getApplicationContext(), "_token", accessToken.getJwtToken());
-                            welcome(accessToken.getJwtToken());
+                            AppUtils.setVariable(context, "_token", accessToken.getJwtToken());
+                            welcome(AppUtils.getAuthToken(context));
                         }
                     }
                 }

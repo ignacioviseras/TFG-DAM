@@ -114,6 +114,8 @@ public class EditProfileActivity extends AppCompatActivity {
             menu.findItem(R.id.boughtAccesses).setVisible(true);
         }
 
+        menu.findItem(R.id.logout).setVisible(false);
+
         return super.onCreateOptionsMenu(menu);
     }
 
