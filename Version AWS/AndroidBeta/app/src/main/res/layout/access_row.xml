@@ -15,17 +15,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:id="@+id/accessQR"
-            android:layout_width="0dp"
-            android:layout_height="45dp"
-            android:layout_weight="15"
-            android:background="@android:color/transparent"
-            android:padding="0dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/qr_icon"
-            app:iconSize="30dp"></ImageButton>
-
         <TextView
             android:id="@+id/accessTitle"
             android:layout_width="0dp"
@@ -36,6 +25,17 @@
             android:gravity="center_vertical"
             android:textAlignment="gravity"
             android:textSize="20sp" />
+
+        <ImageButton
+            android:id="@+id/accessQR"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="15"
+            android:background="@android:color/transparent"
+            android:padding="0dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/qr_icon"
+            app:iconSize="30dp"></ImageButton>
 
         <ImageButton
             android:id="@+id/removeAccess"

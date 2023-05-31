@@ -44,12 +44,10 @@ public class EventsAdapter  extends ArrayAdapter<Event> {
         }
         ImageButton deleteEvent = convertView.findViewById(R.id.eventDelete);
         ImageButton buyAccess = convertView.findViewById(R.id.eventBuy);
-        ImageButton editEvent = convertView.findViewById(R.id.eventEdit);
         TextView itemTextView = convertView.findViewById(R.id.eventTitle);
         Event event = itemList.get(position);
 
         if(this.isAdmin){
-           // editEvent.setVisibility(View.VISIBLE);
             deleteEvent.setVisibility(View.VISIBLE);
         }else{
             buyAccess.setVisibility(View.VISIBLE);
