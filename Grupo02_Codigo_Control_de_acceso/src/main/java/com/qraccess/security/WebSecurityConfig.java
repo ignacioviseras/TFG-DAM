@@ -30,6 +30,7 @@ public class WebSecurityConfig {
         .authorizeHttpRequests((authorize) -> authorize
           //.requestMatchers("/public/**").permitAll()	
         .requestMatchers("/login", "/signin").permitAll()
+        .requestMatchers("/whoami").hasAnyRole("ADMIN", "CUSTOMER")
         .requestMatchers("/events/**").permitAll()
         .requestMatchers("/admin/**").hasRole("ADMIN")
         .requestMatchers("/customer/**").hasRole("CUSTOMER")

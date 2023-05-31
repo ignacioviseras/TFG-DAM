@@ -13,4 +13,8 @@ public class Customer extends User{
 		this.setName(customer_update.getName());
 		//this.setPassword(admin_update.getPassword());		
 	}
+
+	public String getRole(){
+		return "CUSTOMER";
+	}
 }

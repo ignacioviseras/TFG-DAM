@@ -14,4 +14,7 @@ public class Admin extends User{
 		//this.setPassword(admin_update.getPassword());		
 	}
 	
+	public String getRole(){
+		return "ADMIN";
+	}
 }

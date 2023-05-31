@@ -1,10 +1,19 @@
-package com.edix.grupo02_codigo_control_de_acceso.io.response;
+package com.edix.grupo02_codigo_control_de_acceso.entities;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+@Entity
 public class Event {
+    @PrimaryKey
+    @NonNull
     private int id;
     private long expires;
+
     private String name, description;
 
+    public Event(){}
     public int getId() {
         return this.id;
     }

@@ -38,4 +38,6 @@ public abstract class User  {
         this.password = BCrypt.hashpw(this.password, salt);
 	}
 
+	public abstract String getRole();
+
 }

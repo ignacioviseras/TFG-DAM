@@ -17,7 +17,7 @@
         tools:layout_editor_absoluteX="19dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/signInBoxName"
+            android:id="@+id/editBoxName"
             android:layout_width="314dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
@@ -28,7 +28,7 @@
             android:layout_margin="10dp"/>
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/signInMailBox"
+            android:id="@+id/editBoxMail"
             android:layout_width="314dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
@@ -39,7 +39,7 @@
             android:layout_margin="10dp"/>
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/signInPassBox"
+            android:id="@+id/editPassBox"
             android:layout_width="314dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
@@ -50,7 +50,7 @@
             app:cornerRadius="60sp"
             android:layout_margin="10dp"/>
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/signInPassBoxBis"
+            android:id="@+id/editPassBoxBis"
             android:layout_width="314dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"

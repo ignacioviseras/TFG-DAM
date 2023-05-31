@@ -1,33 +1,23 @@
 package com.edix.grupo02_codigo_control_de_acceso;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.DialogInterface;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.Spinner;
-import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.edix.grupo02_codigo_control_de_acceso.adapters.AccessAdapter;
 import com.edix.grupo02_codigo_control_de_acceso.adapters.EventsAdapter;
+import com.edix.grupo02_codigo_control_de_acceso.apiService.ApiAdapter;
+import com.edix.grupo02_codigo_control_de_acceso.database.DataBaseUtils;
+import com.edix.grupo02_codigo_control_de_acceso.entities.Access;
+import com.edix.grupo02_codigo_control_de_acceso.entities.Event;
 import com.edix.grupo02_codigo_control_de_acceso.global.AppUtils;
-import com.edix.grupo02_codigo_control_de_acceso.io.ApiAdapter;
-import com.edix.grupo02_codigo_control_de_acceso.io.response.Access;
-import com.edix.grupo02_codigo_control_de_acceso.io.response.Event;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,22 +25,17 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    String email;
     ListView listView;
-    SearchView searchView;
+    private boolean isAdmin = false;
 
-    List<Access> accessesList = new ArrayList<>();
-    List<Event> eventsList = new ArrayList<>();
-    List<String> listaRegistros = new ArrayList<>();
-    ArrayAdapter<String> mAdapterRegistros;
-    Spinner select;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listView = findViewById(R.id.boughtAccessesList);
-        loadAccesses();
+        isAdmin = AppUtils.isAdmin(getApplicationContext());
+        refreshEvents();
     }
 
     private void loadAccesses() {
@@ -58,39 +43,46 @@ public class MainActivity extends AppCompatActivity {
             Call<List<Access>> call = ApiAdapter.getApiService().getAccesses(AppUtils.getAuthToken(getApplicationContext()));
             call.enqueue(new Callback<List<Access>>() {
                 @Override
-                public void onResponse(Call<List<Access>> call, Response<List<Access>> response) {
+                public void onResponse(@NonNull Call<List<Access>> call, @NonNull Response<List<Access>> response) {
                     if (response.isSuccessful()) {
                         AccessAdapter adapter = new AccessAdapter(getApplicationContext(), response.body());
                         listView.setAdapter(adapter);
                     }
                 }
                 @Override
-                public void onFailure(Call<List<Access>> call, Throwable t) {
+                public void onFailure(@NonNull Call<List<Access>> call, @NonNull Throwable t) {
 
                 }
             });
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException ignored) {
 
         }
     }
 
     private void loadEvents() {
+        EventsAdapter adapter = new EventsAdapter(
+                getApplicationContext(),
+                DataBaseUtils.getDBManager(getApplicationContext()).eventDao().getAll()
+        );
+        listView.setAdapter(adapter);
+    }
+    private void refreshEvents() {
         try {
             Call<List<Event>> call = ApiAdapter.getApiService().getEvents();
             call.enqueue(new Callback<List<Event>>() {
                 @Override
-                public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
+                public void onResponse(@NonNull Call<List<Event>> call, @NonNull Response<List<Event>> response) {
                     if (response.isSuccessful()) {
-                        EventsAdapter adapter = new EventsAdapter(getApplicationContext(), response.body());
-                        listView.setAdapter(adapter);
+                        DataBaseUtils.getDBManager(getApplicationContext()).eventDao().reset();
+                        DataBaseUtils.getDBManager(getApplicationContext()).eventDao().insertAll(response.body());
                     }
                 }
                 @Override
-                public void onFailure(Call<List<Event>> call, Throwable t) {
+                public void onFailure(@NonNull Call<List<Event>> call, @NonNull Throwable t) {
 
                 }
             });
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException ignored) {
 
         }
     }
@@ -100,11 +92,18 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
+        if(isAdmin){
+            menu.findItem(R.id.checkAccess).setVisible(true);
+        }else{
+            menu.findItem(R.id.boughtAccesses).setVisible(true);
+        }
+
         return super.onCreateOptionsMenu(menu);
     }
 
+    @SuppressLint("NonConstantResourceId")
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.events:
@@ -116,23 +115,17 @@ public class MainActivity extends AppCompatActivity {
             case R.id.editProfile:
                 editProfile();
                 return true;
+            case R.id.checkAccess:
+                Intent intent =  new Intent(this, ScanQrActivity.class);
+                startActivity(intent);
+                return true;
             case R.id.logout:
                 // cierre de sesion
+                DataBaseUtils.removeDB(getApplicationContext());
                 onBackPressed();
                 finish();
                 return true;
             default:return super.onOptionsItemSelected(item);
         }
-    }
-
-    public void pantallaqr (View view){
-        View parent = (View) view.getParent();
-        TextView registroTextView = parent.findViewById(R.id.accessQR);
-        String registro = registroTextView.getText().toString();
-
-
-        Intent intent = new Intent(MainActivity.this, showqr.class);
-        intent.putExtra("txtQr", registro);//pasamos el texto de la lista
-        startActivity(intent);
     }
 }

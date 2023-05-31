@@ -4,15 +4,18 @@ package com.qraccess.controllers;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 import com.qraccess.daos.mysql.AdminDaoImp;
 import com.qraccess.daos.mysql.CustomerDaoImp;
+import com.qraccess.entities.User;
 import com.qraccess.security.service.JwtUtilService;
 import com.qraccess.security.utils.TokenInfo;
 import com.qraccess.utils.Log;
@@ -75,14 +78,16 @@ public class PublicController {
 		Boolean success = false;
 		if(true){
 			/* check email */
-			if(adminDao.getByMail( newUser.get("mail")) == null || customerDao.getByMail( newUser.get("mail")) == null){
-				return new ResponseEntity<Boolean>(HttpStatus.CONFLICT); //409 NOT FOUND	
-			}
+		}
+		if(adminDao.getByMail( newUser.get("mail")) != null){
+			return new ResponseEntity<Boolean>(HttpStatus.CONFLICT); //409 MAIL ALREADY EXIST	
+		}else if(customerDao.getByMail( newUser.get("mail")) != null){
+			return new ResponseEntity<Boolean>(HttpStatus.CONFLICT); //409 MAIL ALREADY EXIST	
 		}
 		// if admin or customer is created returns true, else false
-		if(newUser.get("role").equals("admin")){
+		if(newUser.get("role").equals("admin")){			
 			success = adminDao.insert(newUser.get("name"), newUser.get("mail"), newUser.get("password")) != null;
-		}else if(newUser.get("role").equals("customer")){
+		}else if(newUser.get("role").equals("customer")){			
 			success = customerDao.insert(newUser.get("name"), newUser.get("mail"), newUser.get("password")) != null;
 		}else{
 			/* exception role not available */	
@@ -90,4 +95,18 @@ public class PublicController {
 		}
 		return ResponseEntity.ok(success);
 	  }
+	@GetMapping(path="/whoami", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> whoAmI(){
+		var auth =  SecurityContextHolder.getContext().getAuthentication();
+		User c = customerDao.getByMail(auth.getName());	
+				
+		if(c == null){
+			c = adminDao.getByMail(auth.getName());	
+			if(c == null){
+				return new ResponseEntity<User>(HttpStatus.FORBIDDEN);//403 USER NOT FOUND	
+			}
+		}
+		c.setPassword("*********");
+		return new ResponseEntity<User>(c, HttpStatus.OK);	
+	}
 }

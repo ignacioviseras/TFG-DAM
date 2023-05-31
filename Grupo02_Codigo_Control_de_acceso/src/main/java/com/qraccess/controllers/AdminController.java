@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,7 +47,45 @@ public class AdminController {
 		System.out.println("creating event: " + auth.toString());
 		return new ResponseEntity<Event>(eventDao.insert(event),HttpStatus.CREATED);//201 CREATED
 	}
-
+	/**
+	 * Updates an event for the given event ID.
+	 *
+	 * @param  event_id	the ID of the event to be updated
+	 * @param  event		the updated event object
+	 * @return         	a ResponseEntity with the updated event and a 201 CREATED status
+	 */
+	@PostMapping(path="/event/{eventId}",consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Event> updateAdmin(@PathVariable("eventId") int event_id, @RequestBody Event event) {	
+		event.setId(event_id);
+		return new ResponseEntity<Event>(eventDao.update(event),HttpStatus.CREATED);//201 CREATED
+	}
+	/**
+	 * Deletes an event from the database.
+	 *
+	 * @param  event_id	the id of the event to delete
+	 * @return         	a ResponseEntity<Boolean> indicating if the delete was successful
+	 */
+	@DeleteMapping(path="/eventDelete/{eventId}",produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Boolean> updateAdmin(@PathVariable("eventId") int event_id) {	
+		return new ResponseEntity<Boolean>(eventDao.delete(event_id),HttpStatus.CREATED);//201 CREATED
+	}
+	
+	/**
+	 * Deletes an event by ID.
+	 *
+	 * @param  event_id	the ID of the event to be deleted
+	 * @return         	a boolean indicating if the deletion was successful
+	 */
+	@DeleteMapping(path="/event/{event_id}",  produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Boolean> deleteEvent(@PathVariable("event_id") int event_id){
+		Event event = eventDao.findById(event_id);
+		if(event == null){
+			return new ResponseEntity<Boolean>(HttpStatus.NOT_FOUND); //404 NOT FOUND
+		}else{
+			eventDao.delete(event_id);
+			return new ResponseEntity<Boolean>(true,HttpStatus.CREATED);//201 CREATED
+		}		
+	}
     /**
      * Retrieves an Access object by its ID and validates it.
      *
@@ -61,7 +100,11 @@ public class AdminController {
 			return new ResponseEntity<Access>(HttpStatus.NOT_FOUND); //404 NOT FOUND
 		}else{
 			access.validate();
-			accessDao.update(access);
+			if(access.getAvailables() <= 0){
+				accessDao.delete(access_id);
+			}else{
+				accessDao.update(access);
+			}			
 			return new ResponseEntity<Access>(access, HttpStatus.OK);
 		}
 	}

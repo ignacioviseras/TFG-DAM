@@ -88,14 +88,39 @@ public class EventDaoImp extends MySQLCon implements EventDao{
 
     @Override
     public Event update(Event obj) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        if(this.start()){
+			String sql = "UPDATE EVENTS SET NAME=?, DESCRIPTION=?, EXPIRES=? WHERE ID=?";
+			try {
+				PreparedStatement ps = this.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+				ps.setString(1,obj.getName());				
+				ps.setString(2,obj.getDescription());
+				ps.setLong(3,obj.getExpires());
+				ps.setInt(4,obj.getId());
+				ps.executeUpdate();
+			}catch(SQLException e) {
+				System.err.print("No se ha podido actualizar el evento:"+e.getMessage());
+			}finally {
+				this.close();
+			}
+		}
+		return obj;
     }
 
     @Override
     public boolean delete(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        boolean deleted = false;
+		if(this.start()) {
+			String sql = "DELETE FROM EVENTS WHERE ID = ?";			
+			try {
+				PreparedStatement ps = this.con.prepareStatement(sql);
+				ps.setInt(1, id);
+				deleted = ps.executeUpdate() > 0;
+				this.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}			
+		}
+		return deleted;
     } 
     
 }

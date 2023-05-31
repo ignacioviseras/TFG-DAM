@@ -1,7 +1,9 @@
 package com.edix.grupo02_codigo_control_de_acceso.global;
 
 import android.content.Context;
-import android.content.SharedPreferences;
+
+import com.edix.grupo02_codigo_control_de_acceso.database.DataBaseUtils;
+import com.edix.grupo02_codigo_control_de_acceso.entities.Variable;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,7 +15,7 @@ public class AppUtils {
     /*
     *   chequea la valided de un eamil.
     * */
-    private static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+    private static final String EMAIL_REGEX = "^[A-Za-z\\d+_.-]+@[A-Za-z0-9.-]+$";
 
     public static boolean isValidMail(String email){
         Pattern pattern = Pattern.compile(EMAIL_REGEX);
@@ -23,21 +25,33 @@ public class AppUtils {
     /*
     *   Estas dos funciones se utilizan para guardar y recuperar variables de la aplicación de tipo string
     * */
-    private static final String PREF_NAME = "MyAppVariables";
-
-    public static void setMyVariable(Context context, String key, String value) {
-        SharedPreferences preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(key, value);
-        editor.apply();
+    public static void setVariable(Context context, String key, String value) {
+        DataBaseUtils.getDBManager(context).variableDao().insert(new Variable(key, value));
     }
 
-    public static String getMyVariable(Context context, String key) {
-        SharedPreferences preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        return preferences.getString(key, null);
+    public static String getVariable(Context context, String key) {
+        Variable variable = DataBaseUtils.getDBManager(context).variableDao().findByKey(key);
+        if(variable == null) return null;
+        else return variable.value;
     }
 
     public static String getAuthToken(Context context){
-        return "Bearer "+ AppUtils.getMyVariable(context, "_token");
+        String token = AppUtils.getVariable(context, "_token");
+        if(token == null){
+            return null;
+        }else{
+            return "Bearer " + token;
+        }
     }
+
+    public static boolean isAdmin(Context context){
+       // Log.d(">>>>>>>>>>>>>>>>>>>>>>", AppUtils.getVariable(context, "_role"));
+        String role = AppUtils.getVariable(context, "_role");
+        if(role ==null){
+            return false;
+        }else{
+            return role.equals("ADMIN");
+        }
+    }
+
 }
