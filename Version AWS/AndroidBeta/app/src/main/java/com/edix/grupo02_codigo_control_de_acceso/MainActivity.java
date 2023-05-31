@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.edix.grupo02_codigo_control_de_acceso.adapters.AccessAdapter;
 import com.edix.grupo02_codigo_control_de_acceso.adapters.EventsAdapter;
@@ -37,6 +39,42 @@ public class MainActivity extends AppCompatActivity {
         isAdmin = AppUtils.isAdmin(getApplicationContext());
         refreshEvents(false);
         refreshAccesses(true);
+        loadQRMenu();
+    }
+
+    private void loadQRMenu(){
+        ImageButton eventsBtn = findViewById(R.id.events);
+        ImageButton editProfileBtn = findViewById(R.id.editProfile);;
+        ImageButton accessBtn = findViewById(R.id.boughtAccesses);;
+
+        accessBtn.setOnClickListener(v->{
+            deactivateBtns(eventsBtn, editProfileBtn, accessBtn);
+            refreshAccesses(true);
+            activateBtn(accessBtn, true);
+        });
+        editProfileBtn.setOnClickListener(v->{
+            deactivateBtns(eventsBtn, editProfileBtn, accessBtn);
+            editProfile();
+            activateBtn(editProfileBtn, true);
+        });
+        eventsBtn.setOnClickListener(v->{
+            deactivateBtns(eventsBtn, editProfileBtn, accessBtn);
+            refreshEvents(true);
+        });
+    };
+
+    private void deactivateBtns(ImageButton... buttons){
+        for (ImageButton btn : buttons) {
+            activateBtn(btn, false);
+        }
+    }
+
+    private void activateBtn(ImageButton btn, Boolean activated){
+        int color = R.color.black;
+        if(activated){
+            color = R.color.light_blue;
+        }
+        btn.setImageTintList(ContextCompat.getColorStateList(getApplicationContext(), color));
     }
 
     private void loadAccesses() {
@@ -109,42 +147,5 @@ public class MainActivity extends AppCompatActivity {
     private void editProfile(){
         Intent intent =  new Intent(this, EditProfileActivity.class);
         startActivity(intent);
-    }
-    @Override
-    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        if(isAdmin){
-            menu.findItem(R.id.checkAccess).setVisible(true);
-        }else{
-            menu.findItem(R.id.boughtAccesses).setVisible(true);
-        }
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @SuppressLint("NonConstantResourceId")
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.events:
-                refreshEvents(true);
-                return true;
-            case R.id.boughtAccesses:
-                refreshAccesses(true);
-                return true;
-            case R.id.editProfile:
-                editProfile();
-                return true;
-            case R.id.checkAccess:
-                Intent intent =  new Intent(this, ScanQrActivity.class);
-                startActivity(intent);
-                return true;
-            case R.id.logout:
-                onBackPressed();
-                // cierre de sesion
-                DataBaseUtils.removeDB(getApplicationContext());
-                finish();
-                return true;
-            default:return super.onOptionsItemSelected(item);
-        }
     }
 }
