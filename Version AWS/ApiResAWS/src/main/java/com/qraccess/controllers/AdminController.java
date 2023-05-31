@@ -116,9 +116,12 @@ public class AdminController {
 	 * @return          ResponseEntity containing the updated Admin object with the password encrypted and hidden
 	 */
 	@PostMapping(path="/update",consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Admin> updateAdmin(@RequestBody Admin newinfo) {		
+	public ResponseEntity<Admin> updateCustomer(@RequestBody Admin newinfo) {		
 		newinfo.encryptPassword();
-		Admin newAdmin = adminDao.update(newinfo);
+		var auth =  SecurityContextHolder.getContext().getAuthentication();
+		Admin admin = adminDao.getByMail(auth.getName());
+		admin.update(newinfo);
+		Admin newAdmin = adminDao.update(admin);
 		newAdmin.setPassword("******");
 		return new ResponseEntity<Admin>(newAdmin,HttpStatus.CREATED);//201 CREATED
 	}

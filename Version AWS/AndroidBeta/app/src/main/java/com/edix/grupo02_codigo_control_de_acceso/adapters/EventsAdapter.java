@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.edix.grupo02_codigo_control_de_acceso.database.DataBaseUtils;
 import com.edix.grupo02_codigo_control_de_acceso.global.AppToast;
 import com.edix.grupo02_codigo_control_de_acceso.R;
 import com.edix.grupo02_codigo_control_de_acceso.global.AppUtils;
@@ -44,16 +45,21 @@ public class EventsAdapter  extends ArrayAdapter<Event> {
         ImageButton deleteEvent = convertView.findViewById(R.id.eventDelete);
         ImageButton buyAccess = convertView.findViewById(R.id.eventBuy);
         ImageButton editEvent = convertView.findViewById(R.id.eventEdit);
+        TextView itemTextView = convertView.findViewById(R.id.eventTitle);
+        Event event = itemList.get(position);
 
         if(this.isAdmin){
-            editEvent.setVisibility(View.VISIBLE);
+           // editEvent.setVisibility(View.VISIBLE);
             deleteEvent.setVisibility(View.VISIBLE);
         }else{
             buyAccess.setVisibility(View.VISIBLE);
         }
 
-        TextView itemTextView = convertView.findViewById(R.id.eventTitle);
-        Event event = itemList.get(position);
+        deleteEvent.setOnClickListener(v->{
+            deleteEvent(parent.getContext(), event);
+        });
+
+
         itemTextView.setText(event.getName());
         buyAccess.setOnClickListener(v -> {
             try {
@@ -79,5 +85,23 @@ public class EventsAdapter  extends ArrayAdapter<Event> {
             }
         });
         return convertView;
+    }
+
+    public void deleteEvent(Context context, Event event) {
+        Call<Boolean> call = ApiAdapter.getApiService().deleteAccess(AppUtils.getAuthToken(context), event.getId());
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(@NonNull Call<Boolean> call, @NonNull Response<Boolean> response) {
+                if (response.isSuccessful()) {
+                    DataBaseUtils.getDBManager(context).eventDao().delete(event);
+                    String msg = "El evento fue eliminado";
+                    AppToast.show(context,msg,AppToast.INFO);
+                }
+            }
+            @Override
+            public void onFailure(@NonNull Call<Boolean> call, @NonNull Throwable t) {
+
+            }
+        });
     }
 }

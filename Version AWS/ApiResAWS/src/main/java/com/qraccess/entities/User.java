@@ -50,6 +50,7 @@ public abstract class User  {
         if (user.getMail() != null) {
             this.setMail(user.getMail());
         }
+	}
 
 	public abstract String getRole();
 

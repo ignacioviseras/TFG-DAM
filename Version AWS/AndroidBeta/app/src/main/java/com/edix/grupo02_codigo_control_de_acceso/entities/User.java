@@ -80,4 +80,22 @@ public class User {
     public static User get(String username, String password, String name, String role){
         return new User(username.trim(), password, name, role);
     }
+
+    public static User getForUpdate(String username, String password, String name){
+        if (username.isEmpty() && password.isEmpty() && name.isEmpty()) {
+            return null;
+        }else{
+            User user = new User();
+            if(!username.equals("")){
+                user.setMail(username.trim());
+            }
+            if(!password.equals("")){
+                user.setPassword(password);
+            }
+            if(!name.equals("")){
+                user.setName(name);
+            }
+            return user;
+        }
+    }
 }

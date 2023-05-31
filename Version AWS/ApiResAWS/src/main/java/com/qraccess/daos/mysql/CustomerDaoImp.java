@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.qraccess.daos.interfaces.CustomerDao;
 import com.qraccess.entities.Customer;
+import com.qraccess.utils.Log;
 @Component
 public class CustomerDaoImp  extends MySQLCon implements CustomerDao{
 	@Override
@@ -96,14 +97,15 @@ public class CustomerDaoImp  extends MySQLCon implements CustomerDao{
 
 	@Override
 	public Customer update(Customer obj) {
+		Log.info(obj.toString());
 		if(this.start()){
-			String sql = "UPDATE CUSTOMERS SET NAME=?, MAIL=? WHERE ID=?";
+			String sql = "UPDATE CUSTOMERS SET NAME=?, MAIL=?, PASSWORD=? WHERE ID=?";
 			try {
 				PreparedStatement ps = this.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				ps.setString(1,obj.getName());
 				ps.setString(2,obj.getMail());
-				//ps.setString(3,obj.getPassword());
-				ps.setInt(3, obj.getId());
+				ps.setString(3,obj.getPassword());
+				ps.setInt(4, obj.getId());
 				ps.executeUpdate();
 			}catch(SQLException e) {
 				System.err.print("No se ha podido actualizar el Customer:"+e.getMessage());

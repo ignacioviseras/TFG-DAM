@@ -24,4 +24,7 @@ public interface AccessDao {
 
     @Query("DELETE FROM access")
     void reset();
+
+    @Delete
+    void delete(Access access);
 }

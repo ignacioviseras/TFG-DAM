@@ -72,13 +72,15 @@ public class EditProfileActivity extends AppCompatActivity {
                 AppToast.show(getApplicationContext(), "las contraseñas no coinciden", AppToast.FAIL);
                 return;
             }
-            User user = User.get(passText.getText().toString(), nameText.getText().toString(), "CUSTOMER", emailText.getText().toString());
-            user.setPassword(null);
+            User user = User.getForUpdate(emailText.getText().toString(), passText.getText().toString(), nameText.getText().toString());
+            if(user == null){ // no pongo ningún mensaje porque si están todos los campos vacios esta claro que es una pulsacion erronea
+                return;
+            }
             Call<User> call;
             if (isAdmin) {
-                call = ApiAdapter.getApiService().updateCustomer(AppUtils.getAuthToken(getApplicationContext()), user);
-            }else{
                 call = ApiAdapter.getApiService().updateAdmin(AppUtils.getAuthToken(getApplicationContext()), user);
+            }else{
+                call = ApiAdapter.getApiService().updateCustomer(AppUtils.getAuthToken(getApplicationContext()), user);
             }
             call.enqueue(new Callback<User>() {
                 @Override
@@ -87,17 +89,19 @@ public class EditProfileActivity extends AppCompatActivity {
                         Intent intent = new Intent(EditProfileActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
+                        String msg = "Se ha actualizado el perfil";
+                        AppToast.show(getApplicationContext(),msg,AppToast.INFO);
                     }
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-
+                    AppToast.show(getApplicationContext(),"La petición no ha podido resolverse",AppToast.FAIL);
                 }
             });
 
-        }catch(IllegalArgumentException ignored) {
-
+        }catch(IllegalArgumentException e) {
+            AppToast.show(getApplicationContext(),e.getMessage(),AppToast.FAIL);
         }
 
     }

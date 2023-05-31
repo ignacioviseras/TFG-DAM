@@ -1,6 +1,5 @@
 package com.qraccess.controllers;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -110,6 +110,11 @@ public class CustomerController {
 			}
 		}		
 	}
+
+	@DeleteMapping(path="/deleteAccess/{eventId}",produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Boolean> deleteAccess(@PathVariable("eventId") int event_id) {	
+		return new ResponseEntity<Boolean>(accessDao.delete(event_id),HttpStatus.CREATED);//201 CREATED
+	}
 	
     /**
      * Updates a customer's information.
@@ -123,9 +128,9 @@ public class CustomerController {
 		var auth =  SecurityContextHolder.getContext().getAuthentication();
 		Customer c = customerDao.getByMail(auth.getName());
 		c.update(newinfo);
-		Customer newAdmin = customerDao.update(newinfo);
-		newAdmin.setPassword("******");
-		return new ResponseEntity<Customer>(newAdmin,HttpStatus.CREATED);//201 CREATED
+		Customer newCustomer = customerDao.update(c);
+		newCustomer.setPassword("******");
+		return new ResponseEntity<Customer>(newCustomer,HttpStatus.CREATED);//201 CREATED
 	}
 	
 	@GetMapping(path="/accesses/{event_id}/qr", produces = MediaType.IMAGE_PNG_VALUE)
