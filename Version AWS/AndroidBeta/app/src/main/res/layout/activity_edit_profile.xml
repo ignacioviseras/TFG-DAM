@@ -11,6 +11,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginHorizontal="50dp"
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -26,47 +27,45 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editBoxName"
-                android:layout_width="314dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
                 android:layout_margin="10dp"
-                android:backgroundTint="@color/white"
-                android:hint="@string/cajaNombre"
-                android:textAlignment="center"
-                android:textColorHint="@color/blue_sea"
+                android:backgroundTint="?attr/colorPrimary"
+                android:hint="@string/nameBox"
+                android:textColorHint="?attr/colorSecondary"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                app:cornerRadius="60sp" />
+                android:textStyle="bold"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editBoxMail"
-                android:layout_width="314dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:backgroundTint="?attr/colorPrimary"
                 android:hint="@string/cajaCorreo"
-                android:textColorHint="@color/blue_sea"
+                android:textColorHint="?attr/colorSecondary"
                 android:textSize="16sp"
                 app:cornerRadius="60sp"
                 android:layout_margin="10dp"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editPassBox"
-                android:layout_width="314dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:backgroundTint="?attr/colorPrimary"
                 android:hint="@string/passwordBox"
                 android:inputType="textPassword"
-                android:textColorHint="@color/blue_sea"
+                android:textColorHint="?attr/colorSecondary"
                 android:textSize="16sp"
                 app:cornerRadius="60sp"
                 android:layout_margin="10dp"/>
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editPassBoxBis"
-                android:layout_width="314dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:backgroundTint="?attr/colorPrimary"
                 android:hint="@string/passwordBoxBis"
                 android:inputType="textPassword"
-                android:textColorHint="@color/blue_sea"
+                android:textColorHint="?attr/colorSecondary"
                 android:textSize="16sp"
                 app:cornerRadius="60sp"
                 android:layout_margin="10dp"/>
@@ -75,7 +74,7 @@
                 android:layout_width="150dp"
                 android:layout_height="52dp"
                 android:layout_marginTop="8dp"
-                android:backgroundTint="@color/light_blue"
+                android:background="?attr/colorPrimaryVariant"
                 android:text="@string/updateInfo"
                 android:textSize="16sp"
                 app:cornerRadius="32sp" />
@@ -90,7 +89,8 @@
             android:layout_marginVertical="5dp"
             android:orientation="horizontal"
             android:paddingVertical="5dp"
-            tools:layout_editor_absoluteX="50dp"/>
+            tools:layout_editor_absoluteX="50dp"
+            tools:layout="@layout/fragment_menu" />
     </RelativeLayout>
 
 

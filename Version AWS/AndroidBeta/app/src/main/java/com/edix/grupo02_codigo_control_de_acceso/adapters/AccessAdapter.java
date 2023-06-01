@@ -60,8 +60,7 @@ public class AccessAdapter extends ArrayAdapter<Access> {
         View the_view = convertView;
         removeAccess.setOnClickListener(v->{
             deleteAccess(parent.getContext(), access);
-            the_view.setVisibility(View.INVISIBLE);
-            AccessesHelper.refresh(parent.getContext());
+            the_view.setVisibility(View.GONE);
         });
         Event event = DataBaseUtils.getDBManager(parent.getContext()).eventDao().findById(access.getEvent_id());
         itemTextView.setText(event.getName() + " (x" + access.getAvailables() + ")");
@@ -101,9 +100,9 @@ public class AccessAdapter extends ArrayAdapter<Access> {
             @Override
             public void onResponse(@NonNull Call<Boolean> call, @NonNull Response<Boolean> response) {
                 if (response.isSuccessful()) {
-                    DataBaseUtils.getDBManager(context).accessDao().delete(access);
+                    AccessesHelper.refresh(context);
                     String msg = "El acceso fue eliminado";
-                    ToastHelper.show(context,msg, ToastHelper.INFO);
+                    ToastHelper.info(context,msg);
                 }
             }
             @Override

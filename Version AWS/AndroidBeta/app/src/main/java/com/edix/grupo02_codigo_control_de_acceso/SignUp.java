@@ -54,7 +54,7 @@ public class SignUp extends AppCompatActivity {
                 public void onResponse(@NonNull Call<Boolean> call, @NonNull Response<Boolean> response) {
                     if (response.isSuccessful()) {
                         String msg = "Usuario registrado correctamente";
-                        ToastHelper.show(getApplicationContext(),msg, ToastHelper.INFO);
+                        ToastHelper.info(getApplicationContext(),msg);
                         Intent intent = new Intent(getApplicationContext(), Login.class);
                         startActivity(intent);
                         finish();
@@ -62,11 +62,11 @@ public class SignUp extends AppCompatActivity {
                 }
                 @Override
                 public void onFailure(@NonNull Call<Boolean> call, @NonNull Throwable t) {
-                    ToastHelper.show(getApplicationContext(),t.getMessage(), ToastHelper.FAIL);
+                    ToastHelper.fail(getApplicationContext(),t.getMessage());
                 }
             });
         } catch (IllegalArgumentException e) {
-            ToastHelper.show(getApplicationContext(),e.getMessage(), ToastHelper.FAIL);
+            ToastHelper.fail(getApplicationContext(),e.getMessage());
         }
     }
 

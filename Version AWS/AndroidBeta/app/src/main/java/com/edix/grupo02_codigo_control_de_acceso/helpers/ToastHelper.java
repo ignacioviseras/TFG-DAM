@@ -10,12 +10,13 @@ import android.widget.Toast;
 import com.edix.grupo02_codigo_control_de_acceso.R;
 
 public class ToastHelper {
-    final public static String INFO = "info";
-    final public static String WARN = "warn";
-    final public static String FAIL = "fail";
+    public final static String INFO = "info";
+    public final static String WARN = "warn";
+    public final static String FAIL = "fail";
+
 
     @SuppressLint("InflateParams")
-    public static void show(Context context, String message, String severity) {
+    public void show(Context context, String message, String severity) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View layout;
         if (severity.equals(ToastHelper.INFO)) {
@@ -33,9 +34,14 @@ public class ToastHelper {
         toast.setDuration(Toast.LENGTH_LONG);
         toast.setView(layout);
         toast.show();
-
-       // Handler handler = new Handler();
-        // Ocultar el Toast después de la duración personalizada
-       // handler.postDelayed(toast::cancel, duration);
+    }
+    public static void info(Context context, String message){
+        new ToastHelper().show(context, message, ToastHelper.INFO);
+    }
+    public static void warn(Context context, String message){
+        new ToastHelper().show(context, message, ToastHelper.WARN);
+    }
+    public static void fail(Context context, String message){
+        new ToastHelper().show(context, message, ToastHelper.FAIL);
     }
 }

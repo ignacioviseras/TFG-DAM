@@ -67,7 +67,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private void updateProfile(View view) {
         try {
             if(!passTextBis.getText().toString().equals(passText.getText().toString())){
-                ToastHelper.show(getApplicationContext(), "las contraseñas no coinciden", ToastHelper.FAIL);
+                ToastHelper.warn(getApplicationContext(), "las contraseñas no coinciden");
                 return;
             }
             User user = User.getForUpdate(emailText.getText().toString(), passText.getText().toString(), nameText.getText().toString());
@@ -88,18 +88,18 @@ public class EditProfileActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                         String msg = "Se ha actualizado el perfil";
-                        ToastHelper.show(getApplicationContext(),msg, ToastHelper.INFO);
+                        ToastHelper.info(getApplicationContext(),msg);
                     }
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-                    ToastHelper.show(getApplicationContext(),"La petición no ha podido resolverse", ToastHelper.FAIL);
+                    ToastHelper.fail(getApplicationContext(),"La petición no ha podido resolverse");
                 }
             });
 
         }catch(IllegalArgumentException e) {
-            ToastHelper.show(getApplicationContext(),e.getMessage(), ToastHelper.FAIL);
+            ToastHelper.fail(getApplicationContext(),e.getMessage());
         }
 
     }

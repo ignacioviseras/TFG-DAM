@@ -72,8 +72,9 @@ public class EventsAdapter  extends ArrayAdapter<Event> {
                         if (response.isSuccessful()) {
                             Access access = response.body();
                             if(access != null){
+                                AccessesHelper.refresh(parent.getContext());
                                 String msg = "Tienes "+access.getAvailables()+" accesos para "+event.getName();
-                                ToastHelper.show(parent.getContext(),msg, ToastHelper.INFO);
+                                ToastHelper.info(parent.getContext(),msg);
                             }
                         }
                     }
@@ -97,7 +98,7 @@ public class EventsAdapter  extends ArrayAdapter<Event> {
                 if (response.isSuccessful()) {
                     DataBaseUtils.getDBManager(context).eventDao().delete(event);
                     String msg = "El evento fue eliminado";
-                    ToastHelper.show(context,msg, ToastHelper.INFO);
+                    ToastHelper.info(context,msg);
                     // no necesita actualizar los accesos porque sulo puede borrar eventos el administrador
                     EventsHelper.refresh(context);
                 }

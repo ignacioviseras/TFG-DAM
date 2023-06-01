@@ -1,16 +1,12 @@
 package com.edix.grupo02_codigo_control_de_acceso;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.FrameLayout;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.edix.grupo02_codigo_control_de_acceso.adapters.AccessAdapter;
-import com.edix.grupo02_codigo_control_de_acceso.adapters.EventsAdapter;
 import com.edix.grupo02_codigo_control_de_acceso.helpers.AccessesHelper;
-import com.edix.grupo02_codigo_control_de_acceso.helpers.EventsHelper;
 
 public class MainActivity extends AppCompatActivity {
 

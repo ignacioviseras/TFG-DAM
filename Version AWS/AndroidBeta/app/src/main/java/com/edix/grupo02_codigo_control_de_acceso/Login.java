@@ -32,9 +32,8 @@ public class Login extends AppCompatActivity{
         // comprueba si el usuario ya está logado
         this.isLogged();
 
-        // carga el layout y esconde la barra de navegacion
+        // carga el layout
         setContentView(R.layout.activity_login);
-        Objects.requireNonNull(getSupportActionBar()).hide();
 
         // parametriza los elementos  de la gui
 
@@ -88,7 +87,7 @@ public class Login extends AppCompatActivity{
                 }
             });
         } catch (IllegalArgumentException e) {
-            ToastHelper.show(getApplicationContext(),e.getMessage(), ToastHelper.FAIL);
+            ToastHelper.fail(getApplicationContext(),e.getMessage());
         }
     }
 
@@ -107,7 +106,7 @@ public class Login extends AppCompatActivity{
                         User user = response.body();
                         if(user != null){
                             AppUtils.setVariable(context, "_role", user.getRole());
-                            ToastHelper.show(context,"Bienvenida "+user.getName(), ToastHelper.INFO);
+                            ToastHelper.info(context,"Bienvenida "+user.getName());
                             Intent intent;
                             if(AppUtils.isAdmin(context)){
                                 intent = new Intent(Login.this, EventsActivity.class);
@@ -122,11 +121,11 @@ public class Login extends AppCompatActivity{
 
                 @Override
                 public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-                    ToastHelper.show(context,"Error al consultar el API Service", ToastHelper.FAIL);
+                    ToastHelper.fail(context,"Error al consultar el API Service");
                 }
             });
         }else{
-            ToastHelper.show(context,"Bienvenid@ !", ToastHelper.INFO);
+            ToastHelper.info(context,"Bienvenid@ !");
         }
     }
 }

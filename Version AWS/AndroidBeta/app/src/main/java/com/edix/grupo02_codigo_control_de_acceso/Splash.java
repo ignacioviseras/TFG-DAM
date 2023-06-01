@@ -16,7 +16,6 @@ public class Splash extends AppCompatActivity implements Animation.AnimationList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        getSupportActionBar().hide();
         EventsHelper.refresh(getApplicationContext());
 
         ImageView cargando = findViewById(R.id.cargando);
