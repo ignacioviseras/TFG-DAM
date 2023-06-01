@@ -9,8 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import com.edix.grupo02_codigo_control_de_acceso.global.AppToast;
-import com.edix.grupo02_codigo_control_de_acceso.global.AppUtils;
+
+import com.edix.grupo02_codigo_control_de_acceso.helpers.AccessesHelper;
+import com.edix.grupo02_codigo_control_de_acceso.helpers.ToastHelper;
+import com.edix.grupo02_codigo_control_de_acceso.helpers.AppUtils;
 import com.edix.grupo02_codigo_control_de_acceso.apiService.ApiAdapter;
 import com.edix.grupo02_codigo_control_de_acceso.apiService.response.AccessToken;
 import com.edix.grupo02_codigo_control_de_acceso.entities.User;
@@ -86,12 +88,15 @@ public class Login extends AppCompatActivity{
                 }
             });
         } catch (IllegalArgumentException e) {
-            AppToast.show(getApplicationContext(),e.getMessage(),AppToast.FAIL);
+            ToastHelper.show(getApplicationContext(),e.getMessage(), ToastHelper.FAIL);
         }
     }
 
     private void welcome(String token){
         Context context = getApplicationContext();
+        // carga los accesos
+        AccessesHelper.refresh(context);
+        //carga el rol
         String role = AppUtils.getVariable(context, "_role");
         if(role == null){
             Call<User> call = ApiAdapter.getApiService().whoAmI(token);
@@ -102,7 +107,7 @@ public class Login extends AppCompatActivity{
                         User user = response.body();
                         if(user != null){
                             AppUtils.setVariable(context, "_role", user.getRole());
-                            AppToast.show(context,"Bienvenida "+user.getName(),AppToast.INFO);
+                            ToastHelper.show(context,"Bienvenida "+user.getName(), ToastHelper.INFO);
                             Intent intent = new Intent(Login.this, MainActivity.class);
                             startActivity(intent);
                             finish();
@@ -112,11 +117,11 @@ public class Login extends AppCompatActivity{
 
                 @Override
                 public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-                    AppToast.show(context,"Error al consultar el API Service",AppToast.FAIL);
+                    ToastHelper.show(context,"Error al consultar el API Service", ToastHelper.FAIL);
                 }
             });
         }else{
-            AppToast.show(context,"Bienvenid@ !",AppToast.INFO);
+            ToastHelper.show(context,"Bienvenid@ !", ToastHelper.INFO);
         }
     }
 }

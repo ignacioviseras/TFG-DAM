@@ -5,15 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:windowSoftInputMode="adjustNothing"
-    tools:context=".MainActivity">
+    tools:context=".EventsActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ListView
-            android:id="@+id/boughtAccessesList"
+            android:id="@+id/allEventsList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/fragment_menu"/>
+            android:layout_above="@id/fragment_menu"/> <!-- Añade la propiedad layout_above para posicionar el ListView arriba del fragmento -->
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_menu"

@@ -18,13 +18,12 @@ import androidx.annotation.Nullable;
 
 import com.edix.grupo02_codigo_control_de_acceso.R;
 import com.edix.grupo02_codigo_control_de_acceso.apiService.ApiAdapter;
-import com.edix.grupo02_codigo_control_de_acceso.apiService.response.AccessToken;
 import com.edix.grupo02_codigo_control_de_acceso.database.DataBaseUtils;
 import com.edix.grupo02_codigo_control_de_acceso.entities.Access;
 import com.edix.grupo02_codigo_control_de_acceso.entities.Event;
-import com.edix.grupo02_codigo_control_de_acceso.entities.User;
-import com.edix.grupo02_codigo_control_de_acceso.global.AppToast;
-import com.edix.grupo02_codigo_control_de_acceso.global.AppUtils;
+import com.edix.grupo02_codigo_control_de_acceso.helpers.AccessesHelper;
+import com.edix.grupo02_codigo_control_de_acceso.helpers.ToastHelper;
+import com.edix.grupo02_codigo_control_de_acceso.helpers.AppUtils;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
@@ -62,6 +61,7 @@ public class AccessAdapter extends ArrayAdapter<Access> {
         removeAccess.setOnClickListener(v->{
             deleteAccess(parent.getContext(), access);
             the_view.setVisibility(View.INVISIBLE);
+            AccessesHelper.refresh(parent.getContext());
         });
         Event event = DataBaseUtils.getDBManager(parent.getContext()).eventDao().findById(access.getEvent_id());
         itemTextView.setText(event.getName() + " (x" + access.getAvailables() + ")");
@@ -103,7 +103,7 @@ public class AccessAdapter extends ArrayAdapter<Access> {
                 if (response.isSuccessful()) {
                     DataBaseUtils.getDBManager(context).accessDao().delete(access);
                     String msg = "El acceso fue eliminado";
-                    AppToast.show(context,msg,AppToast.INFO);
+                    ToastHelper.show(context,msg, ToastHelper.INFO);
                 }
             }
             @Override

@@ -18,4 +18,6 @@
     <string name="cerrar_aplicacion">cerrar aplicación</string>
     <string name="ver_editar_perfil">Ver/editar perfil</string>
     <string name="eventos_disponibles">Eventos disponibles</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

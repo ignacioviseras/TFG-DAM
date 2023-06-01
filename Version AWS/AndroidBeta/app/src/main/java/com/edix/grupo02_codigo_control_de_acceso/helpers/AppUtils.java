@@ -1,4 +1,4 @@
-package com.edix.grupo02_codigo_control_de_acceso.global;
+package com.edix.grupo02_codigo_control_de_acceso.helpers;
 
 import android.content.Context;
 

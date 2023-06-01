@@ -8,6 +8,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.edix.grupo02_codigo_control_de_acceso.helpers.EventsHelper;
+
 public class Splash extends AppCompatActivity implements Animation.AnimationListener {
 
     @Override
@@ -15,6 +17,7 @@ public class Splash extends AppCompatActivity implements Animation.AnimationList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         getSupportActionBar().hide();
+        EventsHelper.refresh(getApplicationContext());
 
         ImageView cargando = findViewById(R.id.cargando);
         Animation animacion = AnimationUtils.loadAnimation(this,R.anim.animation_splash);

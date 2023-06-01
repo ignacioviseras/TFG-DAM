@@ -13,8 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.edix.grupo02_codigo_control_de_acceso.database.DataBaseUtils;
-import com.edix.grupo02_codigo_control_de_acceso.global.AppToast;
-import com.edix.grupo02_codigo_control_de_acceso.global.AppUtils;
+import com.edix.grupo02_codigo_control_de_acceso.helpers.ToastHelper;
+import com.edix.grupo02_codigo_control_de_acceso.helpers.AppUtils;
 import com.edix.grupo02_codigo_control_de_acceso.apiService.ApiAdapter;
 import com.edix.grupo02_codigo_control_de_acceso.entities.User;
 
@@ -37,10 +37,8 @@ public class EditProfileActivity extends AppCompatActivity {
         passText = findViewById(R.id.editPassBox);
         passTextBis = findViewById(R.id.editPassBoxBis);
         Button updateBtn = findViewById(R.id.updateProfileBtn);
-        Button cancelBtn = findViewById(R.id.cancelUpdateBtn);
-
         updateBtn.setOnClickListener(this::updateProfile);
-        cancelBtn.setOnClickListener(this::goToMainPage);
+        MenuFragment.load(this, R.id.fragment_menu);
 
         loadProfile();
     }
@@ -69,7 +67,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private void updateProfile(View view) {
         try {
             if(!passTextBis.getText().toString().equals(passText.getText().toString())){
-                AppToast.show(getApplicationContext(), "las contraseñas no coinciden", AppToast.FAIL);
+                ToastHelper.show(getApplicationContext(), "las contraseñas no coinciden", ToastHelper.FAIL);
                 return;
             }
             User user = User.getForUpdate(emailText.getText().toString(), passText.getText().toString(), nameText.getText().toString());
@@ -90,57 +88,19 @@ public class EditProfileActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                         String msg = "Se ha actualizado el perfil";
-                        AppToast.show(getApplicationContext(),msg,AppToast.INFO);
+                        ToastHelper.show(getApplicationContext(),msg, ToastHelper.INFO);
                     }
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-                    AppToast.show(getApplicationContext(),"La petición no ha podido resolverse",AppToast.FAIL);
+                    ToastHelper.show(getApplicationContext(),"La petición no ha podido resolverse", ToastHelper.FAIL);
                 }
             });
 
         }catch(IllegalArgumentException e) {
-            AppToast.show(getApplicationContext(),e.getMessage(),AppToast.FAIL);
+            ToastHelper.show(getApplicationContext(),e.getMessage(), ToastHelper.FAIL);
         }
 
-    }
-
-    private void goToMainPage(View view) {
-        Intent intent = new Intent(EditProfileActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
-    }
-    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        if(isAdmin){
-            menu.findItem(R.id.checkAccess).setVisible(true);
-        }else{
-            menu.findItem(R.id.boughtAccesses).setVisible(true);
-        }
-
-        menu.findItem(R.id.logout).setVisible(false);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @SuppressLint("NonConstantResourceId")
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.events:
-            case R.id.boughtAccesses:
-                Intent eventsIntent =  new Intent(this, MainActivity.class);
-                startActivity(eventsIntent);
-                return true;
-            case R.id.editProfile:
-                return true;
-            case R.id.logout:
-                // cierre de sesion
-                DataBaseUtils.removeDB(getApplicationContext());
-                onBackPressed();
-                finish();
-                return true;
-            default:return super.onOptionsItemSelected(item);
-        }
     }
 }

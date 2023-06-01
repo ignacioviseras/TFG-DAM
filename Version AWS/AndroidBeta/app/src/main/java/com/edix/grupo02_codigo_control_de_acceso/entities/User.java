@@ -5,7 +5,7 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import com.edix.grupo02_codigo_control_de_acceso.global.AppUtils;
+import com.edix.grupo02_codigo_control_de_acceso.helpers.AppUtils;
 @Entity
 public class User {
     @PrimaryKey

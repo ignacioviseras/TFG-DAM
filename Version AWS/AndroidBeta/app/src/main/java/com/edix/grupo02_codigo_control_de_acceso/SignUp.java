@@ -12,7 +12,7 @@ import android.widget.RadioGroup;
 
 import com.edix.grupo02_codigo_control_de_acceso.apiService.ApiAdapter;
 import com.edix.grupo02_codigo_control_de_acceso.entities.User;
-import com.edix.grupo02_codigo_control_de_acceso.global.AppToast;
+import com.edix.grupo02_codigo_control_de_acceso.helpers.ToastHelper;
 
 import java.util.Objects;
 
@@ -54,7 +54,7 @@ public class SignUp extends AppCompatActivity {
                 public void onResponse(@NonNull Call<Boolean> call, @NonNull Response<Boolean> response) {
                     if (response.isSuccessful()) {
                         String msg = "Usuario registrado correctamente";
-                        AppToast.show(getApplicationContext(),msg,AppToast.INFO);
+                        ToastHelper.show(getApplicationContext(),msg, ToastHelper.INFO);
                         Intent intent = new Intent(getApplicationContext(), Login.class);
                         startActivity(intent);
                         finish();
@@ -62,11 +62,11 @@ public class SignUp extends AppCompatActivity {
                 }
                 @Override
                 public void onFailure(@NonNull Call<Boolean> call, @NonNull Throwable t) {
-                    AppToast.show(getApplicationContext(),t.getMessage(),AppToast.FAIL);
+                    ToastHelper.show(getApplicationContext(),t.getMessage(), ToastHelper.FAIL);
                 }
             });
         } catch (IllegalArgumentException e) {
-            AppToast.show(getApplicationContext(),e.getMessage(),AppToast.FAIL);
+            ToastHelper.show(getApplicationContext(),e.getMessage(), ToastHelper.FAIL);
         }
     }
 

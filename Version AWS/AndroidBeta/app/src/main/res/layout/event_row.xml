@@ -43,7 +43,7 @@
                 android:padding="0dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/buy_icon"
-                android:visibility="invisible"
+                android:visibility="gone"
                 app:iconSize="30dp"></ImageButton>
 
             <ImageButton
@@ -55,7 +55,7 @@
                 android:padding="0dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/destroy"
-                android:visibility="invisible"
+                android:visibility="gone"
                 app:iconSize="30dp"></ImageButton>
         </LinearLayout>
     </LinearLayout>

@@ -1,4 +1,4 @@
-package com.edix.grupo02_codigo_control_de_acceso.global;
+package com.edix.grupo02_codigo_control_de_acceso.helpers;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.edix.grupo02_codigo_control_de_acceso.R;
 
-public class AppToast {
+public class ToastHelper {
     final public static String INFO = "info";
     final public static String WARN = "warn";
     final public static String FAIL = "fail";
@@ -18,9 +18,9 @@ public class AppToast {
     public static void show(Context context, String message, String severity) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View layout;
-        if (severity.equals(AppToast.INFO)) {
+        if (severity.equals(ToastHelper.INFO)) {
             layout = inflater.inflate(R.layout.toast_info, null);
-        } else if (severity.equals(AppToast.WARN)) {
+        } else if (severity.equals(ToastHelper.WARN)) {
             layout = inflater.inflate(R.layout.toast_warning, null);
         } else {
             layout = inflater.inflate(R.layout.toast_error, null);

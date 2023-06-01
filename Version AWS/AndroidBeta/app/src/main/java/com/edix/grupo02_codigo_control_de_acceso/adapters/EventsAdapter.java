@@ -12,9 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.edix.grupo02_codigo_control_de_acceso.database.DataBaseUtils;
-import com.edix.grupo02_codigo_control_de_acceso.global.AppToast;
+import com.edix.grupo02_codigo_control_de_acceso.helpers.AccessesHelper;
+import com.edix.grupo02_codigo_control_de_acceso.helpers.EventsHelper;
+import com.edix.grupo02_codigo_control_de_acceso.helpers.ToastHelper;
 import com.edix.grupo02_codigo_control_de_acceso.R;
-import com.edix.grupo02_codigo_control_de_acceso.global.AppUtils;
+import com.edix.grupo02_codigo_control_de_acceso.helpers.AppUtils;
 import com.edix.grupo02_codigo_control_de_acceso.apiService.ApiAdapter;
 import com.edix.grupo02_codigo_control_de_acceso.entities.Access;
 import com.edix.grupo02_codigo_control_de_acceso.entities.Event;
@@ -71,7 +73,7 @@ public class EventsAdapter  extends ArrayAdapter<Event> {
                             Access access = response.body();
                             if(access != null){
                                 String msg = "Tienes "+access.getAvailables()+" accesos para "+event.getName();
-                                AppToast.show(parent.getContext(),msg,AppToast.INFO);
+                                ToastHelper.show(parent.getContext(),msg, ToastHelper.INFO);
                             }
                         }
                     }
@@ -95,7 +97,9 @@ public class EventsAdapter  extends ArrayAdapter<Event> {
                 if (response.isSuccessful()) {
                     DataBaseUtils.getDBManager(context).eventDao().delete(event);
                     String msg = "El evento fue eliminado";
-                    AppToast.show(context,msg,AppToast.INFO);
+                    ToastHelper.show(context,msg, ToastHelper.INFO);
+                    // no necesita actualizar los accesos porque sulo puede borrar eventos el administrador
+                    EventsHelper.refresh(context);
                 }
             }
             @Override

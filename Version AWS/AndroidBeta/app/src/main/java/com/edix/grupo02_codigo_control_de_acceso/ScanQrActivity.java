@@ -11,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.edix.grupo02_codigo_control_de_acceso.apiService.ApiAdapter;
 import com.edix.grupo02_codigo_control_de_acceso.databinding.ActivityMainBinding;
 import com.edix.grupo02_codigo_control_de_acceso.entities.Access;
-import com.edix.grupo02_codigo_control_de_acceso.global.AppToast;
-import com.edix.grupo02_codigo_control_de_acceso.global.AppUtils;
+import com.edix.grupo02_codigo_control_de_acceso.helpers.ToastHelper;
+import com.edix.grupo02_codigo_control_de_acceso.helpers.AppUtils;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
@@ -38,18 +38,18 @@ public class ScanQrActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(@NonNull Call<Access> call, @NonNull Response<Access> response) {
                         if (response.isSuccessful()) {
-                            AppToast.show(getApplicationContext(),"acceso permitido",AppToast.INFO);
+                            ToastHelper.show(getApplicationContext(),"acceso permitido", ToastHelper.INFO);
                             Intent intent =  new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                         }
                     }
                     @Override
                     public void onFailure(@NonNull Call<Access> call, @NonNull Throwable t) {
-                        AppToast.show(getApplicationContext(),"acceso no permitido",AppToast.FAIL);
+                        ToastHelper.show(getApplicationContext(),"acceso no permitido", ToastHelper.FAIL);
                     }
                 });
             } catch (IllegalArgumentException e) {
-                AppToast.show(getApplicationContext(),"acceso no permitido",AppToast.FAIL);
+                ToastHelper.show(getApplicationContext(),"acceso no permitido", ToastHelper.FAIL);
             }
         }
     });
