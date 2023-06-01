@@ -108,7 +108,12 @@ public class Login extends AppCompatActivity{
                         if(user != null){
                             AppUtils.setVariable(context, "_role", user.getRole());
                             ToastHelper.show(context,"Bienvenida "+user.getName(), ToastHelper.INFO);
-                            Intent intent = new Intent(Login.this, MainActivity.class);
+                            Intent intent;
+                            if(AppUtils.isAdmin(context)){
+                                intent = new Intent(Login.this, EventsActivity.class);
+                            }else{
+                                intent = new Intent(Login.this, MainActivity.class);
+                            }
                             startActivity(intent);
                             finish();
                         }

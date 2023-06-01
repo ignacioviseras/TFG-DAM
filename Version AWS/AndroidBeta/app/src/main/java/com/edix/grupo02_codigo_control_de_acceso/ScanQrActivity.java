@@ -2,6 +2,8 @@ package com.edix.grupo02_codigo_control_de_acceso;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -25,6 +27,7 @@ public class ScanQrActivity extends AppCompatActivity {
     ActivityMainBinding binding;
 
     private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(), result -> {
+
         if (result.getContents() == null) {
             Toast.makeText(this, "CANCELADO", Toast.LENGTH_SHORT).show();
         } else {
@@ -39,7 +42,7 @@ public class ScanQrActivity extends AppCompatActivity {
                     public void onResponse(@NonNull Call<Access> call, @NonNull Response<Access> response) {
                         if (response.isSuccessful()) {
                             ToastHelper.show(getApplicationContext(),"acceso permitido", ToastHelper.INFO);
-                            Intent intent =  new Intent(getApplicationContext(), MainActivity.class);
+                            Intent intent =  new Intent(getApplicationContext(), EventsActivity.class);
                             startActivity(intent);
                         }
                     }
@@ -63,14 +66,30 @@ public class ScanQrActivity extends AppCompatActivity {
     }
 
     public void scanQr() {
+        FrameLayout scannerContainer = findViewById(R.id.scanner_container);
         ScanOptions options = new ScanOptions();
         options.setDesiredBarcodeFormats(ScanOptions.ALL_CODE_TYPES);
-        options.setPrompt("ESCANEAR CODIGO");
+        options.setPrompt("Escanee un código de acceso. Si en 15 segundos no se ha detectado ningún QR, volverá a la pantalla principal");
+        options.setBeepEnabled(true);
         options.setCameraId(0);
         options.setOrientationLocked(false);
         options.setBeepEnabled(false);
         options.setCaptureActivity(CaptureActivityPortrait.class);
         options.setBarcodeImageEnabled(false);
+        // si la cámara no detecta nada lanza un mensaje a los 10 segundos y a los 14 cambia de vista
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ToastHelper.show(getApplicationContext(), "No se ha detectado ningún QR", ToastHelper.WARN);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(ScanQrActivity.this, EventsActivity.class);
+                        startActivity(intent);
+                    }
+                }, 4000);
+            }
+        }, 10000);
         barcodeLauncher.launch(options);
     }
 }

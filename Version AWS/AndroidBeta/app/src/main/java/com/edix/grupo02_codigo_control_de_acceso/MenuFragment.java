@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
+import com.edix.grupo02_codigo_control_de_acceso.database.DataBaseUtils;
 import com.edix.grupo02_codigo_control_de_acceso.helpers.AppUtils;
 
 @SuppressWarnings("ALL")
@@ -31,12 +32,13 @@ public class MenuFragment extends Fragment {
         ImageButton editProfileBtn = view.findViewById(R.id.editProfile);
         ImageButton checkQrBtn = view.findViewById(R.id.scanAccess);
         ImageButton accessBtn = view.findViewById(R.id.boughtAccesses);
+        ImageButton logOutBtn = view.findViewById(R.id.logOutBtn);
 
         if(isAdmin){
             checkQrBtn.setOnClickListener(v -> {
                 goToActivity(ScanQrActivity.class);
             });
-            accessBtn.setVisibility(View.VISIBLE);
+            checkQrBtn.setVisibility(View.VISIBLE);
         }else{
             accessBtn.setOnClickListener(v -> {
                 goToActivity(MainActivity.class);
@@ -49,6 +51,11 @@ public class MenuFragment extends Fragment {
 
         eventsBtn.setOnClickListener(v -> {
             goToActivity(EventsActivity.class);
+        });
+
+        logOutBtn.setOnClickListener(v -> {
+            DataBaseUtils.removeDB(context);
+            goToActivity(Login.class);
         });
 
         switch (getActivity().getClass().getSimpleName()){
