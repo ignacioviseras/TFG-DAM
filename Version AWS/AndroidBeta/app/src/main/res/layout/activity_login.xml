@@ -24,7 +24,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/mailLayout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="50dp"
             android:layout_marginTop="30dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,17 +34,18 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/mailBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
+                android:layout_height="48dp"
                 android:hint="@string/cajaCorreo"
-                android:textColorHint="@color/blue_sea"
+                android:textColor="?attr/colorPrimary"
+                android:backgroundTint="?attr/colorPrimary"
+                android:textColorHint="?attr/colorSecondary"
                 android:textSize="16sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passLayout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="50dp"
             android:layout_marginTop="30dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -54,11 +55,12 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
+                android:layout_height="48dp"
+                android:textColor="?attr/colorPrimary"
+                android:backgroundTint="?attr/colorPrimary"
+                android:textColorHint="?attr/colorSecondary"
                 android:hint="@string/passwordBox"
                 android:inputType="textPassword"
-                android:textColorHint="@color/blue_sea"
                 android:textSize="16sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -69,18 +71,21 @@
             android:layout_height="50dp"
             android:layout_marginHorizontal="50dp"
             android:layout_marginTop="30dp"
-            android:backgroundTint="@color/light_blue"
+            android:contentDescription="Login"
+            android:background="?attr/colorPrimaryVariant"
             android:text="Login" />
 
         <ImageButton
             android:id="@+id/signinBtn"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_gravity="right"
+            android:contentDescription="Create user"
             android:layout_marginRight="50dp"
             android:background="#00FFFFFF"
             app:srcCompat="@drawable/add_user"
-            app:tint="@color/light_blue" />
+            app:tint="?attr/colorPrimaryVariant" />
 
 
     </LinearLayout>

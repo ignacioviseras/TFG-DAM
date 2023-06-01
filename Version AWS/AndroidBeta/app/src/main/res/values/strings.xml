@@ -20,4 +20,6 @@
     <string name="eventos_disponibles">Eventos disponibles</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="emailDescription">email</string>
+    <string name="introduce_email">introduce email</string>
 </resources>
