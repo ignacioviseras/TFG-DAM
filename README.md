@@ -24,28 +24,35 @@ Nada mas entrar en la aplicación nos sale la siguiente pestaña
 <table>
 	<tbody>
 		<tr>
-			<td width="600">En caso de no tener una cuenta tendremos que completar los siguientes campos para darnos de alta.</td>
+			<td width="600">En caso de no tener una cuenta tendremos que completar los siguientes campos para darnos de alta. <br> En la version final no aparecera la opción para darse de alta como administrador ya que estos usuarios solo los podriamos crear nosotros</td>
 			<td><img src="fotosReadme/2.jpg"  width="200" height="450"></td>
 		</tr>
 	</tbody>
 </table>
 
 ### Main
-
 <table>
 	<tbody>
 		<tr>
-			<td width="600">Al insertar el usuario accederemos a esta pestaña aquí podemos añadir registros y buscarlos por su nombre.</td>
+			<td width="600">Al insertar el usuario accederemos a esta pestaña aquí podemos ver la lista de eventos que tiene nuestro usuario, podemos generar el qr o eliminarlos, en caso de no tener tendremos que agregarlos.</td>
 			<td><img src="fotosReadme/4.jpg"  width="200" height="450"></td>
 		</tr>
 	</tbody>
 </table>
 
+### Lista de eventos
 
-Además cuando tenemos un registro podemos borrarlo o generar un QR de este
-
-| <img src="fotosReadme/5.jpg"  width="150" height="350">      | <img src="fotosReadme/6.jpg" width="150" height="350">        |
-|:-------------:|:---------------:|
+<table>
+	<tbody>
+		<tr>
+			<td colspan="2">En esta ventana añadimos los eventos a los que queramos asistir.</td>
+		</tr>
+		<tr>
+			<td><img src="fotosReadme/5.jpg"  width="200" height="450"></td>
+			<td><img src="fotosReadme/6.jpg"  width="200" height="450"></td>
+		</tr>
+	</tbody>
+</table>
 
 ### Scanner
 
@@ -63,7 +70,7 @@ Además cuando tenemos un registro podemos borrarlo o generar un QR de este
 <table>
 	<tbody>
 		<tr>
-			<td width="600">Por ultimo la ventana del perfil nos permite ver los datos del usuario y además podemos cambiar la contraseña y dar de baja el usuario.</td>
+			<td width="600">Por ultimo la ventana del perfil nos permite ver los datos del usuario y además podemos cambiar la contraseña.</td>
 			<td><img src="fotosReadme/8.jpg"  width="200" height="450"></td>
 		</tr>
 	</tbody>
