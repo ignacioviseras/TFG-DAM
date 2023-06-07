@@ -14,7 +14,7 @@ Nada mas entrar en la aplicación nos sale la siguiente pestaña
 	<tbody>
 		<tr>
 			<td width="600">Aquí podemos acceder con nuestra cuenta en caso de tener una de lo contrario tendremos que crearla.</td>
-			<td><img src="fotosReadme/1.png"  width="200" height="450"></td>
+			<td><img src="fotosReadme/1.jpg"  width="200" height="450"></td>
 		</tr>
 	</tbody>
 </table>
@@ -25,22 +25,26 @@ Nada mas entrar en la aplicación nos sale la siguiente pestaña
 	<tbody>
 		<tr>
 			<td width="600">En caso de no tener una cuenta tendremos que completar los siguientes campos para darnos de alta.</td>
-			<td><img src="fotosReadme/2.png"  width="200" height="450"></td>
+			<td><img src="fotosReadme/2.jpg"  width="200" height="450"></td>
 		</tr>
 	</tbody>
 </table>
 
 ### Main
 
-Al insertar el usuario accederemos a esta pestaña aquí podemos añadir registros y buscarlos por su nombre.
-
-| <img src="fotosReadme/3.png"  width="150" height="350">      | <img src="fotosReadme/4.png" width="150" height="350">        |
-|:-------------:|:---------------:|
+<table>
+	<tbody>
+		<tr>
+			<td width="600">Al insertar el usuario accederemos a esta pestaña aquí podemos añadir registros y buscarlos por su nombre.</td>
+			<td><img src="fotosReadme/4.jpg"  width="200" height="450"></td>
+		</tr>
+	</tbody>
+</table>
 
 
 Además cuando tenemos un registro podemos borrarlo o generar un QR de este
 
-| <img src="fotosReadme/5.png"  width="150" height="350">      | <img src="fotosReadme/6.png" width="150" height="350">        |
+| <img src="fotosReadme/5.jpg"  width="150" height="350">      | <img src="fotosReadme/6.jpg" width="150" height="350">        |
 |:-------------:|:---------------:|
 
 ### Scanner
@@ -60,7 +64,7 @@ Además cuando tenemos un registro podemos borrarlo o generar un QR de este
 	<tbody>
 		<tr>
 			<td width="600">Por ultimo la ventana del perfil nos permite ver los datos del usuario y además podemos cambiar la contraseña y dar de baja el usuario.</td>
-			<td><img src="fotosReadme/8.png"  width="200" height="450"></td>
+			<td><img src="fotosReadme/8.jpg"  width="200" height="450"></td>
 		</tr>
 	</tbody>
 </table>
